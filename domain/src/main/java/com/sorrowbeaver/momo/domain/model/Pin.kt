@@ -6,7 +6,7 @@ data class Pin (
     val id : Long,
     val author : User,
     val name : String,
-    val map : Map,
+    val momoMap: MomoMap,
     val label : Int,
     val createdDate : Date,
     val posts : List<Post>
