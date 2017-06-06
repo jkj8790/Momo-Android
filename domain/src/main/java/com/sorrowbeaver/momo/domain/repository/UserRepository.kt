@@ -6,21 +6,21 @@ import okhttp3.Response
 
 interface UserRepository {
 
-  fun login(userName: String, password: String) : Observable<User>
+  fun login(userName: String, password: String): Observable<User>
 
-  fun singup(email: String, userName: String, password: String) : Observable<User>
+  fun singup(email: String, userName: String, password: String): Observable<User>
 
   //TODO ordering
-  fun users() : Observable<Response>
+  fun users(): Observable<Response>
 
-  fun logout() : Observable<Response>
+  fun logout(): Observable<Response>
 
-  fun facebookLogin() : Observable<User>
+  fun facebookLogin(): Observable<User>
 
-  fun detail(userId: Long) : Observable<User>
+  fun detail(userId: Long): Observable<User>
 
-  fun follow(userId : Long) : Observable<Response>
+  fun follow(userId: Long): Observable<Response>
 
-  fun requestAuthentiacateMail() : Observable<Response>
+  fun requestAuthentiacateMail(): Observable<Response>
 }
 

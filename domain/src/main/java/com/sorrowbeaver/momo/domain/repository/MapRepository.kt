@@ -11,6 +11,6 @@ interface MapRepository {
 
   fun maps(mapSortOption: MapSortOption = RECENT): Observable<List<MomoMap>>
 
-  fun detail(id: Long) : Observable<MomoMap>
+  fun detail(id: Long): Observable<MomoMap>
 
 }
