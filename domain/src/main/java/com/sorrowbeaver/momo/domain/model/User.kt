@@ -1,5 +1,19 @@
 package com.sorrowbeaver.momo.domain.model
 
-data class User(val id : Long, val username : String,
-    val email : String)
+import java.util.Date
+
+data class User (
+    val id : Long,
+    val username : String,
+    val email : String,
+    val profileUrl : String?,
+    val joinedDate: Date,
+    val lastLoggedInDate: Date?,
+    // TODO encapsulate with social feature
+    val signedUpWithFacebook : Boolean,
+    val activated : Boolean,
+    val type : UserType,
+    val mapList: List<Map>,
+    val following : List<User>
+)
 
