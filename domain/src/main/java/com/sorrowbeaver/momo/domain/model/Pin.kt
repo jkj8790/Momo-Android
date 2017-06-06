@@ -7,7 +7,11 @@ data class Pin (
     val author : User,
     val name : String,
     val momoMap: MomoMap,
-    val label : Int,
+    val type : PinType,
     val createdDate : Date,
     val posts : List<Post>
-)
+) {
+  enum class PinType {
+    PLACE, FOOD, CAFE, SHOP, ETC
+  }
+}
