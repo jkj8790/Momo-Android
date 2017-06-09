@@ -17,14 +17,15 @@ import io.reactivex.schedulers.Schedulers
  * By convention each UseCase implementation will return the result using a [DisposableObserver]
  * that will execute its job in a background thread and will post the result in the UI thread.
  */
-abstract class UseCase<T, in Params> internal constructor(private val threadExecutor: ThreadExecutor,
+abstract class UseCase<T, in Params> constructor(
+    private val threadExecutor: ThreadExecutor,
     private val postExecutionThread: PostExecutionThread) {
   private val disposables: CompositeDisposable = CompositeDisposable()
 
   /**
    * Builds an [Observable] which will be used when executing the current [UseCase].
    */
-  internal abstract fun buildUseCaseObservable(params: Params): Observable<T>
+  abstract fun buildUseCaseObservable(params: Params): Observable<T>
 
   /**
    * Executes the current use case.

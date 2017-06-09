@@ -6,7 +6,7 @@ import okhttp3.Response
 
 interface UserRepository {
 
-  fun login(userName: String, password: String): Observable<User>
+  fun login(id: String, password: String): Observable<User>
 
   fun singup(email: String, userName: String, password: String): Observable<User>
 
