@@ -8,7 +8,7 @@ interface UserRepository {
 
   fun login(id: String, password: String): Observable<User>
 
-  fun singup(email: String, userName: String, password: String): Observable<User>
+  fun signUp(email: String, userName: String, password: String): Observable<User>
 
   //TODO ordering
   fun users(): Observable<Response>
