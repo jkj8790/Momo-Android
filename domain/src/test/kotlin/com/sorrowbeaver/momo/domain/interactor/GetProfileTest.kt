@@ -7,10 +7,12 @@ import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class GetProfileTest {
 
   val FAKE_USER_ID = 0L
@@ -21,7 +23,6 @@ class GetProfileTest {
   lateinit var getProfile: GetProfile
 
   @Before fun setUp() {
-    MockitoAnnotations.initMocks(this);
     `when`(userRepository.detail(FAKE_USER_ID)).thenReturn(Observable.empty());
     getProfile = GetProfile(userRepository, mockExecutor, mockPostExecution)
   }

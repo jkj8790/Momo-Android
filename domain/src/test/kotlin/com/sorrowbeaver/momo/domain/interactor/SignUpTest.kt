@@ -7,10 +7,12 @@ import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class SignUpTest {
 
   val FAKE_EMAIL = "email";
@@ -23,7 +25,6 @@ class SignUpTest {
   lateinit var signUp: SignUp
 
   @Before fun setUp() {
-    MockitoAnnotations.initMocks(this);
     `when`(userRepository.signUp(FAKE_EMAIL, FAKE_ID, FAKE_PWD)).thenReturn(Observable.empty());
     signUp = SignUp(userRepository, mockExecutor, mockPostExecution)
   }
