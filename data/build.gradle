@@ -45,4 +45,10 @@ dependencies {
   androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
+  compile project(path: ':domain')
+}
+
+task copyTestClasses(type: Copy) {
+  from "build/tmp/kotlin-classes/debugUnitTest"
+  into "build/intermediates/classes/debug"
 }
