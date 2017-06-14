@@ -2,11 +2,10 @@ package com.sorrowbeaver.momo.data.entity
 
 import java.util.Date
 
-// TODO change any to proper class
 data class UserEntity(
     val pk : Long,
     val username : String,
-    val password : String,
+    val password : String, // TODO why server is giving password?
     val email : String,
     val profile_img : String?,
     val relation_user_set : List<Long>,
