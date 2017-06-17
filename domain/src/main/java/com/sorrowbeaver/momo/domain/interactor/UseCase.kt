@@ -1,13 +1,11 @@
 package com.sorrowbeaver.momo.domain.interactor
 
 
-import com.sorrowbeaver.momo.domain.executor.PostExecutionThread
-import com.sorrowbeaver.momo.domain.executor.ThreadExecutor
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 
 /**
  * Abstract class for a Use Case (Interactor in terms of Clean Architecture).
@@ -18,8 +16,8 @@ import io.reactivex.schedulers.Schedulers
  * that will execute its job in a background thread and will post the result in the UI thread.
  */
 abstract class UseCase<T, in Params> constructor(
-    private val threadExecutor: ThreadExecutor,
-    private val postExecutionThread: PostExecutionThread) {
+    private val executorScheduler: Scheduler,
+    private val postExecutionScheduler: Scheduler) {
   private val disposables: CompositeDisposable = CompositeDisposable()
 
   /**
@@ -37,8 +35,8 @@ abstract class UseCase<T, in Params> constructor(
    */
   fun execute(observer: DisposableObserver<T>, params: Params) {
     val observable = this.buildUseCaseObservable(params)
-        .subscribeOn(Schedulers.from(threadExecutor))
-        .observeOn(postExecutionThread.getScheduler())
+        .subscribeOn(executorScheduler)
+        .observeOn(postExecutionScheduler)
     addDisposable(observable.subscribeWith(observer))
   }
 

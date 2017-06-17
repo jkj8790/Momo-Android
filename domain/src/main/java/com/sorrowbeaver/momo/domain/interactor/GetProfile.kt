@@ -1,16 +1,16 @@
 package com.sorrowbeaver.momo.domain.interactor
 
-import com.sorrowbeaver.momo.domain.executor.PostExecutionThread
-import com.sorrowbeaver.momo.domain.executor.ThreadExecutor
 import com.sorrowbeaver.momo.domain.interactor.GetProfile.Params
 import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 
 class GetProfile (
-    val userRepository: UserRepository, threadExecutor: ThreadExecutor,
-    postExecutionThread: PostExecutionThread
-) : UseCase<User, Params>(threadExecutor, postExecutionThread) {
+    val userRepository: UserRepository,
+    executorScheduler: Scheduler,
+    postExecutionScheduler: Scheduler
+) : UseCase<User, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val userId : Long)
 
