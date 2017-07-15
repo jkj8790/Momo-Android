@@ -1,10 +1,9 @@
 package com.sorrowbeaver.momo.domain.interactor
 
 import com.nhaarman.mockito_kotlin.verify
-import com.sorrowbeaver.momo.domain.executor.PostExecutionThread
-import com.sorrowbeaver.momo.domain.executor.ThreadExecutor
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,14 +16,14 @@ class GetProfileTest {
 
   val FAKE_USER_ID = 0L
 
-  @Mock lateinit var mockExecutor : ThreadExecutor
-  @Mock lateinit var mockPostExecution : PostExecutionThread
+  @Mock lateinit var mockExecuteScheduler : Scheduler
+  @Mock lateinit var mockPostExecution : Scheduler
   @Mock lateinit var userRepository : UserRepository
   lateinit var getProfile: GetProfile
 
   @Before fun setUp() {
     `when`(userRepository.detail(FAKE_USER_ID)).thenReturn(Observable.empty());
-    getProfile = GetProfile(userRepository, mockExecutor, mockPostExecution)
+    getProfile = GetProfile(userRepository, mockExecuteScheduler, mockPostExecution)
   }
 
   @Test fun testSignUp() {

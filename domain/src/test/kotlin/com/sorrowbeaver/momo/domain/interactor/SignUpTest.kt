@@ -5,6 +5,7 @@ import com.sorrowbeaver.momo.domain.executor.PostExecutionThread
 import com.sorrowbeaver.momo.domain.executor.ThreadExecutor
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
+import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,7 +27,7 @@ class SignUpTest {
 
   @Before fun setUp() {
     `when`(userRepository.signUp(FAKE_EMAIL, FAKE_ID, FAKE_PWD)).thenReturn(Observable.empty());
-    signUp = SignUp(userRepository, mockExecutor, mockPostExecution)
+    signUp = SignUp(userRepository, TestScheduler(), TestScheduler())
   }
 
   @Test fun testSignUp() {

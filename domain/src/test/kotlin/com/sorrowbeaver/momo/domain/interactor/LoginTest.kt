@@ -1,10 +1,9 @@
 package com.sorrowbeaver.momo.domain.interactor
 
 import com.nhaarman.mockito_kotlin.verify
-import com.sorrowbeaver.momo.domain.executor.PostExecutionThread
-import com.sorrowbeaver.momo.domain.executor.ThreadExecutor
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
+import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,14 +17,12 @@ class LoginTest {
   val FAKE_ID = "id"
   val FAKE_PWD = "pwd"
 
-  @Mock lateinit var mockExecutor : ThreadExecutor
-  @Mock lateinit var mockPostExecution : PostExecutionThread
   @Mock lateinit var userRepository : UserRepository
   lateinit var login : Login
 
   @Before fun setUp() {
-    `when`(userRepository.login(FAKE_ID, FAKE_PWD)).thenReturn(Observable.empty());
-    login = Login(userRepository, mockExecutor, mockPostExecution)
+    `when`(userRepository.login(FAKE_ID, FAKE_PWD)).thenReturn(Observable.empty())
+    login = Login(userRepository, TestScheduler(), TestScheduler())
   }
 
   @Test fun testLogin() {
