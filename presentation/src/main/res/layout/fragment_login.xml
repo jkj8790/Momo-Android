@@ -4,11 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <TextView
-      android:id="@+id/hello"
+  <EditText
+      android:id="@+id/edit_id"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="HELLO"
+      android:hint="@string/id"
+      android:layout_marginTop="10dp"
+      />
+
+  <EditText
+      android:id="@+id/edit_pwd"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:hint="@string/password"
+      android:layout_marginTop="10dp"
       />
 
 </LinearLayout>

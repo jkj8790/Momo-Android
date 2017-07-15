@@ -6,6 +6,12 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.sorrowbeaver.momo.R
+import com.sorrowbeaver.momo.data.repository.UserDataRepository
+import com.sorrowbeaver.momo.data.repository.datasource.UserDataStoreFactory
+import com.sorrowbeaver.momo.domain.interactor.Login
+import com.sorrowbeaver.momo.mapper.UserModelDataMapper
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,12 +44,19 @@ class LoginActivity : AppCompatActivity() {
       transaction.commit()
     }
 
-    loginPresenter = LoginPresenter()
+    loginPresenter = LoginPresenter(loginFragment, UserModelDataMapper(), Login(
+        UserDataRepository(), Schedulers.io(), AndroidSchedulers.mainThread()
+    ))
 
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
     }
 
+  }
+
+  private fun getUserDataRepository(): UserDataRepository {
+    val factory = UserDataStoreFactory()
+    return UserDataRepository()
   }
 
   private fun setupDrawerContent(navigationView: NavigationView) {

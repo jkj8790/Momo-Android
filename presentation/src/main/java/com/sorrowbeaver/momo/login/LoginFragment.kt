@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.sorrowbeaver.momo.R
 import com.sorrowbeaver.momo.login.LoginContract.Presenter
+import com.sorrowbeaver.momo.model.UserModel
 
 class LoginFragment : Fragment(), LoginContract.View {
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
   }
@@ -22,6 +22,27 @@ class LoginFragment : Fragment(), LoginContract.View {
 
     return root
   }
+
+  override fun showLoading() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun hideLoading() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onSuccessLogin(user: UserModel) {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onLoginError() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
 
   override fun setPresenter(presenter: Presenter) {
   }
