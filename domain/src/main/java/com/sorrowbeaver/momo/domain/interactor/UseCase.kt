@@ -33,7 +33,7 @@ abstract class UseCase<T, in Params> constructor(
    * *
    * @param params Parameters (Optional) used to build/execute this use case.
    */
-  fun execute(observer: DisposableObserver<T>, params: Params) {
+  open fun execute(observer: DisposableObserver<T>, params: Params) {
     val observable = this.buildUseCaseObservable(params)
         .subscribeOn(executorScheduler)
         .observeOn(postExecutionScheduler)

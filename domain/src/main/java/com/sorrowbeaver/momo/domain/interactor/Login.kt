@@ -6,7 +6,7 @@ import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class Login (
+open class Login (
     private val userRepository: UserRepository,
     executorScheduler: Scheduler,
     postExecutionScheduler: Scheduler

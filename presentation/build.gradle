@@ -31,6 +31,7 @@ dependencies {
   implementation "com.android.support:design:$supportLibraryVersion"
   implementation 'com.google.android.gms:play-services-maps:11.0.0'
   implementation 'io.reactivex.rxjava2:rxkotlin:2.0.3'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
   implementation "org.jetbrains.anko:anko:$anko_version"
 
   implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -45,8 +46,26 @@ dependencies {
   testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 
   testImplementation 'junit:junit:4.12'
+  testImplementation "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
+  testImplementation "com.natpryce:hamkrest:1.4.0.0"
 
   androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
+
+  api project(path: ':domain')
+  api project(path: ':data')
+}
+
+
+task createTestResources << {
+  def mockMakerFile = new File("$projectDir/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker")
+  if (System.env.MOCK_MAKER != null) {
+    logger.info("Using MockMaker ${System.env.MOCK_MAKER}")
+    mockMakerFile.parentFile.mkdirs()
+    mockMakerFile.createNewFile()
+    mockMakerFile.write(System.env.MOCK_MAKER)
+  } else {
+    logger.info("Using default MockMaker")
+  }
 }
