@@ -13,7 +13,7 @@ interface LoginContract {
   }
 
   interface Presenter : BasePresenter {
-
+    fun login(id: String, password: String)
   }
 
 }

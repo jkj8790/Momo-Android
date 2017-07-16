@@ -48,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
         UserDataRepository(), Schedulers.io(), AndroidSchedulers.mainThread()
     ))
 
+    loginFragment.presenter = loginPresenter
+
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
     }

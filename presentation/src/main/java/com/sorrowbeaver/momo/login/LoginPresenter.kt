@@ -14,7 +14,7 @@ class LoginPresenter(
   override fun start() {
   }
 
-  fun login(id: String, password: String) {
+  override fun login(id: String, password: String) {
     view.showLoading()
     login.execute(
         object : DisposableObserver<User>() {

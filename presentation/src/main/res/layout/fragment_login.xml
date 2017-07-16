@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
   <EditText
-      android:id="@+id/edit_id"
+      android:id="@+id/editId"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:hint="@string/id"
@@ -13,11 +13,18 @@
       />
 
   <EditText
-      android:id="@+id/edit_pwd"
+      android:id="@+id/editPwd"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:hint="@string/password"
       android:layout_marginTop="10dp"
+      />
+
+  <android.support.v7.widget.AppCompatButton
+      android:id="@+id/btnLogin"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/login"
       />
 
 </LinearLayout>

@@ -1,49 +1,53 @@
 package com.sorrowbeaver.momo.login
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sorrowbeaver.momo.R
-import com.sorrowbeaver.momo.login.LoginContract.Presenter
 import com.sorrowbeaver.momo.model.UserModel
+import kotlinx.android.synthetic.main.fragment_login.btnLogin
+import kotlinx.android.synthetic.main.fragment_login.editId
+import kotlinx.android.synthetic.main.fragment_login.editPwd
 
 class LoginFragment : Fragment(), LoginContract.View {
+
+  lateinit var presenter: LoginContract.Presenter
+  var progressDialog: AlertDialog? = null
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
   }
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
-    val root = inflater?.inflate(R.layout.fragment_login, container, false)
+    return inflater?.inflate(R.layout.fragment_login, container, false)
+  }
 
-
-
-    return root
+  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    btnLogin.setOnClickListener {
+      presenter.login(editId.text.toString(), editPwd.text.toString())
+    }
   }
 
   override fun showLoading() {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    progressDialog = AlertDialog.Builder(context)
+        .setView(R.layout.dialog_progress)
+        .show()
   }
 
   override fun hideLoading() {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    progressDialog?.dismiss()
   }
 
   override fun onSuccessLogin(user: UserModel) {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    Snackbar.make(btnLogin, "Login done", Snackbar.LENGTH_SHORT).show()
   }
 
   override fun onLoginError() {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
-
-  override fun setPresenter(presenter: Presenter) {
+    Snackbar.make(btnLogin, "Login failed", Snackbar.LENGTH_SHORT).show()
   }
 }
