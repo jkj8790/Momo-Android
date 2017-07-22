@@ -3,6 +3,7 @@ package com.sorrowbeaver.momo.data.repository
 import com.sorrowbeaver.momo.data.entity.mapper.UserEntityDataMapper
 import com.sorrowbeaver.momo.data.repository.datasource.UserDataStoreFactory
 import com.sorrowbeaver.momo.domain.model.User
+import com.sorrowbeaver.momo.domain.model.UserSortOption
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
 import okhttp3.Response
@@ -14,44 +15,51 @@ class UserDataRepository : UserRepository {
 
   override fun login(id: String, password: String): Observable<User> {
     val userDataStore = userDataStoreFactory.create()
-    return userDataStore.login(id, password).map {userEntityDataMapper.transform(it) }
+    return userDataStore.login(id, password)
+        .map {userEntityDataMapper.transform(it) }
   }
 
   override fun signUp(email: String, userName: String, password: String): Observable<User> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.signUp(email, userName, password)
+        .map {userEntityDataMapper.transform(it) }
 
-  override fun users(): Observable<Response> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun logout(): Observable<Response> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
   override fun facebookLogin(): Observable<User> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.facebookLogin()
+        .map {userEntityDataMapper.transform(it) }
+  }
+
+  override fun requestAuthenticateMail(): Observable<Response> {
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.requestAuthenticateMail()
+  }
+
+  override fun logout(): Observable<Response> {
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.requestAuthenticateMail()
   }
 
   override fun detail(userId: Long): Observable<User> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.detail(userId)
+        .map { userEntityDataMapper.transform(it) }
+  }
+
+  override fun users(sortOption: UserSortOption): Observable<List<User>> {
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.users()
+        .flatMap { Observable.fromIterable(it) }
+        .map { userEntityDataMapper.transform(it) }
+        .toList()
+        .toObservable()
   }
 
   override fun follow(userId: Long): Observable<Response> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.follow(userId)
   }
-
-  override fun requestAuthentiacateMail(): Observable<Response> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
-
 
 }
