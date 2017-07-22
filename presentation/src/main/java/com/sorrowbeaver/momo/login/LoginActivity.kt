@@ -23,16 +23,16 @@ class LoginActivity : AppCompatActivity() {
     setContentView(R.layout.activity_login)
 
     // Set up the toolbar.
-    val toolbar = findViewById(R.id.toolbar) as Toolbar
+    val toolbar: Toolbar = findViewById(R.id.toolbar)
     setSupportActionBar(toolbar)
     val ab = supportActionBar
     ab?.setHomeAsUpIndicator(android.R.drawable.ic_menu_edit)
     ab?.setDisplayHomeAsUpEnabled(true)
 
     // Set up the navigation drawer.
-    drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
+    drawerLayout = findViewById(R.id.drawer_layout)
     drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark)
-    val navigationView = findViewById(R.id.nav_view) as NavigationView
+    val navigationView: NavigationView = findViewById(R.id.nav_view)
     setupDrawerContent(navigationView)
 
     var loginFragment = supportFragmentManager.findFragmentById(R.id.contentFrame) as? LoginFragment

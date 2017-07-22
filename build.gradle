@@ -6,7 +6,7 @@ buildscript {
   ext.retrofit_version = '2.3.0'
   ext.anko_version = '0.10.1'
   ext.leakcanary_version = '1.5.1'
-  ext.supportLibraryVersion = '25.4.0'
+  ext.supportLibraryVersion = '26.0.0-beta2'
   repositories {
     maven { url 'https://maven.google.com' }
     jcenter()

@@ -4,15 +4,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  compileSdkVersion 26
+  buildToolsVersion "26.0.0-rc2"
   defaultConfig {
     applicationId "com.sorrowbeaver.momo"
     minSdkVersion 19
-    targetSdkVersion 25
+    targetSdkVersion 26
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    multiDexEnabled true
   }
   buildTypes {
     release {
@@ -24,6 +25,25 @@ android {
   packagingOptions {
     exclude 'META-INF/rxjava.properties'
   }
+
+  if(project.hasProperty('devBuild')) {
+    splits.abi.enable = false
+    splits.density.enable = false
+    aaptOptions.cruncherEnabled = false
+  }
+
+  flavorDimensions 'development'
+
+  productFlavors {
+
+    development {
+      minSdkVersion 21
+      dimension 'development'
+      resConfigs "en", "xxxhdpi"
+    }
+
+  }
+
 }
 
 dependencies {
