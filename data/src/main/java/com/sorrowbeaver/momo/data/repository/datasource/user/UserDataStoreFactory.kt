@@ -1,4 +1,4 @@
-package com.sorrowbeaver.momo.data.repository.datasource
+package com.sorrowbeaver.momo.data.repository.datasource.user
 
 class UserDataStoreFactory {
 

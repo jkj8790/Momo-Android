@@ -1,4 +1,4 @@
-package com.sorrowbeaver.momo.data.repository.datasource
+package com.sorrowbeaver.momo.data.repository.datasource.user
 
 import com.sorrowbeaver.momo.data.entity.UserEntity
 import io.reactivex.Observable
@@ -30,6 +30,8 @@ class FakeUserDataStore : UserDataStore {
   override fun requestAuthenticateMail(): Observable<Response> {
     TODO("not implemented")
   }
+
+  fun Response.Builder.success(): Response = code(200).build()
 
   override fun logout(): Observable<Response> {
     return Observable.just(Response.Builder().success())
@@ -64,4 +66,3 @@ class FakeUserDataStore : UserDataStore {
   )
 }
 
-fun Response.Builder.success(): Response = code(200).build()

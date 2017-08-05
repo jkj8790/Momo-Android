@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.sorrowbeaver.momo.R
 import com.sorrowbeaver.momo.data.repository.UserDataRepository
-import com.sorrowbeaver.momo.data.repository.datasource.UserDataStoreFactory
+import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataStoreFactory
 import com.sorrowbeaver.momo.domain.interactor.Login
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import io.reactivex.android.schedulers.AndroidSchedulers

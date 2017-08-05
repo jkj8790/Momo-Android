@@ -1,4 +1,4 @@
-package com.sorrowbeaver.momo.data.repository.datasource
+package com.sorrowbeaver.momo.data.repository.datasource.user
 
 import com.sorrowbeaver.momo.data.entity.UserEntity
 import io.reactivex.Observable
