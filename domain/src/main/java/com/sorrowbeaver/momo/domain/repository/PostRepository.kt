@@ -8,7 +8,7 @@ interface PostRepository {
 
   fun posts(): Observable<List<Post>>
 
-  fun createPost(pin: Pin, photoUrl: String?, desciption: String?): Observable<Post>
+  fun createPost(pin: Pin, photoUrl: String?, description: String?): Observable<Post>
 
   fun detail(id: Long): Observable<Post>
 
