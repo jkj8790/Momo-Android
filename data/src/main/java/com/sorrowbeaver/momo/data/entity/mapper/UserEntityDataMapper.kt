@@ -9,12 +9,10 @@ import com.sorrowbeaver.momo.domain.model.UserType.Super
 class UserEntityDataMapper {
 
   fun transform(userEntity: UserEntity) : User {
-    val type = if(userEntity.is_superuser) {
-      Super
-    } else if(userEntity.is_staff) {
-      Staff
-    } else {
-      Normal
+    val type = when {
+      userEntity.is_superuser -> Super
+      userEntity.is_staff -> Staff
+      else -> Normal
     }
 
     return User(
