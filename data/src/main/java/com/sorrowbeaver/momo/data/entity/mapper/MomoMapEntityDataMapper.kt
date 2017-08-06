@@ -17,8 +17,8 @@ class MomoMapEntityDataMapper {
     )
   }
 
-  fun transform(momoMapEntities: List<MomoMapEntity>) : List<MomoMap> {
-    return momoMapEntities.map { transform(it) }
+  fun transform(momoMapEntities: List<MomoMapEntity>?) : List<MomoMap>? {
+    return momoMapEntities?.map { transform(it) }
   }
 
 }

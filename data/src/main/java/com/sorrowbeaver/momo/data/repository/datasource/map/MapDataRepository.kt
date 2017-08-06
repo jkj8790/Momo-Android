@@ -18,7 +18,8 @@ class MapDataRepository : MapRepository {
 
   override fun maps(mapSortOption: MapSortOption): Observable<List<MomoMap>> {
     return mapDataStore.maps()
-        .map { mapDataEntityDataMapper.transform(it) }
+        .map { mapDataEntityDataMapper.transform(it)!! }
+    //TODO find better solution
   }
 
   override fun detail(id: Long): Observable<MomoMap> {
