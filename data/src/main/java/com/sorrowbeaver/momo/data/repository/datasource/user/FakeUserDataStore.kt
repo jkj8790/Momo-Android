@@ -27,7 +27,7 @@ class FakeUserDataStore : UserDataStore {
     TODO("not implemented")
   }
 
-  override fun requestAuthenticateMail(): Observable<Response> {
+  override fun requestAuthenticateEmail(): Observable<Response> {
     TODO("not implemented")
   }
 

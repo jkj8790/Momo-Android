@@ -31,14 +31,14 @@ class UserDataRepository : UserRepository {
         .map {userEntityDataMapper.transform(it) }
   }
 
-  override fun requestAuthenticateMail(): Observable<Response> {
+  override fun requestAuthenticateEmail(): Observable<Response> {
     val userDataStore = userDataStoreFactory.create()
-    return userDataStore.requestAuthenticateMail()
+    return userDataStore.requestAuthenticateEmail()
   }
 
   override fun logout(): Observable<Response> {
     val userDataStore = userDataStoreFactory.create()
-    return userDataStore.requestAuthenticateMail()
+    return userDataStore.logout()
   }
 
   override fun detail(userId: Long): Observable<User> {

@@ -16,7 +16,7 @@ interface UserDataStore {
 
   fun follow(userId: Long): Observable<Response>
 
-  fun requestAuthenticateMail(): Observable<Response>
+  fun requestAuthenticateEmail(): Observable<Response>
 
   fun logout(): Observable<Response>
 

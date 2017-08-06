@@ -12,22 +12,21 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetProfileTest {
-
-  val FAKE_USER_ID = 0L
+class RequestAuthenticateEmailTest {
 
   @Mock lateinit var userRepository : UserRepository
-  lateinit var getProfile: GetProfile
+  lateinit var requestAuthenticateEmail: RequestAuthenticateEmail
 
   @Before fun setUp() {
-    `when`(userRepository.detail(FAKE_USER_ID)).thenReturn(Observable.empty());
-    getProfile = GetProfile(userRepository, TestScheduler(), TestScheduler())
+    `when`(userRepository.requestAuthenticateEmail()).thenReturn(Observable.empty());
+    requestAuthenticateEmail = RequestAuthenticateEmail(userRepository,
+        TestScheduler(), TestScheduler())
   }
 
   @Test fun testSignUp() {
-    getProfile.buildUseCaseObservable(GetProfile.Params(FAKE_USER_ID))
+    requestAuthenticateEmail.buildUseCaseObservable(Unit)
 
-    verify(userRepository).detail(FAKE_USER_ID)
+    verify(userRepository).requestAuthenticateEmail()
   }
 
 }

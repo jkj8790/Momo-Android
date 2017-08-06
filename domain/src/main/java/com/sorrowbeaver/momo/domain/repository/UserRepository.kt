@@ -15,13 +15,12 @@ interface UserRepository {
 
   fun facebookLogin(): Observable<User>
 
-  fun requestAuthenticateMail(): Observable<Response>
+  fun requestAuthenticateEmail(): Observable<Response>
 
   fun logout(): Observable<Response>
 
   fun detail(userId: Long): Observable<User>
 
-  //TODO Add sort option parameter.
   fun users(sortOption: UserSortOption): Observable<List<User>>
 
   fun follow(userId: Long): Observable<Response>

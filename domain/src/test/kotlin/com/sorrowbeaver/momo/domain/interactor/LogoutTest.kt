@@ -12,22 +12,20 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetProfileTest {
-
-  val FAKE_USER_ID = 0L
+class LogoutTest {
 
   @Mock lateinit var userRepository : UserRepository
-  lateinit var getProfile: GetProfile
+  lateinit var logout: Logout
 
   @Before fun setUp() {
-    `when`(userRepository.detail(FAKE_USER_ID)).thenReturn(Observable.empty());
-    getProfile = GetProfile(userRepository, TestScheduler(), TestScheduler())
+    `when`(userRepository.logout()).thenReturn(Observable.empty());
+    logout = Logout(userRepository, TestScheduler(), TestScheduler())
   }
 
   @Test fun testSignUp() {
-    getProfile.buildUseCaseObservable(GetProfile.Params(FAKE_USER_ID))
+    logout.buildUseCaseObservable(Unit)
 
-    verify(userRepository).detail(FAKE_USER_ID)
+    verify(userRepository).logout()
   }
 
 }
