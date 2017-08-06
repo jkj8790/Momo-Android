@@ -23,4 +23,8 @@ class UserEntityDataMapper {
     )
   }
 
+  fun transform(userEntities: List<UserEntity>?) : List<User>? {
+    return userEntities?.map { transform(it) }
+  }
+
 }
