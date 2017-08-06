@@ -8,7 +8,7 @@ data class MomoMap(
     val description: String,
     val isPrivate: Boolean,
     val author: User,
-    val pins: List<Pin>,
+    val pinIds: List<Long>,
     val createdDate: Date
 ) {
   enum class MapSortOption {

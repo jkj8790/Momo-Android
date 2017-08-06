@@ -13,7 +13,7 @@ data class User(
     val signedUpWithFacebook: Boolean,
     val activated: Boolean,
     val type: UserType,
-    val momoMapList: List<MomoMap>,
+    val momoMapIds: List<Long>,
     val following: List<User>
 )
 

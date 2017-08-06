@@ -4,7 +4,7 @@ import java.util.Date
 
 data class Post(
     val id: Long,
-    val pin: Pin,
+    val pinId: Long,
     val photoUrl: String?,
     val description: String,
     val createdDate: Date
