@@ -1,7 +1,6 @@
-package com.sorrowbeaver.momo.data.repository
+package com.sorrowbeaver.momo.data.repository.datasource.user
 
 import com.sorrowbeaver.momo.data.entity.mapper.UserEntityDataMapper
-import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataStoreFactory
 import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.domain.model.UserSortOption
 import com.sorrowbeaver.momo.domain.repository.UserRepository
