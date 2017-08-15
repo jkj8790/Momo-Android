@@ -2,20 +2,20 @@ package com.sorrowbeaver.momo.login
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import com.sorrowbeaver.momo.R
-import com.sorrowbeaver.momo.data.repository.UserDataRepository
+import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataRepository
 import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataStoreFactory
 import com.sorrowbeaver.momo.domain.interactor.Login
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_login.drawerLayout
+import kotlinx.android.synthetic.main.activity_login.navigationView
+import kotlinx.android.synthetic.main.activity_login.toolbar
 
 class LoginActivity : AppCompatActivity() {
 
-  lateinit var drawerLayout: DrawerLayout
   lateinit var loginPresenter: LoginPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,16 +23,13 @@ class LoginActivity : AppCompatActivity() {
     setContentView(R.layout.activity_login)
 
     // Set up the toolbar.
-    val toolbar: Toolbar = findViewById(R.id.toolbar)
     setSupportActionBar(toolbar)
     val ab = supportActionBar
     ab?.setHomeAsUpIndicator(android.R.drawable.ic_menu_edit)
     ab?.setDisplayHomeAsUpEnabled(true)
 
     // Set up the navigation drawer.
-    drawerLayout = findViewById(R.id.drawer_layout)
     drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark)
-    val navigationView: NavigationView = findViewById(R.id.nav_view)
     setupDrawerContent(navigationView)
 
     var loginFragment = supportFragmentManager.findFragmentById(R.id.contentFrame) as? LoginFragment
