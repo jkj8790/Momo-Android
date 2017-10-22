@@ -1,4 +1,4 @@
-package com.sorrowbeaver.momo
+package com.sorrowbeaver.momo.main
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -6,20 +6,23 @@ import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.sorrowbeaver.momo.R.color
+import com.sorrowbeaver.momo.R.id
+import com.sorrowbeaver.momo.R.layout
+import com.sorrowbeaver.momo.map.MapFragment
 import kotlinx.android.synthetic.main.activity_maps.drawerLayout
 import kotlinx.android.synthetic.main.activity_maps.navigationView
 import kotlinx.android.synthetic.main.activity_maps.toolbar
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
   private var mMap: GoogleMap? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_maps)
+    setContentView(layout.activity_maps)
 
     // Set up the toolbar.
     setSupportActionBar(toolbar)
@@ -28,21 +31,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     ab?.setDisplayHomeAsUpEnabled(true)
 
     // Set up the navigation drawer.
-    drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark)
+    drawerLayout.setStatusBarBackground(color.colorPrimaryDark)
     setupDrawerContent(navigationView)
 
-    var supportMapFragment = supportFragmentManager.findFragmentById(R.id.contentFrame) as?
-        SupportMapFragment
-    if (supportMapFragment == null) {
+    var mapFragment = supportFragmentManager.findFragmentById(
+        id.contentFrame) as? MapFragment
+    if (mapFragment == null) {
       // Obtain the SupportMapFragment and get notified when the map is ready to be used.
       // Create the fragment
-      supportMapFragment = SupportMapFragment()
+      mapFragment = MapFragment()
       val transaction = supportFragmentManager.beginTransaction()
-      transaction.add(R.id.contentFrame, supportMapFragment)
+      transaction.add(id.contentFrame, mapFragment)
       transaction.commit()
     }
 
-    supportMapFragment.getMapAsync(this)
+    mapFragment.getMapAsync(this)
 
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
@@ -71,7 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
   private fun setupDrawerContent(navigationView: NavigationView) {
     navigationView.setNavigationItemSelectedListener { menuItem ->
       when (menuItem.itemId) {
-        R.id.list_navigation_menu_item -> {
+        id.list_navigation_menu_item -> {
         }
         else -> {
         }

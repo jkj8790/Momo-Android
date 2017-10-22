@@ -8,8 +8,8 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sorrowbeaver.momo.MapsActivity
 import com.sorrowbeaver.momo.R
+import com.sorrowbeaver.momo.main.MainActivity
 import com.sorrowbeaver.momo.model.UserModel
 import kotlinx.android.synthetic.main.fragment_login.btnLogin
 import kotlinx.android.synthetic.main.fragment_login.editId
@@ -47,7 +47,7 @@ class LoginFragment : Fragment(), LoginContract.View {
 
   override fun onSuccessLogin(user: UserModel) {
     Snackbar.make(btnLogin, "Login done", Snackbar.LENGTH_SHORT).show()
-    startActivity(Intent(activity, MapsActivity::class.java))
+    startActivity(Intent(activity, MainActivity::class.java))
   }
 
   override fun onLoginError() {
