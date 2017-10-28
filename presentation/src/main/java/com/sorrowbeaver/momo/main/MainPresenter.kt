@@ -10,12 +10,12 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
 class MainPresenter(
-    private val userRepository: UserRepository,
+    userRepository: UserRepository,
     val view: MainContract.View
 ): MainContract.Presenter {
 
   private val getProfile = GetProfile(userRepository, Schedulers.io(), AndroidSchedulers.mainThread())
-  val userModelMapper = UserModelDataMapper()
+  private val userModelMapper = UserModelDataMapper()
   private val disposables = CompositeDisposable()
 
   override fun subscribe() {
@@ -30,12 +30,12 @@ class MainPresenter(
     view.showLoading()
      getProfile.get(Params(0))
         .observeOn(Schedulers.computation())
-        .map { userModelMapper.transform(it) }
+        .map(userModelMapper::transform)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeBy(
-            onNext = {
-              it.profileUrl?.let { view.showProfileImage(it) }
-              view.showUserName(it.userName)
+            onNext = { userModel ->
+              userModel.profileUrl?.let(view::showProfileImage)
+              view.showUserName(userModel.userName)
             },
             onError = {
               it.printStackTrace()
@@ -45,7 +45,7 @@ class MainPresenter(
             onComplete = {
               view.hideLoading()
             }
-        ) .let { disposables.add(it) }
+        ) .let(disposables::add)
   }
 
 }

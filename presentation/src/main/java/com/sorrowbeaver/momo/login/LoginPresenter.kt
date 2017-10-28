@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 
 class LoginPresenter(
     val view: LoginContract.View,
-    val userModelDataMapper: UserModelDataMapper,
+    private val userModelDataMapper: UserModelDataMapper,
     val login: Login // TODO consider using Dagger if usecases are more added
 ) : LoginContract.Presenter {
   private val disposables = CompositeDisposable()
@@ -25,19 +25,15 @@ class LoginPresenter(
     view.showLoading()
     login.get(Login.Params(id, password))
         .observeOn(Schedulers.computation())
-        .map { userModelDataMapper.transform(it) }
+        .map(userModelDataMapper::transform)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeBy (
-            onNext = {
-              view.onSuccessLogin(it)
-            },
+            onNext = view::onSuccessLogin,
             onError = {
               it.printStackTrace()
               view.hideLoading()
             },
-            onComplete = {
-              view.hideLoading()
-            }
-        ).let { disposables.add(it) }
+            onComplete = view::hideLoading
+        ).let(disposables::add)
   }
 }
