@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
 
   override fun onResume() {
     super.onResume()
-    presenter.start()
+    presenter.subscribe()
   }
 
   override fun onPause() {

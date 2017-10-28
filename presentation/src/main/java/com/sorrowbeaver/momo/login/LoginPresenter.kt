@@ -3,6 +3,7 @@ package com.sorrowbeaver.momo.login
 import com.sorrowbeaver.momo.domain.interactor.Login
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
@@ -11,8 +12,13 @@ class LoginPresenter(
     val userModelDataMapper: UserModelDataMapper,
     val login: Login // TODO consider using Dagger if usecases are more added
 ) : LoginContract.Presenter {
+  private val disposables = CompositeDisposable()
 
-  override fun start() {
+  override fun subscribe() {
+  }
+
+  override fun unsubscribe() {
+    disposables.clear()
   }
 
   override fun login(id: String, password: String) {
@@ -32,6 +38,6 @@ class LoginPresenter(
             onComplete = {
               view.hideLoading()
             }
-        )
+        ).let { disposables.add(it) }
   }
 }
