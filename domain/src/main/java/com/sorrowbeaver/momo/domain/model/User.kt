@@ -4,7 +4,7 @@ import java.util.Date
 
 data class User(
     val id: Long,
-    val username: String,
+    val userName: String,
     val email: String,
     val profileUrl: String?,
     val joinedDate: Date,

@@ -2,7 +2,10 @@ package com.sorrowbeaver.momo.main
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,18 +14,24 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
+import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataRepository
 import com.sorrowbeaver.momo.map.MapFragment
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_maps.drawerLayout
 import kotlinx.android.synthetic.main.activity_maps.navigationView
 import kotlinx.android.synthetic.main.activity_maps.toolbar
+import kotlinx.android.synthetic.main.nav_header.imgProfile
+import kotlinx.android.synthetic.main.nav_header.textUserName
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View {
 
   private var mMap: GoogleMap? = null
+  private val presenter = MainPresenter(UserDataRepository(), this)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_maps)
+
 
     // Set up the toolbar.
     setSupportActionBar(toolbar)
@@ -50,6 +59,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     // Load previously saved state, if available.
     if (savedInstanceState != null) {
     }
+
+    toolbar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    presenter.start()
+  }
+
+  override fun onPause() {
+    super.onPause()
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    return super.onOptionsItemSelected(item)
   }
 
 
@@ -75,6 +99,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     navigationView.setNavigationItemSelectedListener { menuItem ->
       when (menuItem.itemId) {
         id.list_navigation_menu_item -> {
+          Toast.makeText(this, "a", Toast.LENGTH_SHORT).show()
         }
         else -> {
         }
@@ -85,4 +110,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
       true
     }
   }
+
+  override fun showLoading() {
+    // TODO show profile dialog
+  }
+
+  override fun hideLoading() {
+    // TODO hide profile dialog
+  }
+
+  override fun showProfileImage(profileUrl: String) {
+    Picasso.with(this).load(profileUrl).into(imgProfile)
+  }
+
+  override fun showUserName(userName: String) {
+    textUserName.text = userName
+  }
+
 }
