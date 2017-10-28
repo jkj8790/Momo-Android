@@ -11,7 +11,7 @@ class GetPosts (
     postExecutionScheduler: Scheduler
 ) : UseCase<List<Post>, Unit>(executorScheduler, postExecutionScheduler) {
 
-  override fun buildUseCaseObservable(params: Unit): Observable<List<Post>> {
+  override fun buildObservable(params: Unit): Observable<List<Post>> {
     return postRepository.posts()
   }
 }

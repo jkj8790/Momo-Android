@@ -24,7 +24,7 @@ class RequestAuthenticateEmailTest {
   }
 
   @Test fun testSignUp() {
-    requestAuthenticateEmail.buildUseCaseObservable(Unit)
+    requestAuthenticateEmail.buildObservable(Unit)
 
     verify(userRepository).requestAuthenticateEmail()
   }

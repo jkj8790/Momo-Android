@@ -26,7 +26,7 @@ class FollowTest {
   }
 
   @Test fun testSignUp() {
-    follow.buildUseCaseObservable(Params(FAKE_USER_ID))
+    follow.buildObservable(Params(FAKE_USER_ID))
 
     verify(userRepository).follow(FAKE_USER_ID)
   }

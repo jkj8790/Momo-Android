@@ -27,7 +27,7 @@ class GetUsersTest {
   }
 
   @Test fun testSignUp() {
-    getUsers.buildUseCaseObservable(Params(sortOption))
+    getUsers.buildObservable(Params(sortOption))
 
     verify(userRepository).users(sortOption)
   }

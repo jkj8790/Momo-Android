@@ -23,7 +23,7 @@ class GetPostsTest {
   }
 
   @Test fun testCreateMap() {
-    getPosts.buildUseCaseObservable(Unit)
+    getPosts.buildObservable(Unit)
 
     verify(postRepository).posts()
   }

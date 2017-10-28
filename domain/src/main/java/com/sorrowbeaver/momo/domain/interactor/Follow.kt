@@ -14,7 +14,7 @@ class Follow (
 
   data class Params(val userId: Long)
 
-  override fun buildUseCaseObservable(params: Params): Observable<Response> {
+  override fun buildObservable(params: Params): Observable<Response> {
     return userRepository.follow(params.userId)
   }
 }

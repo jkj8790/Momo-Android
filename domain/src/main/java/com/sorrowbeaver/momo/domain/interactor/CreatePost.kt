@@ -14,7 +14,7 @@ class CreatePost (
 
   data class Params(val pinId: Long, val photoUrl: String?, val description: String?)
 
-  override fun buildUseCaseObservable(params: Params): Observable<Post> {
+  override fun buildObservable(params: Params): Observable<Post> {
     return postRepository.createPost(params.pinId,
         params.photoUrl, params.description)
   }

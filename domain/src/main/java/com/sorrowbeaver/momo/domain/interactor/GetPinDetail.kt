@@ -14,7 +14,7 @@ class GetPinDetail (
 
   data class Params(val id: Long)
 
-  override fun buildUseCaseObservable(params: Params): Observable<Pin> {
+  override fun buildObservable(params: Params): Observable<Pin> {
     return pinRepository.detail(params.id)
   }
 }

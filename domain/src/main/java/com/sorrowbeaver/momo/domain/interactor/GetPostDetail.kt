@@ -14,7 +14,7 @@ class GetPostDetail (
 
   data class Params(val id: Long)
 
-  override fun buildUseCaseObservable(params: Params): Observable<Post> {
+  override fun buildObservable(params: Params): Observable<Post> {
     return postRepository.detail(params.id)
   }
 }

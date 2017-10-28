@@ -15,7 +15,7 @@ class GetMaps (
 
   data class Params(val sortOption: MapSortOption)
 
-  override fun buildUseCaseObservable(params: Params): Observable<List<MomoMap>> {
+  override fun buildObservable(params: Params): Observable<List<MomoMap>> {
     return mapRepository.maps(params.sortOption)
   }
 }

@@ -25,7 +25,7 @@ class GetMapsTest {
   }
 
   @Test fun testGetMaps() {
-    getMaps.buildUseCaseObservable(Params(RECENT))
+    getMaps.buildObservable(Params(RECENT))
 
     verify(mapRepository).maps(RECENT)
   }

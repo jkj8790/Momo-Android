@@ -14,7 +14,7 @@ class GetMapDetail (
 
   data class Params(val id: Long)
 
-  override fun buildUseCaseObservable(params: Params): Observable<MomoMap> {
+  override fun buildObservable(params: Params): Observable<MomoMap> {
     return mapRepository.detail(params.id)
   }
 }

@@ -119,6 +119,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     // TODO hide profile dialog
   }
 
+  override fun showError() {
+    Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
+  }
+
   override fun showProfileImage(profileUrl: String) {
     Picasso.with(this).load(profileUrl).into(imgProfile)
   }

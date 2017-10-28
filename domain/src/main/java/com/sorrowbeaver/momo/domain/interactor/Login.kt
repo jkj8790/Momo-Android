@@ -14,7 +14,7 @@ open class Login (
 
   data class Params(val id: String, val password: String)
 
-  override fun buildUseCaseObservable(params: Params): Observable<User> {
+  override fun buildObservable(params: Params): Observable<User> {
     return userRepository.login(params.id, params.password)
   }
 }

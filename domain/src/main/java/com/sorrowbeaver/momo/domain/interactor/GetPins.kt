@@ -11,7 +11,7 @@ class GetPins (
     postExecutionScheduler: Scheduler
 ) : UseCase<List<Pin>, Unit>(executorScheduler, postExecutionScheduler) {
 
-  override fun buildUseCaseObservable(params: Unit): Observable<List<Pin>> {
+  override fun buildObservable(params: Unit): Observable<List<Pin>> {
     return pinRepository.pins()
   }
 }

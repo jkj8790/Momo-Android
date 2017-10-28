@@ -14,7 +14,7 @@ class SignUp (
 
   data class Params(val email: String, val id: String, val password: String)
 
-  override fun buildUseCaseObservable(params: Params): Observable<User> {
+  override fun buildObservable(params: Params): Observable<User> {
     return userRepository.signUp(params.email, params.id, params.password)
   }
 }

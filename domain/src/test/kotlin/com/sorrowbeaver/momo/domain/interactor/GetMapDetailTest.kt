@@ -25,7 +25,7 @@ class GetMapDetailTest {
   }
 
   @Test fun testMapDetail() {
-    getMapDetail.buildUseCaseObservable(GetMapDetail.Params(FAKE_MAP_ID))
+    getMapDetail.buildObservable(GetMapDetail.Params(FAKE_MAP_ID))
 
     verify(mapRepository).detail(FAKE_MAP_ID)
   }

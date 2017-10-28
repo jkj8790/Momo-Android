@@ -57,24 +57,24 @@ class LoginPresenterTest {
       Schedulers.trampoline(), Schedulers.trampoline()
   ) {
 
-    override fun buildUseCaseObservable(params: Params): Observable<User> {
+    override fun buildObservable(params: Params): Observable<User> {
       return Observable.just(expectedUser)
     }
 
     override fun execute(observer: DisposableObserver<User>, params: Params) {
-      buildUseCaseObservable(params).subscribe(observer)
+      buildObservable(params).subscribe(observer)
     }
   }
 
   class FailLogin : Login(mock<UserRepository>(),
       Schedulers.trampoline(), Schedulers.trampoline()) {
 
-    override fun buildUseCaseObservable(params: Params): Observable<User> {
+    override fun buildObservable(params: Params): Observable<User> {
       return Observable.error(RuntimeException())
     }
 
     override fun execute(observer: DisposableObserver<User>, params: Params) {
-      buildUseCaseObservable(params).subscribe(observer)
+      buildObservable(params).subscribe(observer)
     }
   }
 

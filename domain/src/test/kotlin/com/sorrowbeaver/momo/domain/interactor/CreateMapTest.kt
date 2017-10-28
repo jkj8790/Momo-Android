@@ -23,7 +23,7 @@ class CreateMapTest {
   }
 
   @Test fun testCreateMap() {
-    createMap.buildUseCaseObservable(Unit)
+    createMap.buildObservable(Unit)
 
     verify(mapRepository).createMap()
   }

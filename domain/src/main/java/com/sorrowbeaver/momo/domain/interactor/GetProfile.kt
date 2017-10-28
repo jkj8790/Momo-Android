@@ -14,7 +14,7 @@ class GetProfile (
 
   data class Params(val userId : Long)
 
-  override fun buildUseCaseObservable(params: Params): Observable<User> {
+  override fun buildObservable(params: Params): Observable<User> {
     return userRepository.detail(params.userId)
   }
 }

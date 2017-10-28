@@ -26,7 +26,7 @@ class LoginTest {
   }
 
   @Test fun testLogin() {
-    login.buildUseCaseObservable(Login.Params(FAKE_ID, FAKE_PWD))
+    login.buildObservable(Login.Params(FAKE_ID, FAKE_PWD))
 
     verify(userRepository).login(FAKE_ID, FAKE_PWD);
   }

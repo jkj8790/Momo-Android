@@ -25,7 +25,7 @@ class SearchPlaceTest {
   }
 
   @Test fun testCreateMap() {
-    searchPlace.buildUseCaseObservable(Unit)
+    searchPlace.buildObservable(Unit)
 
     verify(searchRepository).searchPlace()
   }

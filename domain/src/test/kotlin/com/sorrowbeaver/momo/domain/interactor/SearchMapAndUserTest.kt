@@ -26,7 +26,7 @@ class SearchMapAndUserTest {
   }
 
   @Test fun testCreateMap() {
-    searchMapAndUser.buildUseCaseObservable(Params(FAKE_KEYWORD))
+    searchMapAndUser.buildObservable(Params(FAKE_KEYWORD))
 
     verify(searchRepository).searchMapAndUser(FAKE_KEYWORD)
   }

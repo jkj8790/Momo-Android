@@ -29,7 +29,7 @@ class CreatePostTest {
   }
 
   @Test fun testCreateMap() {
-    createPost.buildUseCaseObservable(Params(
+    createPost.buildObservable(Params(
         FAKE_PIN_ID, FAKE_PHOTO_URL, FAKE_DESCRIPTION
     ))
 

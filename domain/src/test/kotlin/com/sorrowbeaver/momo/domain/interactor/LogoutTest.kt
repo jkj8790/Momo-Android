@@ -23,7 +23,7 @@ class LogoutTest {
   }
 
   @Test fun testSignUp() {
-    logout.buildUseCaseObservable(Unit)
+    logout.buildObservable(Unit)
 
     verify(userRepository).logout()
   }

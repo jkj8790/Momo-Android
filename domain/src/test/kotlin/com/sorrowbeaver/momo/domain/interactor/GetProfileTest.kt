@@ -25,7 +25,7 @@ class GetProfileTest {
   }
 
   @Test fun testSignUp() {
-    getProfile.buildUseCaseObservable(GetProfile.Params(FAKE_USER_ID))
+    getProfile.buildObservable(GetProfile.Params(FAKE_USER_ID))
 
     verify(userRepository).detail(FAKE_USER_ID)
   }

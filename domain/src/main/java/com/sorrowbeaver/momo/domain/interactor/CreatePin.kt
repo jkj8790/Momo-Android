@@ -15,7 +15,7 @@ class CreatePin (
 
   data class Params(val name: String, val pinType: PinType, val mapId: Long)
 
-  override fun buildUseCaseObservable(params: Params): Observable<Pin> {
+  override fun buildObservable(params: Params): Observable<Pin> {
     return pinRepository.createPin(params.name, params.pinType, params.mapId)
   }
 }

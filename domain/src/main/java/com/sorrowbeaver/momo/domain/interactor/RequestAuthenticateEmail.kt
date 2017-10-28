@@ -11,7 +11,7 @@ class RequestAuthenticateEmail (
     postExecutionScheduler: Scheduler
 ) : UseCase<Response, Unit>(executorScheduler, postExecutionScheduler) {
 
-  override fun buildUseCaseObservable(params: Unit): Observable<Response> {
+  override fun buildObservable(params: Unit): Observable<Response> {
     return userRepository.requestAuthenticateEmail()
   }
 }

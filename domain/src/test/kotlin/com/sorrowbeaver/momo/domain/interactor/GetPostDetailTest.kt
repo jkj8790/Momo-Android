@@ -26,7 +26,7 @@ class GetPostDetailTest {
   }
 
   @Test fun testCreateMap() {
-    getPostDetail.buildUseCaseObservable(Params(FAKE_POST_ID))
+    getPostDetail.buildObservable(Params(FAKE_POST_ID))
 
     verify(postRepository).detail(FAKE_POST_ID)
   }

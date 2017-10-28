@@ -8,6 +8,7 @@ interface MainContract {
   interface View: BaseView<Presenter> {
     fun showLoading()
     fun hideLoading()
+    fun showError()
     fun showProfileImage(profileUrl: String)
     fun showUserName(userName: String)
   }

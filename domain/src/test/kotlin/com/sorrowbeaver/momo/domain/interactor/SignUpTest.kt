@@ -31,7 +31,7 @@ class SignUpTest {
   }
 
   @Test fun testSignUp() {
-    signUp.buildUseCaseObservable(SignUp.Params(FAKE_EMAIL, FAKE_ID, FAKE_PWD))
+    signUp.buildObservable(SignUp.Params(FAKE_EMAIL, FAKE_ID, FAKE_PWD))
 
     verify(userRepository).signUp(FAKE_EMAIL, FAKE_ID, FAKE_PWD)
   }

@@ -11,7 +11,7 @@ class CreateMap (
     postExecutionScheduler: Scheduler
 ) : UseCase<MomoMap, Unit>(executorScheduler, postExecutionScheduler) {
 
-  override fun buildUseCaseObservable(params: Unit): Observable<MomoMap> {
+  override fun buildObservable(params: Unit): Observable<MomoMap> {
     return mapRepository.createMap()
   }
 }

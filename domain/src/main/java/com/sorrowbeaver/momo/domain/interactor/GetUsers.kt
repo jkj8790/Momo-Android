@@ -15,7 +15,7 @@ class GetUsers (
 
   data class Params(val sortOption: UserSortOption)
 
-  override fun buildUseCaseObservable(params: Params): Observable<List<User>> {
+  override fun buildObservable(params: Params): Observable<List<User>> {
     return userRepository.users(params.sortOption)
   }
 }

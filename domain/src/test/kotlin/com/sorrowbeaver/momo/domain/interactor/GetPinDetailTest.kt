@@ -26,7 +26,7 @@ class GetPinDetailTest {
   }
 
   @Test fun testCreatePin() {
-    getPinDetail.buildUseCaseObservable(Params(FAKE_PIN_ID))
+    getPinDetail.buildObservable(Params(FAKE_PIN_ID))
 
     verify(pinRepository).detail(FAKE_PIN_ID)
   }

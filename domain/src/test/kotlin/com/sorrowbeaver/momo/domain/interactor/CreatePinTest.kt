@@ -30,7 +30,7 @@ class CreatePinTest {
   }
 
   @Test fun testCreatePin() {
-    createPin.buildUseCaseObservable(Params(FAKE_PIN_NAME, FAKE_PIN_TYPE, FAKE_MAP_ID))
+    createPin.buildObservable(Params(FAKE_PIN_NAME, FAKE_PIN_TYPE, FAKE_MAP_ID))
 
     verify(pinRepository).createPin(
         FAKE_PIN_NAME, FAKE_PIN_TYPE, FAKE_MAP_ID

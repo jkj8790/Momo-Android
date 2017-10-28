@@ -23,7 +23,7 @@ class GetPinsTest {
   }
 
   @Test fun testCreatePin() {
-    getPins.buildUseCaseObservable(Unit)
+    getPins.buildObservable(Unit)
 
     verify(pinRepository).pins()
   }

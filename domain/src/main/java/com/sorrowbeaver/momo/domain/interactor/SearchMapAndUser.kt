@@ -14,7 +14,7 @@ class SearchMapAndUser (
 
   data class Params(val keyword: String)
 
-  override fun buildUseCaseObservable(params: Params): Observable<SearchResult> {
+  override fun buildObservable(params: Params): Observable<SearchResult> {
     return searchRepository.searchMapAndUser(params.keyword)
   }
 }

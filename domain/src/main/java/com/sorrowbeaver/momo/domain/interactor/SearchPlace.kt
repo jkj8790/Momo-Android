@@ -11,7 +11,7 @@ class SearchPlace (
     postExecutionScheduler: Scheduler
 ) : UseCase<List<Place>, Unit>(executorScheduler, postExecutionScheduler) {
 
-  override fun buildUseCaseObservable(params: Unit): Observable<List<Place>> {
+  override fun buildObservable(params: Unit): Observable<List<Place>> {
     return searchRepository.searchPlace()
   }
 }
