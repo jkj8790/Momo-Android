@@ -31,6 +31,7 @@ class LoginPresenter(
             onNext = view::onSuccessLogin,
             onError = {
               it.printStackTrace()
+              view.onLoginError()
               view.hideLoading()
             },
             onComplete = view::hideLoading

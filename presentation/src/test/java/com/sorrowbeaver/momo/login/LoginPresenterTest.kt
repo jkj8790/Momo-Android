@@ -5,30 +5,37 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.Login
 import com.sorrowbeaver.momo.domain.model.User
-import com.sorrowbeaver.momo.domain.repository.UserRepository
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
+import com.sorrowbeaver.momo.model.UserModel
 import io.reactivex.Observable
-import io.reactivex.observers.DisposableObserver
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito.`when`
 
 class LoginPresenterTest {
 
-  lateinit var loginPresenter: LoginPresenter
+  private lateinit var loginPresenter: LoginPresenter
 
-  @Mock val mockMapper = mock<UserModelDataMapper>()
-  @Mock val mockLogin = mock<Login>()
-  @Mock val mockView = mock<LoginContract.View>()
-  @Mock val mockUser = mock<User>()
+  @Mock private val mockMapper = mock<UserModelDataMapper>()
+  @Mock private val mockLogin = mock<Login>()
+  @Mock private val mockView = mock<LoginContract.View>()
+  @Mock private val mockUser = mock<User>()
+  @Mock private val mockUserModel = mock<UserModel>()
 
-  val FAKE_ID = "id"
-  val FAKE_PWD = "password"
+  private val FAKE_ID = "id"
+  private val FAKE_PWD = "password"
 
   @Before
   fun setUp() {
     loginPresenter = LoginPresenter(mockView, mockMapper, mockLogin)
+    RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+    RxJavaPlugins.setComputationSchedulerHandler() { Schedulers.trampoline() }
+    // TODO 왜 setInitComputation 하면 제대로 동작하지 않는지 조사
+    `when`(mockMapper.transform(mockUser)).thenReturn(mockUserModel)
   }
 
   @Test
@@ -53,29 +60,20 @@ class LoginPresenterTest {
     verify(mockView).hideLoading()
   }
 
-  class SuccessLogin(val expectedUser: User) : Login(mock<UserRepository>(),
+  class SuccessLogin(private val expectedUser: User) : Login(mock(),
       Schedulers.trampoline(), Schedulers.trampoline()
   ) {
 
     override fun buildObservable(params: Params): Observable<User> {
       return Observable.just(expectedUser)
     }
-
-    override fun execute(observer: DisposableObserver<User>, params: Params) {
-      buildObservable(params).subscribe(observer)
-    }
   }
 
-  class FailLogin : Login(mock<UserRepository>(),
+  class FailLogin : Login(mock(),
       Schedulers.trampoline(), Schedulers.trampoline()) {
 
     override fun buildObservable(params: Params): Observable<User> {
       return Observable.error(RuntimeException())
     }
-
-    override fun execute(observer: DisposableObserver<User>, params: Params) {
-      buildObservable(params).subscribe(observer)
-    }
   }
-
 }

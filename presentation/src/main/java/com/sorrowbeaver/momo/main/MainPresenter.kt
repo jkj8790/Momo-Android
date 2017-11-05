@@ -28,7 +28,7 @@ class MainPresenter(
 
   override fun loadMe() {
     view.showLoading()
-     getProfile.get(Params(0))
+    getProfile.get(Params(0))
         .observeOn(Schedulers.computation())
         .map(userModelMapper::transform)
         .observeOn(AndroidSchedulers.mainThread())
