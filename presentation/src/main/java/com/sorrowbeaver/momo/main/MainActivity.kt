@@ -15,7 +15,7 @@ import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
 import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataRepository
-import com.sorrowbeaver.momo.domain.interactor.GetProfile
+import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.map.MapFragment
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.squareup.picasso.Picasso
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
 
   private var mMap: GoogleMap? = null
   private val presenter = MainPresenter(
-      GetProfile(UserDataRepository(), Schedulers.io(), AndroidSchedulers.mainThread()),
+      GetMe(UserDataRepository(), Schedulers.io(), AndroidSchedulers.mainThread()),
       UserModelDataMapper(),
       this
   )
