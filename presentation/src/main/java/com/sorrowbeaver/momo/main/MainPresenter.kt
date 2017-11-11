@@ -2,7 +2,6 @@ package com.sorrowbeaver.momo.main
 
 import com.sorrowbeaver.momo.domain.interactor.GetProfile
 import com.sorrowbeaver.momo.domain.interactor.GetProfile.Params
-import com.sorrowbeaver.momo.domain.repository.UserRepository
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -10,12 +9,11 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
 class MainPresenter(
-    userRepository: UserRepository,
-    val view: MainContract.View
+    private val getProfile: GetProfile,
+    private val userModelMapper: UserModelDataMapper,
+    private val view: MainContract.View
 ): MainContract.Presenter {
 
-  private val getProfile = GetProfile(userRepository, Schedulers.io(), AndroidSchedulers.mainThread())
-  private val userModelMapper = UserModelDataMapper()
   private val disposables = CompositeDisposable()
 
   override fun subscribe() {

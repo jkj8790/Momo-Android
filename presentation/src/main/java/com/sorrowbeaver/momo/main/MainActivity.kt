@@ -15,8 +15,12 @@ import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
 import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataRepository
+import com.sorrowbeaver.momo.domain.interactor.GetProfile
 import com.sorrowbeaver.momo.map.MapFragment
+import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.squareup.picasso.Picasso
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_maps.drawerLayout
 import kotlinx.android.synthetic.main.activity_maps.navigationView
 import kotlinx.android.synthetic.main.activity_maps.toolbar
@@ -26,7 +30,11 @@ import kotlinx.android.synthetic.main.nav_header.textUserName
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View {
 
   private var mMap: GoogleMap? = null
-  private val presenter = MainPresenter(UserDataRepository(), this)
+  private val presenter = MainPresenter(
+      GetProfile(UserDataRepository(), Schedulers.io(), AndroidSchedulers.mainThread()),
+      UserModelDataMapper(),
+      this
+  )
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
