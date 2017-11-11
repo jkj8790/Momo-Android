@@ -14,6 +14,8 @@ interface UserDataStore {
 
   fun detail(userId: Long): Observable<UserEntity>
 
+  fun myDetail(): Observable<UserEntity>
+
   fun follow(userId: Long): Observable<Response>
 
   fun requestAuthenticateEmail(): Observable<Response>

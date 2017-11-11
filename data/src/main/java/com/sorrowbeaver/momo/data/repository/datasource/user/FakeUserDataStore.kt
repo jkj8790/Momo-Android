@@ -23,6 +23,11 @@ class FakeUserDataStore : UserDataStore {
     return Observable.just(USERS[userId.toInt()])
   }
 
+  override fun myDetail(): Observable<UserEntity> {
+    // TODO Throw exception if not logged in
+    return Observable.just(ME)
+  }
+
   override fun follow(userId: Long): Observable<Response> {
     TODO("not implemented")
   }

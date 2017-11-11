@@ -21,6 +21,8 @@ interface UserRepository {
 
   fun detail(userId: Long): Observable<User>
 
+  fun myDetail(): Observable<User>
+
   fun users(sortOption: UserSortOption): Observable<List<User>>
 
   fun follow(userId: Long): Observable<Response>

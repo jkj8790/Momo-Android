@@ -47,6 +47,12 @@ class UserDataRepository : UserRepository {
         .map { userEntityDataMapper.transform(it) }
   }
 
+  override fun myDetail(): Observable<User> {
+    val userDataStore = userDataStoreFactory.create()
+    return userDataStore.myDetail()
+        .map { userEntityDataMapper.transform(it) }
+  }
+
   override fun users(sortOption: UserSortOption): Observable<List<User>> {
     val userDataStore = userDataStoreFactory.create()
     return userDataStore.users()
