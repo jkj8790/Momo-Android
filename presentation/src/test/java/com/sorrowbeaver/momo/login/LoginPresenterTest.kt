@@ -33,7 +33,7 @@ class LoginPresenterTest {
   fun setUp() {
     loginPresenter = LoginPresenter(mockView, mockMapper, mockLogin)
     RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
-    RxJavaPlugins.setComputationSchedulerHandler() { Schedulers.trampoline() }
+    RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
     // TODO 왜 setInitComputation 하면 제대로 동작하지 않는지 조사
     `when`(mockMapper.transform(mockUser)).thenReturn(mockUserModel)
   }
