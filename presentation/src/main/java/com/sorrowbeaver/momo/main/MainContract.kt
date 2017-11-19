@@ -13,7 +13,7 @@ interface MainContract {
     fun showUserName(userName: String)
   }
 
-  interface Presenter: BasePresenter {
+  interface Presenter: BasePresenter<View> {
     fun loadMe()
   }
 

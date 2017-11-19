@@ -8,20 +8,23 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.sorrowbeaver.momo.MomoApplication
 import com.sorrowbeaver.momo.R
 import com.sorrowbeaver.momo.main.MainActivity
 import com.sorrowbeaver.momo.model.UserModel
 import kotlinx.android.synthetic.main.fragment_login.btnLogin
 import kotlinx.android.synthetic.main.fragment_login.editId
 import kotlinx.android.synthetic.main.fragment_login.editPwd
+import javax.inject.Inject
 
 class LoginFragment : Fragment(), LoginContract.View {
 
-  lateinit var presenter: LoginContract.Presenter
+  @Inject lateinit var presenter: LoginContract.Presenter
   var progressDialog: AlertDialog? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    (activity.application as MomoApplication).component.inject(this)
   }
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -30,6 +33,7 @@ class LoginFragment : Fragment(), LoginContract.View {
   }
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    presenter.takeView(this)
     btnLogin.setOnClickListener {
       presenter.login(editId.text.toString(), editPwd.text.toString())
     }

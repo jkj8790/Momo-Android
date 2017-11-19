@@ -11,33 +11,27 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.sorrowbeaver.momo.MomoApplication
 import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
-import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataRepository
-import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.map.MapFragment
-import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.squareup.picasso.Picasso
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_maps.drawerLayout
 import kotlinx.android.synthetic.main.activity_maps.navigationView
 import kotlinx.android.synthetic.main.activity_maps.toolbar
 import kotlinx.android.synthetic.main.nav_header.imgProfile
 import kotlinx.android.synthetic.main.nav_header.textUserName
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View {
 
   private var mMap: GoogleMap? = null
-  private val presenter = MainPresenter(
-      GetMe(UserDataRepository(), Schedulers.io(), AndroidSchedulers.mainThread()),
-      UserModelDataMapper(),
-      this
-  )
+  @Inject lateinit var presenter: MainPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    (application as MomoApplication).component.inject(this)
     setContentView(layout.activity_maps)
 
 
@@ -69,6 +63,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     }
 
     toolbar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
+
+    presenter.takeView(this)
   }
 
   override fun onResume() {

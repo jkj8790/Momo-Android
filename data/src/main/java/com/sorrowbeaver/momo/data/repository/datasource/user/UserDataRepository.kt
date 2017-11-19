@@ -6,11 +6,12 @@ import com.sorrowbeaver.momo.domain.model.UserSortOption
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
 import okhttp3.Response
+import javax.inject.Inject
 
-class UserDataRepository : UserRepository {
-
-  val userEntityDataMapper = UserEntityDataMapper()
-  val userDataStoreFactory = UserDataStoreFactory()
+class UserDataRepository @Inject constructor(
+    private val userEntityDataMapper: UserEntityDataMapper,
+    private val userDataStoreFactory: UserDataStoreFactory
+) : UserRepository {
 
   override fun login(id: String, password: String): Observable<User> {
     val userDataStore = userDataStoreFactory.create()

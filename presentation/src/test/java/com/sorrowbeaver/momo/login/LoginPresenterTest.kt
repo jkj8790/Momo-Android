@@ -21,7 +21,6 @@ class LoginPresenterTest {
   private lateinit var loginPresenter: LoginPresenter
 
   @Mock private val mockMapper = mock<UserModelDataMapper>()
-  @Mock private val mockLogin = mock<Login>()
   @Mock private val mockView = mock<LoginContract.View>()
   @Mock private val mockUser = mock<User>()
   @Mock private val mockUserModel = mock<UserModel>()
@@ -31,7 +30,6 @@ class LoginPresenterTest {
 
   @Before
   fun setUp() {
-    loginPresenter = LoginPresenter(mockView, mockMapper, mockLogin)
     RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
     RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
     // TODO 왜 setInitComputation 하면 제대로 동작하지 않는지 조사
@@ -40,7 +38,7 @@ class LoginPresenterTest {
 
   @Test
   fun testLogin() {
-    loginPresenter = LoginPresenter(mockView, mockMapper, SuccessLogin(mockUser))
+    loginPresenter = createPresenter(SuccessLogin(mockUser))
 
     loginPresenter.login(FAKE_ID, FAKE_PWD)
 
@@ -51,7 +49,7 @@ class LoginPresenterTest {
 
   @Test
   fun testError() {
-    loginPresenter = LoginPresenter(mockView, mockMapper, FailLogin())
+    loginPresenter = createPresenter(FailLogin())
 
     loginPresenter.login(FAKE_ID, FAKE_PWD)
 
@@ -76,4 +74,7 @@ class LoginPresenterTest {
       return Observable.error(RuntimeException())
     }
   }
+
+  private fun createPresenter(login: Login) =
+      LoginPresenter(mockMapper, login).apply { takeView(mockView) }
 }

@@ -35,7 +35,8 @@ class MainPresenterTest {
 
   @Test
   fun testGetMe() {
-    mainPresenter = MainPresenter(SuccessGetMe(mockUser), mockMapper, mockView)
+    mainPresenter = MainPresenter(SuccessGetMe(mockUser), mockMapper)
+    mainPresenter.takeView(mockView)
 
     mainPresenter.loadMe()
 
