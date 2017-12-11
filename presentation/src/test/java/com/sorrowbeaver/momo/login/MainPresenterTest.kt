@@ -20,7 +20,6 @@ import org.mockito.Mockito.`when`
 
 class MainPresenterTest {
 
-  private lateinit var mainPresenter: MainPresenter
   @Mock private val mockView = mock<MainContract.View>()
   @Mock private val mockMapper = mock<UserModelDataMapper>()
   @Mock private val mockUser = mock<User>()
@@ -30,19 +29,42 @@ class MainPresenterTest {
   fun setUp() {
     RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
     RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
+    RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
     `when`(mockMapper.transform(mockUser)).thenReturn(mockUserModel)
   }
 
   @Test
   fun testGetMe() {
-    mainPresenter = MainPresenter(SuccessGetMe(mockUser), mockMapper)
-    mainPresenter.takeView(mockView)
+    val mainPresenter = createPresenter(SuccessGetMe(mockUser))
+
+    mainPresenter.loadMe()
+
+    verify(mockView).showLoading()
+    verify(mockView).showUserName(anyOrNull())
+    verify(mockView).hideLoading()
+  }
+
+  @Test
+  fun testGetMeWithProfile() {
+    val mainPresenter = createPresenter(SuccessGetMe(mockUser))
+    `when`(mockUserModel.profileUrl).thenReturn("profile")
 
     mainPresenter.loadMe()
 
     verify(mockView).showLoading()
     verify(mockView).showUserName(anyOrNull())
     verify(mockView).showProfileImage(anyOrNull())
+    verify(mockView).hideLoading()
+  }
+
+  @Test
+  fun testFailedGetMeShowError() {
+    val mainPresenter = createPresenter(FailGetMe())
+
+    mainPresenter.loadMe()
+
+    verify(mockView).showLoading()
+    verify(mockView).showError()
     verify(mockView).hideLoading()
   }
 
@@ -55,5 +77,14 @@ class MainPresenterTest {
     }
   }
 
+  class FailGetMe : GetMe(mock(), Schedulers.trampoline(), Schedulers.trampoline()) {
+
+    override fun buildObservable(params: Unit): Observable<User> {
+      return Observable.error(RuntimeException())
+    }
+  }
+
+  private fun createPresenter(getMe: GetMe)
+    = MainPresenter(getMe, mockMapper).apply { takeView(mockView) }
 
 }
