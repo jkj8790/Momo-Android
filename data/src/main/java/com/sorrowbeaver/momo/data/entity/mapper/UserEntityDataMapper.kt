@@ -16,10 +16,10 @@ class UserEntityDataMapper {
     }
 
     return User(
-        userEntity.pk, userEntity.username, userEntity.email,
+        userEntity.pk, type, userEntity.username, userEntity.email,
         userEntity.profile_img, userEntity.date_joined, userEntity.last_login,
-        userEntity.is_facebook, userEntity.is_active, type,
-        listOf(), listOf()
+        userEntity.is_facebook, userEntity.is_active,
+        listOf(), listOf(), listOf()
     )
   }
 

@@ -4,6 +4,7 @@ import java.util.Date
 
 data class User(
     val id: Long,
+    val type: UserType,
     val userName: String,
     val email: String,
     val profileUrl: String?,
@@ -12,8 +13,8 @@ data class User(
     // TODO encapsulate with social feature
     val signedUpWithFacebook: Boolean,
     val activated: Boolean,
-    val type: UserType,
     val momoMapIds: List<Long>,
-    val following: List<User>
+    val followeeIds: List<Long>,
+    val followerIds: List<Long>
 )
 
