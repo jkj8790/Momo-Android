@@ -25,6 +25,18 @@ android {
   packagingOptions {
     exclude 'META-INF/rxjava.properties'
   }
+
+  flavorDimensions "data_source"
+
+  productFlavors {
+    fake {
+      dimension "data_source"
+    }
+
+    disk {
+      dimension "data_source"
+    }
+  }
 }
 
 dependencies {
@@ -37,10 +49,13 @@ dependencies {
   implementation 'com.squareup.okhttp3:okhttp:3.8.0'
   implementation 'com.squareup.moshi:moshi:1.5.0'
   implementation 'javax.inject:javax.inject:1'
+  implementation 'com.squareup.sqlbrite3:sqlbrite-kotlin:3.1.0'
 
   implementation 'com.android.support:appcompat-v7:25.3.1'
 
-  compileOnly 'javax.annotation:jsr250-api:1.0'
+  implementation 'com.google.dagger:dagger:2.13'
+  kapt 'com.google.dagger:dagger-compiler:2.13'
+
 
   testImplementation 'junit:junit:4.12'
   testImplementation "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
