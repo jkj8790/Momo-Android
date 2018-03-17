@@ -2,7 +2,7 @@ package com.sorrowbeaver.momo.data.entity.mapper
 
 import com.sorrowbeaver.momo.data.entity.UserEntity
 import com.sorrowbeaver.momo.domain.model.User
-import com.sorrowbeaver.momo.domain.model.UserType.Super
+import com.sorrowbeaver.momo.domain.model.UserType
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Before
@@ -35,9 +35,9 @@ class UserEntityDataMapperTest {
         true, true, false, true, listOf())
 
     val user = User(
-        FAKE_ID, FAKE_NAME, FAKE_EMAIL,
+        FAKE_ID, UserType.Super, FAKE_NAME, FAKE_EMAIL,
         FAKE_PROFILE_URL, FAKE_JOINED_URL, FAKE_LAST_LOGGED_IN,
-        true, true, Super, listOf(), listOf())
+        true, true, listOf(), listOf(), listOf())
 
     val result = userEntityDataMapper.transform(userEntity)
 
