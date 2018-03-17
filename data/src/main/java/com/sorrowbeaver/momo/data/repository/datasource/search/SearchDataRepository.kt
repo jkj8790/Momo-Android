@@ -6,17 +6,18 @@ import com.sorrowbeaver.momo.domain.model.Place
 import com.sorrowbeaver.momo.domain.model.SearchResult
 import com.sorrowbeaver.momo.domain.repository.SearchRepository
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class SearchDataRepository : SearchRepository {
+class SearchDataRepository @Inject constructor(
+    private val searchDataStore: FakeSearchDataStore,
+    private val searchEntityDataMapper: SearchResultEntityDataMapper,
+    private val placeEntityDataMapper: PlaceEntityDataMapper
+) : SearchRepository {
 
-  val searchDataStoreFactory = SearchDataStoreFactory()
-  val searchDataStore = searchDataStoreFactory.create()
-  val searchDataEntityDataMapper = SearchResultEntityDataMapper()
-  val placeEntityDataMapper = PlaceEntityDataMapper()
 
   override fun searchMapAndUser(keyword: String): Observable<SearchResult> {
     return searchDataStore.searchMapAndUser(keyword)
-        .map { searchDataEntityDataMapper.transform(it) }
+        .map { searchEntityDataMapper.transform(it) }
   }
 
   override fun searchPlace(): Observable<List<Place>> {

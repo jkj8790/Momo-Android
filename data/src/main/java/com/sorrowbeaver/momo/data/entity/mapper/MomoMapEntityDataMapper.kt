@@ -3,10 +3,12 @@ package com.sorrowbeaver.momo.data.entity.mapper
 import com.sorrowbeaver.momo.data.entity.MomoMapEntity
 import com.sorrowbeaver.momo.domain.model.MomoMap
 import java.util.Date
+import javax.inject.Inject
 
-class MomoMapEntityDataMapper {
+class MomoMapEntityDataMapper @Inject constructor(
+    private val userEntityDataMapper: UserEntityDataMapper
+){
 
-  val userEntityDataMapper = UserEntityDataMapper()
 
   fun transform(momoMapEntity: MomoMapEntity) : MomoMap {
     val user = userEntityDataMapper.transform(momoMapEntity.author)

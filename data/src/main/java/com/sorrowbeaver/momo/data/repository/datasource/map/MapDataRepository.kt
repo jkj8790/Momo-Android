@@ -5,26 +5,28 @@ import com.sorrowbeaver.momo.domain.model.MomoMap
 import com.sorrowbeaver.momo.domain.model.MomoMap.MapSortOption
 import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class MapDataRepository : MapRepository {
+class MapDataRepository @Inject constructor(
+    private val mapDataStore: FakeMapDataStore,
+    private val mapEntityDataMapper: MomoMapEntityDataMapper
+) : MapRepository {
 
-  val mapDataStore = MapDataStoreFactory().create()
-  val mapDataEntityDataMapper = MomoMapEntityDataMapper()
 
   override fun createMap(): Observable<MomoMap> {
     return mapDataStore.createMap()
-        .map { mapDataEntityDataMapper.transform(it) }
+        .map { mapEntityDataMapper.transform(it) }
   }
 
   override fun maps(mapSortOption: MapSortOption): Observable<List<MomoMap>> {
     return mapDataStore.maps()
-        .map { mapDataEntityDataMapper.transform(it)!! }
+        .map { mapEntityDataMapper.transform(it)!! }
     //TODO find better solution
   }
 
   override fun detail(id: Long): Observable<MomoMap> {
     return mapDataStore.detail(id)
-        .map { mapDataEntityDataMapper.transform(it) }
+        .map { mapEntityDataMapper.transform(it) }
   }
 
 }

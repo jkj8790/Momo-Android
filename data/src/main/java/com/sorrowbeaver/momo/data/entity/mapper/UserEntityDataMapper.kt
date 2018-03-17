@@ -5,8 +5,9 @@ import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.domain.model.UserType.Normal
 import com.sorrowbeaver.momo.domain.model.UserType.Staff
 import com.sorrowbeaver.momo.domain.model.UserType.Super
+import javax.inject.Inject
 
-class UserEntityDataMapper {
+class UserEntityDataMapper @Inject constructor() {
 
   fun transform(userEntity: UserEntity) : User {
     val type = when {

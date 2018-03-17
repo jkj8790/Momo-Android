@@ -3,8 +3,9 @@ package com.sorrowbeaver.momo.data.repository.datasource.post
 import com.sorrowbeaver.momo.data.entity.PostEntity
 import io.reactivex.Observable
 import java.util.Date
+import javax.inject.Inject
 
-class FakePostDataStore : PostDataStore {
+class FakePostDataStore @Inject constructor() : PostDataStore {
 
   val FAKE_POST = PostEntity(
       0, 0, "photho", "description", Date()

@@ -4,8 +4,11 @@ import com.sorrowbeaver.momo.data.entity.MomoMapEntity
 import com.sorrowbeaver.momo.data.repository.datasource.user.FakeUserDataStore
 import io.reactivex.Observable
 import java.util.Date
+import javax.inject.Inject
 
-class FakeMapDataStore(userDataStore: FakeUserDataStore) : MapDataStore {
+class FakeMapDataStore @Inject constructor(
+    userDataStore: FakeUserDataStore
+) : MapDataStore {
 
   val FAKE_MAP = MomoMapEntity(
       0, "FAKE1", "I'm fake map",

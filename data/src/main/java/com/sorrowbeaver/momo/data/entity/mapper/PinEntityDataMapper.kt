@@ -8,8 +8,9 @@ import com.sorrowbeaver.momo.domain.model.Pin.PinType.FOOD
 import com.sorrowbeaver.momo.domain.model.Pin.PinType.PLACE
 import com.sorrowbeaver.momo.domain.model.Pin.PinType.SHOP
 import java.util.Date
+import javax.inject.Inject
 
-class PinEntityDataMapper {
+class PinEntityDataMapper @Inject constructor() {
 
   fun transform(pinEntity: PinEntity) : Pin {
     val type = when(pinEntity.pin_label) {

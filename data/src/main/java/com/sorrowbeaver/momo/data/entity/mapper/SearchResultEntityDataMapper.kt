@@ -2,11 +2,13 @@ package com.sorrowbeaver.momo.data.entity.mapper
 
 import com.sorrowbeaver.momo.data.entity.SearchResultEntity
 import com.sorrowbeaver.momo.domain.model.SearchResult
+import javax.inject.Inject
 
-class SearchResultEntityDataMapper {
+class SearchResultEntityDataMapper @Inject constructor(
+    private val momoMapEntityDataMapper: MomoMapEntityDataMapper,
+    private val userEntityDataMapper: UserEntityDataMapper
+) {
 
-  val momoMapEntityDataMapper = MomoMapEntityDataMapper()
-  val userEntityDataMapper = UserEntityDataMapper()
 
   fun transform(searchResultEntity: SearchResultEntity) : SearchResult {
     return SearchResult(

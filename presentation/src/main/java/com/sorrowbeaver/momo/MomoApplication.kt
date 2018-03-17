@@ -1,6 +1,7 @@
 package com.sorrowbeaver.momo
 
 import android.app.Application
+import com.sorrowbeaver.momo.data.di.DaggerDataComponent
 import com.sorrowbeaver.momo.di.ApplicationComponent
 import com.sorrowbeaver.momo.di.ApplicationModule
 import com.sorrowbeaver.momo.di.DaggerApplicationComponent
@@ -18,8 +19,11 @@ class MomoApplication : Application() {
     }
     LeakCanary.install(this)
 
+    val dataComponent = DaggerDataComponent.create()
+
     component = DaggerApplicationComponent.builder()
         .applicationModule(ApplicationModule(this))
+        .dataComponent(dataComponent)
         .build()
   }
 }

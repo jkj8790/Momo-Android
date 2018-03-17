@@ -4,8 +4,9 @@ import com.sorrowbeaver.momo.data.entity.UserEntity
 import io.reactivex.Observable
 import okhttp3.Response
 import java.util.Date
+import javax.inject.Inject
 
-class FakeUserDataStore : UserDataStore {
+class FakeUserDataStore @Inject constructor() : UserDataStore {
 
   override fun login(id: String, password: String): Observable<UserEntity> {
     return Observable.just(ME)

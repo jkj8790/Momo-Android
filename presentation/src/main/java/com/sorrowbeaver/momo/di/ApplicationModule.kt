@@ -1,10 +1,6 @@
 package com.sorrowbeaver.momo.di
 
 import android.app.Application
-import com.sorrowbeaver.momo.data.entity.mapper.UserEntityDataMapper
-import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataRepository
-import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataStoreFactory
-import com.sorrowbeaver.momo.domain.repository.UserRepository
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import dagger.Module
 import dagger.Provides
@@ -20,17 +16,7 @@ class ApplicationModule(private val application: Application) {
   fun provideApplicationContext() = application
 
   @Provides @Singleton
-  fun provideUserDataStoreFactory() = UserDataStoreFactory()
-
-  @Provides @Singleton
   fun provideUserModelDataMapper() = UserModelDataMapper()
-
-  @Provides @Singleton
-  fun provideUserEntityDataMapper() = UserEntityDataMapper()
-
-  @Provides @Singleton
-  fun provideUserRepository(userDataRepository: UserDataRepository): UserRepository
-      = userDataRepository
 
   @Provides @Singleton
   @Named("executor")
