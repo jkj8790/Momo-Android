@@ -10,7 +10,7 @@ class DbCallback : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {
 
   override fun onCreate(db: SupportSQLiteDatabase) {
     db.execSQL("CREATE TABLE posts (id INTEGER PRIMARY KEY, pin_id INTEGER, " +
-        "photo_url TEXT, description TEXT, created INTEGER)"
+        "photo_url TEXT, description TEXT, created_at INTEGER)"
     )
   }
 
