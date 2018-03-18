@@ -8,13 +8,14 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class PinDataRepository @Inject constructor(
-    private val pinDataStore: FakePinDataStore,
+    private val pinDataStore: DiskPinDataStore,
     private val pinEntityDataMapper: PinEntityDataMapper
 ) : PinRepository {
 
 
-  override fun createPin(name: String, pinType: PinType, mapId: Long): Observable<Pin> {
-    return pinDataStore.createPin(name, pinType.ordinal, mapId)
+  override fun createPin(name: String, pinType: PinType,
+      authorId: Long, authorName: String, mapId: Long): Observable<Pin> {
+    return pinDataStore.createPin(name, pinType.ordinal, authorId, authorName, mapId)
         .map { pinEntityDataMapper.transform(it) }
   }
 

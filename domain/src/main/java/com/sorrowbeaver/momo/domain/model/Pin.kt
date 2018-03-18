@@ -4,11 +4,12 @@ import java.util.Date
 
 data class Pin(
     val id: Long,
-    val authorName: String,
     val name: String,
-    val momoMapId: Long,
     val type: PinType,
-    val createdDate: Date,
+    val createAt: Date,
+    val authorId: Long,
+    val authorName: String,
+    val momoMapId: Long,
     val postIds: List<Long>
 ) {
   enum class PinType {

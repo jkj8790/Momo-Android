@@ -6,7 +6,8 @@ import io.reactivex.Observable
 
 interface PinRepository {
 
-  fun createPin(name: String, pinType: PinType, mapId: Long): Observable<Pin>
+  fun createPin(name: String, pinType: PinType, authorId: Long, authorName: String,
+      mapId: Long): Observable<Pin>
 
   fun pins(): Observable<List<Pin>>
 
