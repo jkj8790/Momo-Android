@@ -5,10 +5,10 @@ import io.reactivex.Observable
 
 interface MapDataStore {
 
-  fun createMap(): Observable<MomoMapEntity>
-
   fun maps(): Observable<List<MomoMapEntity>>
 
   fun detail(id: Long): Observable<MomoMapEntity>
 
+  fun createMap(name: String, description: String, isPrivate: Boolean, authorId: Long,
+      authorName: String): Observable<MomoMapEntity>
 }

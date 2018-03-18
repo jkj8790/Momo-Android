@@ -24,6 +24,18 @@ class DbCallback : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {
     )
 
     db.execSQL("CREATE TABLE pin_posts (pin_id INTEGER, post_id INTEGER)")
+
+    db.execSQL("CREATE TABLE map " +
+        "(id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+        "name TEXT, " +
+        "description TEXT, " +
+        "is_private INTEGER, " +
+        "author_id INTEGER, " +
+        "author_name TEXT, " +
+        "created_at INTEGER)"
+    )
+
+    db.execSQL("CREATE TABLE map_pins (map_id INTEGER, pin_id INTEGER)")
   }
 
   override fun onUpgrade(db: SupportSQLiteDatabase, oldVersion: Int, newVersion: Int) {
