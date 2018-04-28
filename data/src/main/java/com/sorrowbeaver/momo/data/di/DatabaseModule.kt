@@ -5,6 +5,7 @@ import android.arch.persistence.db.SupportSQLiteOpenHelper.Configuration
 import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory
 import android.util.Log
 import com.sorrowbeaver.momo.data.db.DbCallback
+import com.sorrowbeaver.momo.data.repository.datasource.pin.DiskPinDataStore
 import com.squareup.sqlbrite3.BriteDatabase
 import com.squareup.sqlbrite3.SqlBrite
 import dagger.Module
@@ -16,7 +17,7 @@ const val DATABASE_NAME = "momo.db"
 
 @Singleton
 @Module
-class DatabaseModule {
+class DatabaseModule(private val application: Application) {
 
   @Provides
   fun provideSqlBrite() = SqlBrite.Builder()
@@ -24,7 +25,7 @@ class DatabaseModule {
       .build()!!
 
   @Provides
-  fun briteDataBase(sqlBrite: SqlBrite, application: Application)
+  fun briteDataBase(sqlBrite: SqlBrite)
   : BriteDatabase{
     val configuration = Configuration.builder(application)
         .name(DATABASE_NAME)
@@ -36,5 +37,8 @@ class DatabaseModule {
     db.setLoggingEnabled(true)
     return db
   }
+
+  @Provides
+  fun diskPinDataStore(db: BriteDatabase) = DiskPinDataStore(db)
 
 }
