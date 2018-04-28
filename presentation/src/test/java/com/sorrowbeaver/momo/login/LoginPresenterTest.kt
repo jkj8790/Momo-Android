@@ -31,6 +31,7 @@ class LoginPresenterTest {
   @Before
   fun setUp() {
     RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+    RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
     RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
     // TODO 왜 setInitComputation 하면 제대로 동작하지 않는지 조사
     `when`(mockMapper.transform(mockUser)).thenReturn(mockUserModel)
