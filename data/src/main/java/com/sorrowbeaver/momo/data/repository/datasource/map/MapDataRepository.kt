@@ -12,9 +12,9 @@ class MapDataRepository @Inject constructor(
     private val mapEntityDataMapper: MomoMapEntityDataMapper
 ) : MapRepository {
 
-
-  override fun createMap(): Observable<MomoMap> {
-    return mapDataStore.createMap()
+  override fun createMap(name: String, description: String, isPrivate: Boolean, authorId: Long,
+      authorName: String): Observable<MomoMap> {
+    return mapDataStore.createMap(name, description, isPrivate, authorId, authorName)
         .map { mapEntityDataMapper.transform(it) }
   }
 

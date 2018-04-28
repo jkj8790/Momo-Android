@@ -5,17 +5,12 @@ import com.sorrowbeaver.momo.domain.model.MomoMap
 import java.util.Date
 import javax.inject.Inject
 
-class MomoMapEntityDataMapper @Inject constructor(
-    private val userEntityDataMapper: UserEntityDataMapper
-){
-
+class MomoMapEntityDataMapper @Inject constructor() {
 
   fun transform(momoMapEntity: MomoMapEntity) : MomoMap {
-    val user = userEntityDataMapper.transform(momoMapEntity.author)
-
     return MomoMap(
         momoMapEntity.pk, momoMapEntity.map_name, momoMapEntity.description,
-        momoMapEntity.is_private, user, listOf(), Date()
+        momoMapEntity.is_private, momoMapEntity.authorId, listOf(), Date()
     )
   }
 

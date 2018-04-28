@@ -7,7 +7,7 @@ data class MomoMap(
     val name: String,
     val description: String,
     val isPrivate: Boolean,
-    val author: User,
+    val authorId: Long,
     val pinIds: List<Long>,
     val createdDate: Date
 ) {

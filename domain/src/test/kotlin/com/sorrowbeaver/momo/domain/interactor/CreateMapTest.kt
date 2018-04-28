@@ -1,6 +1,7 @@
 package com.sorrowbeaver.momo.domain.interactor
 
 import com.nhaarman.mockito_kotlin.verify
+import com.sorrowbeaver.momo.domain.interactor.CreateMap.Params
 import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
@@ -14,18 +15,43 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class CreateMapTest {
 
-  @Mock lateinit var mapRepository: MapRepository
-  lateinit var createMap: CreateMap
+  @Mock
+  private lateinit var mapRepository: MapRepository
+  private lateinit var createMap: CreateMap
+
+  private val testName = "name"
+  private val testDescription = "description"
+  private val testIsPrivate = true
+  private val testAuthorId = 1L
+  private val testAuthorName = "authorName"
 
   @Before fun setUp() {
-    `when`(mapRepository.createMap()).thenReturn(Observable.empty())
+    `when`(mapRepository.createMap(
+        testName,
+        testDescription,
+        testIsPrivate,
+        testAuthorId,
+        testAuthorName
+    )).thenReturn(Observable.empty())
     createMap = CreateMap(mapRepository, TestScheduler(), TestScheduler())
   }
 
   @Test fun testCreateMap() {
-    createMap.buildObservable(Unit)
+    createMap.buildObservable(Params(
+        testName,
+        testDescription,
+        testIsPrivate,
+        testAuthorId,
+        testAuthorName
+    ))
 
-    verify(mapRepository).createMap()
+    verify(mapRepository).createMap(
+        testName,
+        testDescription,
+        testIsPrivate,
+        testAuthorId,
+        testAuthorName
+    )
   }
 
 }

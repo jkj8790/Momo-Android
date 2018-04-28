@@ -16,24 +16,42 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class CreatePinTest {
 
-  @Mock lateinit var pinRepository: PinRepository
-  lateinit var createPin: CreatePin
+  @Mock
+  private lateinit var pinRepository: PinRepository
+  private lateinit var createPin: CreatePin
 
-  val FAKE_PIN_NAME = "fake"
-  val FAKE_PIN_TYPE = PinType.SHOP
-  val FAKE_MAP_ID = 0L
+  private val testPinName = "fake"
+  private val testPinType = PinType.SHOP
+  private val testAuthorName = "author"
+  private val testAuthorID = 0L
+  private val testMapId = 1L
 
   @Before fun setUp() {
-    `when`(pinRepository.createPin(FAKE_PIN_NAME,
-        FAKE_PIN_TYPE, FAKE_MAP_ID)).thenReturn(Observable.empty())
+    `when`(pinRepository.createPin(
+        testPinName,
+        testPinType,
+        testAuthorID,
+        testAuthorName,
+        testMapId
+    )).thenReturn(Observable.empty())
     createPin = CreatePin(pinRepository, TestScheduler(), TestScheduler())
   }
 
   @Test fun testCreatePin() {
-    createPin.buildObservable(Params(FAKE_PIN_NAME, FAKE_PIN_TYPE, FAKE_MAP_ID))
+    createPin.buildObservable(Params(
+        testPinName,
+        testPinType,
+        testAuthorID,
+        testAuthorName,
+        testMapId
+    ))
 
     verify(pinRepository).createPin(
-        FAKE_PIN_NAME, FAKE_PIN_TYPE, FAKE_MAP_ID
+        testPinName,
+        testPinType,
+        testAuthorID,
+        testAuthorName,
+        testMapId
     )
   }
 

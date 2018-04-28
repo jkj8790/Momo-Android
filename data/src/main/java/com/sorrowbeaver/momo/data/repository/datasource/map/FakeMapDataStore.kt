@@ -12,10 +12,11 @@ class FakeMapDataStore @Inject constructor(
 
   val FAKE_MAP = MomoMapEntity(
       0, "FAKE1", "I'm fake map",
-      false, userDataStore.ME, listOf(), Date()
+      false, 0, "a", emptyList(), Date()
   )
 
-  override fun createMap(): Observable<MomoMapEntity> {
+  override fun createMap(name: String, description: String, isPrivate: Boolean, authorId: Long,
+      authorName: String): Observable<MomoMapEntity> {
     return Observable.just(FAKE_MAP)
   }
 
