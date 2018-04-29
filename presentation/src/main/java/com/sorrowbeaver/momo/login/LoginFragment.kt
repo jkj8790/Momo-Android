@@ -23,28 +23,27 @@ class LoginFragment : Fragment(), LoginContract.View {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    (activity.application as MomoApplication).component.inject(this)
+    (activity?.application as MomoApplication).component.inject(this)
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater?,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    return inflater?.inflate(R.layout.fragment_login, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    return inflater.inflate(R.layout.fragment_login, container, false)
   }
 
-  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     presenter.takeView(this)
     btnLogin.setOnClickListener {
       presenter.login(editId.text.toString(), editPwd.text.toString())
     }
+    super.onViewCreated(view, savedInstanceState)
   }
 
   override fun showLoading() {
-    progressDialog = AlertDialog.Builder(context)
-      .setView(R.layout.dialog_progress)
-      .show()
+    context?.let {
+      progressDialog = AlertDialog.Builder(it)
+        .setView(R.layout.dialog_progress)
+        .show()
+    }
   }
 
   override fun hideLoading() {

@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 25
+  compileSdkVersion 27
   buildToolsVersion '27.0.3'
 
 
   defaultConfig {
-    minSdkVersion 19
-    targetSdkVersion 25
+    minSdkVersion 21
+    targetSdkVersion 27
     versionCode 1
     versionName "1.0"
 
@@ -42,18 +42,16 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation 'io.reactivex.rxjava2:rxkotlin:2.0.3'
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-  implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
   implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
   implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
   implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-  implementation 'com.squareup.okhttp3:okhttp:3.8.0'
+  implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
   implementation 'com.squareup.moshi:moshi:1.5.0'
   implementation 'javax.inject:javax.inject:1'
   implementation 'com.squareup.sqlbrite3:sqlbrite-kotlin:3.1.0'
   implementation 'android.arch.persistence:db-framework:1.0.0'
 
-  implementation 'com.android.support:appcompat-v7:25.3.1'
+  implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
 
   implementation 'com.google.dagger:dagger:2.13'
   kapt 'com.google.dagger:dagger-compiler:2.13'
