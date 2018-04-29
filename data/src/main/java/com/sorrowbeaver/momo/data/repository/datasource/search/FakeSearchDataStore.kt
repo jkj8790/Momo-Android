@@ -14,5 +14,4 @@ class FakeSearchDataStore @Inject constructor() : SearchDataStore {
   override fun searchPlace(): Observable<List<PlaceEntity>> {
     TODO("not implemented")
   }
-
 }

@@ -9,11 +9,13 @@ const val DATABASE_VERSION = 1
 class DbCallback : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {
 
   override fun onCreate(db: SupportSQLiteDatabase) {
-    db.execSQL("CREATE TABLE posts (id INTEGER PRIMARY KEY, pin_id INTEGER, " +
+    db.execSQL(
+      "CREATE TABLE posts (id INTEGER PRIMARY KEY, pin_id INTEGER, " +
         "photo_url TEXT, description TEXT, created_at INTEGER)"
     )
 
-    db.execSQL("CREATE TABLE pin " +
+    db.execSQL(
+      "CREATE TABLE pin " +
         "(id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
         "name TEXT, " +
         "pin_label INTEGER, " +
@@ -25,7 +27,8 @@ class DbCallback : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {
 
     db.execSQL("CREATE TABLE pin_posts (pin_id INTEGER, post_id INTEGER)")
 
-    db.execSQL("CREATE TABLE map " +
+    db.execSQL(
+      "CREATE TABLE map " +
         "(id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
         "name TEXT, " +
         "description TEXT, " +
@@ -40,5 +43,4 @@ class DbCallback : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {
 
   override fun onUpgrade(db: SupportSQLiteDatabase, oldVersion: Int, newVersion: Int) {
   }
-
 }

@@ -15,20 +15,22 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class FollowTest {
 
-  @Mock lateinit var userRepository : UserRepository
+  @Mock
+  lateinit var userRepository: UserRepository
   lateinit var follow: Follow
 
   val FAKE_USER_ID = 0L
 
-  @Before fun setUp() {
-    `when`(userRepository.follow(FAKE_USER_ID)).thenReturn(Observable.empty());
+  @Before
+  fun setUp() {
+    `when`(userRepository.follow(FAKE_USER_ID)).thenReturn(Observable.empty())
     follow = Follow(userRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testSignUp() {
+  @Test
+  fun testSignUp() {
     follow.buildObservable(Params(FAKE_USER_ID))
 
     verify(userRepository).follow(FAKE_USER_ID)
   }
-
 }

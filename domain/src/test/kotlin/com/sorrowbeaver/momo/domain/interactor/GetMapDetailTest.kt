@@ -16,18 +16,20 @@ class GetMapDetailTest {
 
   val FAKE_MAP_ID = 0L
 
-  @Mock lateinit var mapRepository: MapRepository
+  @Mock
+  lateinit var mapRepository: MapRepository
   lateinit var getMapDetail: GetMapDetail
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     `when`(mapRepository.detail(FAKE_MAP_ID)).thenReturn(Observable.empty())
     getMapDetail = GetMapDetail(mapRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testMapDetail() {
+  @Test
+  fun testMapDetail() {
     getMapDetail.buildObservable(GetMapDetail.Params(FAKE_MAP_ID))
 
     verify(mapRepository).detail(FAKE_MAP_ID)
   }
-
 }

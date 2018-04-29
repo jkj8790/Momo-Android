@@ -12,14 +12,13 @@ import com.sorrowbeaver.momo.MomoApplication
 import com.sorrowbeaver.momo.R
 import com.sorrowbeaver.momo.main.MainActivity
 import com.sorrowbeaver.momo.model.UserModel
-import kotlinx.android.synthetic.main.fragment_login.btnLogin
-import kotlinx.android.synthetic.main.fragment_login.editId
-import kotlinx.android.synthetic.main.fragment_login.editPwd
+import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 class LoginFragment : Fragment(), LoginContract.View {
 
-  @Inject lateinit var presenter: LoginContract.Presenter
+  @Inject
+  lateinit var presenter: LoginContract.Presenter
   var progressDialog: AlertDialog? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +26,11 @@ class LoginFragment : Fragment(), LoginContract.View {
     (activity.application as MomoApplication).component.inject(this)
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater?,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     return inflater?.inflate(R.layout.fragment_login, container, false)
   }
 
@@ -41,8 +43,8 @@ class LoginFragment : Fragment(), LoginContract.View {
 
   override fun showLoading() {
     progressDialog = AlertDialog.Builder(context)
-        .setView(R.layout.dialog_progress)
-        .show()
+      .setView(R.layout.dialog_progress)
+      .show()
   }
 
   override fun hideLoading() {

@@ -6,7 +6,7 @@ import okhttp3.Response
 
 interface UserDataStore {
 
-  fun login(id: String, password: String) : Observable<UserEntity>
+  fun login(id: String, password: String): Observable<UserEntity>
 
   fun signUp(email: String, userName: String, password: String): Observable<UserEntity>
 

@@ -6,10 +6,10 @@ import com.sorrowbeaver.momo.domain.repository.PostRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class GetPostDetail (
-    val postRepository: PostRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class GetPostDetail(
+  val postRepository: PostRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<Post, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val id: Long)

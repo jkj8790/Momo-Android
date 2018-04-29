@@ -6,10 +6,10 @@ import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class SignUp (
-    val userRepository: UserRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class SignUp(
+  val userRepository: UserRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<User, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val email: String, val id: String, val password: String)

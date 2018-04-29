@@ -12,18 +12,21 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val application: Application) {
 
-  @Provides @Singleton
+  @Provides
+  @Singleton
   fun provideApplicationContext() = application
 
-  @Provides @Singleton
+  @Provides
+  @Singleton
   fun provideUserModelDataMapper() = UserModelDataMapper()
 
-  @Provides @Singleton
+  @Provides
+  @Singleton
   @Named("executor")
   fun provideExecutorScheduler() = Schedulers.io()
 
-  @Provides @Singleton
+  @Provides
+  @Singleton
   @Named("postExecution")
   fun providePostExecutionScheduler() = AndroidSchedulers.mainThread()!!
-
 }

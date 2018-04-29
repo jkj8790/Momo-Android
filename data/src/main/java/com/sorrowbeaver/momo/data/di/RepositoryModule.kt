@@ -27,14 +27,17 @@ class RepositoryModule {
   interface Binder {
     @Binds
     fun mapRepository(impl: MapDataRepository): MapRepository
+
     @Binds
     fun pinRepository(impl: PinDataRepository): PinRepository
+
     @Binds
     fun postRepository(impl: PostDataRepository): PostRepository
+
     @Binds
     fun serachRepository(impl: SearchDataRepository): SearchRepository
+
     @Binds
     fun userRepository(impl: UserDataRepository): UserRepository
   }
-
 }

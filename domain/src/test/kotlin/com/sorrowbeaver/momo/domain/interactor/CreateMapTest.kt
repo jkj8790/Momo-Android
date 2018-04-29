@@ -25,33 +25,38 @@ class CreateMapTest {
   private val testAuthorId = 1L
   private val testAuthorName = "authorName"
 
-  @Before fun setUp() {
-    `when`(mapRepository.createMap(
+  @Before
+  fun setUp() {
+    `when`(
+      mapRepository.createMap(
         testName,
         testDescription,
         testIsPrivate,
         testAuthorId,
         testAuthorName
-    )).thenReturn(Observable.empty())
+      )
+    ).thenReturn(Observable.empty())
     createMap = CreateMap(mapRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreateMap() {
-    createMap.buildObservable(Params(
+  @Test
+  fun testCreateMap() {
+    createMap.buildObservable(
+      Params(
         testName,
         testDescription,
         testIsPrivate,
         testAuthorId,
         testAuthorName
-    ))
+      )
+    )
 
     verify(mapRepository).createMap(
-        testName,
-        testDescription,
-        testIsPrivate,
-        testAuthorId,
-        testAuthorName
+      testName,
+      testDescription,
+      testIsPrivate,
+      testAuthorId,
+      testAuthorName
     )
   }
-
 }

@@ -6,10 +6,10 @@ import com.sorrowbeaver.momo.domain.repository.PinRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class GetPinDetail (
-    val pinRepository: PinRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class GetPinDetail(
+  val pinRepository: PinRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<Pin, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val id: Long)

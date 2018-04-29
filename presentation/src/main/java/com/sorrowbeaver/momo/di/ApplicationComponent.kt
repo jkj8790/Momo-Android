@@ -7,8 +7,10 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, LoginModule::class],
-    dependencies = [DataComponent::class])
+@Component(
+  modules = [ApplicationModule::class, LoginModule::class],
+  dependencies = [DataComponent::class]
+)
 interface ApplicationComponent {
   fun inject(loginFragment: LoginFragment)
   fun inject(mainActivity: MainActivity)

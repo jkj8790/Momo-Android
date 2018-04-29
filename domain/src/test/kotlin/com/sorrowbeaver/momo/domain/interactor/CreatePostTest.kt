@@ -15,26 +15,36 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class CreatePostTest {
 
-  @Mock lateinit var postRepository: PostRepository
+  @Mock
+  lateinit var postRepository: PostRepository
   lateinit var createPost: CreatePost
 
   val FAKE_PIN_ID = 0L
   val FAKE_PHOTO_URL = "photo"
   val FAKE_DESCRIPTION = "description"
 
-  @Before fun setUp() {
-    `when`(postRepository.createPost(FAKE_PIN_ID,
-         FAKE_PHOTO_URL, FAKE_DESCRIPTION)).thenReturn(Observable.empty())
+  @Before
+  fun setUp() {
+    `when`(
+      postRepository.createPost(
+        FAKE_PIN_ID,
+        FAKE_PHOTO_URL, FAKE_DESCRIPTION
+      )
+    ).thenReturn(Observable.empty())
     createPost = CreatePost(postRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreateMap() {
-    createPost.buildObservable(Params(
+  @Test
+  fun testCreateMap() {
+    createPost.buildObservable(
+      Params(
         FAKE_PIN_ID, FAKE_PHOTO_URL, FAKE_DESCRIPTION
-    ))
+      )
+    )
 
-    verify(postRepository).createPost(FAKE_PIN_ID,
-         FAKE_PHOTO_URL, FAKE_DESCRIPTION)
+    verify(postRepository).createPost(
+      FAKE_PIN_ID,
+      FAKE_PHOTO_URL, FAKE_DESCRIPTION
+    )
   }
-
 }

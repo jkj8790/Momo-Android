@@ -20,10 +20,14 @@ import org.mockito.Mockito.`when`
 
 class MainPresenterTest {
 
-  @Mock private val mockView = mock<MainContract.View>()
-  @Mock private val mockMapper = mock<UserModelDataMapper>()
-  @Mock private val mockUser = mock<User>()
-  @Mock private val mockUserModel = mock<UserModel>()
+  @Mock
+  private val mockView = mock<MainContract.View>()
+  @Mock
+  private val mockMapper = mock<UserModelDataMapper>()
+  @Mock
+  private val mockUser = mock<User>()
+  @Mock
+  private val mockUserModel = mock<UserModel>()
 
   @Before
   fun setUp() {
@@ -68,8 +72,9 @@ class MainPresenterTest {
     verify(mockView).hideLoading()
   }
 
-  class SuccessGetMe(private val expectedUser: User) : GetMe(mock(),
-      Schedulers.trampoline(), Schedulers.trampoline()
+  class SuccessGetMe(private val expectedUser: User) : GetMe(
+    mock(),
+    Schedulers.trampoline(), Schedulers.trampoline()
   ) {
 
     override fun buildObservable(params: Unit): Observable<User> {
@@ -84,7 +89,6 @@ class MainPresenterTest {
     }
   }
 
-  private fun createPresenter(getMe: GetMe)
-    = MainPresenter(getMe, mockMapper).apply { takeView(mockView) }
-
+  private fun createPresenter(getMe: GetMe) =
+    MainPresenter(getMe, mockMapper).apply { takeView(mockView) }
 }

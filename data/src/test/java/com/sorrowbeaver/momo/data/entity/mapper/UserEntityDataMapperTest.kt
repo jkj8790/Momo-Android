@@ -29,19 +29,20 @@ class UserEntityDataMapperTest {
   @Test
   fun testTransform() {
     val userEntity = UserEntity(
-        FAKE_ID, FAKE_NAME, FAKE_PASSWORD,
-        FAKE_EMAIL, FAKE_PROFILE_URL,
-        listOf(1L, 2L), FAKE_JOINED_URL, FAKE_LAST_LOGGED_IN,
-        true, true, false, true, listOf())
+      FAKE_ID, FAKE_NAME, FAKE_PASSWORD,
+      FAKE_EMAIL, FAKE_PROFILE_URL,
+      listOf(1L, 2L), FAKE_JOINED_URL, FAKE_LAST_LOGGED_IN,
+      true, true, false, true, listOf()
+    )
 
     val user = User(
-        FAKE_ID, UserType.Super, FAKE_NAME, FAKE_EMAIL,
-        FAKE_PROFILE_URL, FAKE_JOINED_URL, FAKE_LAST_LOGGED_IN,
-        true, true, listOf(), listOf(), listOf())
+      FAKE_ID, UserType.Super, FAKE_NAME, FAKE_EMAIL,
+      FAKE_PROFILE_URL, FAKE_JOINED_URL, FAKE_LAST_LOGGED_IN,
+      true, true, listOf(), listOf(), listOf()
+    )
 
     val result = userEntityDataMapper.transform(userEntity)
 
     assertThat(user, `is`(result))
   }
-
 }

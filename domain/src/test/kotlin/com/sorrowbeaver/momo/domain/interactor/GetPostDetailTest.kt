@@ -15,20 +15,22 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetPostDetailTest {
 
-  @Mock lateinit var postRepository: PostRepository
+  @Mock
+  lateinit var postRepository: PostRepository
   lateinit var getPostDetail: GetPostDetail
 
   val FAKE_POST_ID = 0L
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     `when`(postRepository.detail(FAKE_POST_ID)).thenReturn(Observable.empty())
     getPostDetail = GetPostDetail(postRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreateMap() {
+  @Test
+  fun testCreateMap() {
     getPostDetail.buildObservable(Params(FAKE_POST_ID))
 
     verify(postRepository).detail(FAKE_POST_ID)
   }
-
 }

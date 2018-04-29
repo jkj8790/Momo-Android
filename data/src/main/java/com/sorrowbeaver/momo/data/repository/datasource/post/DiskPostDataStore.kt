@@ -8,33 +8,40 @@ import io.reactivex.Observable
 import java.util.Date
 
 class DiskPostDataStore(
-    private val db: BriteDatabase
+  private val db: BriteDatabase
 ) : PostDataStore {
 
   override fun posts(): Observable<List<PostEntity>> {
     return db.createQuery("posts", "SELECT * FROM posts")
-        .mapToList { PostEntity(it) }
+      .mapToList { PostEntity(it) }
   }
 
-  override fun createPost(pinId: Long, photoUrl: String?,
-      description: String?): Observable<PostEntity> {
+  override fun createPost(
+    pinId: Long,
+    photoUrl: String?,
+    description: String?
+  ): Observable<PostEntity> {
 
     return Observable.fromCallable {
-      db.insert("posts",
-          SQLiteDatabase.CONFLICT_REPLACE,
-          createContentValues(pinId, photoUrl, description)
+      db.insert(
+        "posts",
+        SQLiteDatabase.CONFLICT_REPLACE,
+        createContentValues(pinId, photoUrl, description)
       )
     }
-        .flatMap { detail(it) }
+      .flatMap { detail(it) }
   }
 
   override fun detail(id: Long): Observable<PostEntity> {
     return db.createQuery("posts", "SELECT * FROM posts WHERE id = $id")
-        .mapToOne { PostEntity(it) }
+      .mapToOne { PostEntity(it) }
   }
 
-  private fun createContentValues(pinId: Long, photoUrl: String?,
-      description: String?): ContentValues {
+  private fun createContentValues(
+    pinId: Long,
+    photoUrl: String?,
+    description: String?
+  ): ContentValues {
     return ContentValues().apply {
       put("pin_id", pinId)
       photoUrl?.let { put("photo_url", it) }
@@ -42,5 +49,4 @@ class DiskPostDataStore(
       put("created_at", Date().time)
     }
   }
-
 }

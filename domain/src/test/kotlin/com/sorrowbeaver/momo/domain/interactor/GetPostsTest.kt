@@ -14,18 +14,20 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetPostsTest {
 
-  @Mock lateinit var postRepository: PostRepository
+  @Mock
+  lateinit var postRepository: PostRepository
   lateinit var getPosts: GetPosts
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     `when`(postRepository.posts()).thenReturn(Observable.empty())
     getPosts = GetPosts(postRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreateMap() {
+  @Test
+  fun testCreateMap() {
     getPosts.buildObservable(Unit)
 
     verify(postRepository).posts()
   }
-
 }

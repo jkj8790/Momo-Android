@@ -7,16 +7,21 @@ import java.util.Date
 import javax.inject.Inject
 
 class FakeMapDataStore @Inject constructor(
-    userDataStore: FakeUserDataStore
+  userDataStore: FakeUserDataStore
 ) : MapDataStore {
 
   val FAKE_MAP = MomoMapEntity(
-      0, "FAKE1", "I'm fake map",
-      false, 0, "a", emptyList(), Date()
+    0, "FAKE1", "I'm fake map",
+    false, 0, "a", emptyList(), Date()
   )
 
-  override fun createMap(name: String, description: String, isPrivate: Boolean, authorId: Long,
-      authorName: String): Observable<MomoMapEntity> {
+  override fun createMap(
+    name: String,
+    description: String,
+    isPrivate: Boolean,
+    authorId: Long,
+    authorName: String
+  ): Observable<MomoMapEntity> {
     return Observable.just(FAKE_MAP)
   }
 
@@ -27,5 +32,4 @@ class FakeMapDataStore @Inject constructor(
   override fun detail(id: Long): Observable<MomoMapEntity> {
     return Observable.just(FAKE_MAP)
   }
-
 }

@@ -6,10 +6,10 @@ import io.reactivex.Observable
 import io.reactivex.Scheduler
 import okhttp3.Response
 
-class Follow (
-    val userRepository: UserRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class Follow(
+  val userRepository: UserRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<Response, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val userId: Long)

@@ -6,10 +6,10 @@ import com.sorrowbeaver.momo.domain.repository.SearchRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class SearchMapAndUser (
-    val searchRepository: SearchRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class SearchMapAndUser(
+  val searchRepository: SearchRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<SearchResult, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val keyword: String)

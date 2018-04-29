@@ -10,9 +10,9 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(
-    private val getMe: GetMe,
-    private val userModelMapper: UserModelDataMapper
-): MainContract.Presenter {
+  private val getMe: GetMe,
+  private val userModelMapper: UserModelDataMapper
+) : MainContract.Presenter {
   private val disposables = CompositeDisposable()
   private var view: MainContract.View? = null
 
@@ -31,25 +31,24 @@ class MainPresenter @Inject constructor(
   override fun loadMe() {
     view?.showLoading()
     getMe.get(Unit)
-        .observeOn(Schedulers.computation())
-        .map(userModelMapper::transform)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeBy(
-            onNext = { userModel ->
-              userModel.profileUrl?.let {
-                view?.showProfileImage(it)
-              }
-              view?.showUserName(userModel.userName)
-            },
-            onError = {
-              it.printStackTrace()
-              view?.showError()
-              view?.hideLoading()
-            },
-            onComplete = {
-              view?.hideLoading()
-            }
-        ) .let(disposables::add)
+      .observeOn(Schedulers.computation())
+      .map(userModelMapper::transform)
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeBy(
+        onNext = { userModel ->
+          userModel.profileUrl?.let {
+            view?.showProfileImage(it)
+          }
+          view?.showUserName(userModel.userName)
+        },
+        onError = {
+          it.printStackTrace()
+          view?.showError()
+          view?.hideLoading()
+        },
+        onComplete = {
+          view?.hideLoading()
+        }
+      ).let(disposables::add)
   }
-
 }

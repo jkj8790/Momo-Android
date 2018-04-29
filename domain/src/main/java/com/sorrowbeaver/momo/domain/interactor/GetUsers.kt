@@ -7,10 +7,10 @@ import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class GetUsers (
-    val userRepository: UserRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class GetUsers(
+  val userRepository: UserRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<List<User>, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val sortOption: UserSortOption)

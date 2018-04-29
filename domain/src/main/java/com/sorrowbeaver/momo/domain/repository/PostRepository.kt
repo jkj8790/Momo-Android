@@ -10,5 +10,4 @@ interface PostRepository {
   fun createPost(pinId: Long, photoUrl: String?, description: String?): Observable<Post>
 
   fun detail(id: Long): Observable<Post>
-
 }

@@ -26,33 +26,38 @@ class CreatePinTest {
   private val testAuthorID = 0L
   private val testMapId = 1L
 
-  @Before fun setUp() {
-    `when`(pinRepository.createPin(
+  @Before
+  fun setUp() {
+    `when`(
+      pinRepository.createPin(
         testPinName,
         testPinType,
         testAuthorID,
         testAuthorName,
         testMapId
-    )).thenReturn(Observable.empty())
+      )
+    ).thenReturn(Observable.empty())
     createPin = CreatePin(pinRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreatePin() {
-    createPin.buildObservable(Params(
+  @Test
+  fun testCreatePin() {
+    createPin.buildObservable(
+      Params(
         testPinName,
         testPinType,
         testAuthorID,
         testAuthorName,
         testMapId
-    ))
+      )
+    )
 
     verify(pinRepository).createPin(
-        testPinName,
-        testPinType,
-        testAuthorID,
-        testAuthorName,
-        testMapId
+      testPinName,
+      testPinType,
+      testAuthorID,
+      testAuthorName,
+      testMapId
     )
   }
-
 }

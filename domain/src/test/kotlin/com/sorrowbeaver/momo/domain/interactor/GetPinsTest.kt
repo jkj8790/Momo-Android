@@ -14,18 +14,20 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetPinsTest {
 
-  @Mock lateinit var pinRepository: PinRepository
+  @Mock
+  lateinit var pinRepository: PinRepository
   lateinit var getPins: GetPins
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     `when`(pinRepository.pins()).thenReturn(Observable.empty())
     getPins = GetPins(pinRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreatePin() {
+  @Test
+  fun testCreatePin() {
     getPins.buildObservable(Unit)
 
     verify(pinRepository).pins()
   }
-
 }

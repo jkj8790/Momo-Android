@@ -9,6 +9,11 @@ interface MapDataStore {
 
   fun detail(id: Long): Observable<MomoMapEntity>
 
-  fun createMap(name: String, description: String, isPrivate: Boolean, authorId: Long,
-      authorName: String): Observable<MomoMapEntity>
+  fun createMap(
+    name: String,
+    description: String,
+    isPrivate: Boolean,
+    authorId: Long,
+    authorName: String
+  ): Observable<MomoMapEntity>
 }

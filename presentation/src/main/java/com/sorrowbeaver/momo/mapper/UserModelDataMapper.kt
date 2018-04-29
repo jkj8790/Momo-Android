@@ -6,5 +6,4 @@ import com.sorrowbeaver.momo.model.UserModel
 class UserModelDataMapper {
 
   fun transform(user: User) = UserModel(user.userName, user.profileUrl)
-
 }

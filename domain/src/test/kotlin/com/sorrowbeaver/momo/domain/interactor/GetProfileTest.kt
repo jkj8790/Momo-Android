@@ -16,18 +16,20 @@ class GetProfileTest {
 
   val FAKE_USER_ID = 0L
 
-  @Mock lateinit var userRepository : UserRepository
+  @Mock
+  lateinit var userRepository: UserRepository
   lateinit var getProfile: GetProfile
 
-  @Before fun setUp() {
-    `when`(userRepository.detail(FAKE_USER_ID)).thenReturn(Observable.empty());
+  @Before
+  fun setUp() {
+    `when`(userRepository.detail(FAKE_USER_ID)).thenReturn(Observable.empty())
     getProfile = GetProfile(userRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testSignUp() {
+  @Test
+  fun testSignUp() {
     getProfile.buildObservable(GetProfile.Params(FAKE_USER_ID))
 
     verify(userRepository).detail(FAKE_USER_ID)
   }
-
 }

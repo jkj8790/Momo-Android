@@ -17,23 +17,20 @@ import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
 import com.sorrowbeaver.momo.map.MapFragment
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_maps.drawerLayout
-import kotlinx.android.synthetic.main.activity_maps.navigationView
-import kotlinx.android.synthetic.main.activity_maps.toolbar
-import kotlinx.android.synthetic.main.nav_header.imgProfile
-import kotlinx.android.synthetic.main.nav_header.textUserName
+import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.nav_header.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View {
 
   private var mMap: GoogleMap? = null
-  @Inject lateinit var presenter: MainPresenter
+  @Inject
+  lateinit var presenter: MainPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     (application as MomoApplication).component.inject(this)
     setContentView(layout.activity_maps)
-
 
     // Set up the toolbar.
     setSupportActionBar(toolbar)
@@ -46,7 +43,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     setupDrawerContent(navigationView)
 
     var mapFragment = supportFragmentManager.findFragmentById(
-        id.contentFrame) as? MapFragment
+      id.contentFrame
+    ) as? MapFragment
     if (mapFragment == null) {
       // Obtain the SupportMapFragment and get notified when the map is ready to be used.
       // Create the fragment
@@ -80,7 +78,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     return super.onOptionsItemSelected(item)
   }
 
-
   /**
    * Manipulates the map once available.
    * This callback is triggered when the map is ready to be used.
@@ -107,7 +104,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
         }
         else -> {
         }
-      }// Do nothing, we're already on that screen
+      } // Do nothing, we're already on that screen
       // Close the navigation drawer when an item is selected.
       menuItem.isChecked = true
       drawerLayout.closeDrawers()
@@ -134,5 +131,4 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
   override fun showUserName(userName: String) {
     textUserName.text = userName
   }
-
 }

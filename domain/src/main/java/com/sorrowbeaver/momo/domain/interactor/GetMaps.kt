@@ -7,10 +7,10 @@ import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class GetMaps (
-    val mapRepository: MapRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class GetMaps(
+  val mapRepository: MapRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<List<MomoMap>, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val sortOption: MapSortOption)

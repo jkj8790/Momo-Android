@@ -15,7 +15,7 @@ class PinEntityTest {
   private val currentDate = Date()
 
   private val samplePin = PinEntity(
-      0, "pin", 0, currentDate, 0, "author", 0, emptyList()
+    0, "pin", 0, currentDate, 0, "author", 0, emptyList()
   )
 
   @Mock
@@ -38,6 +38,4 @@ class PinEntityTest {
 
     assertThat(result, `is`(samplePin))
   }
-
-
 }

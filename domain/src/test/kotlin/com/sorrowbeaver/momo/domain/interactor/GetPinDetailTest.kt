@@ -15,20 +15,22 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetPinDetailTest {
 
-  @Mock lateinit var pinRepository: PinRepository
+  @Mock
+  lateinit var pinRepository: PinRepository
   lateinit var getPinDetail: GetPinDetail
 
   val FAKE_PIN_ID = 0L
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     `when`(pinRepository.detail(FAKE_PIN_ID)).thenReturn(Observable.empty())
     getPinDetail = GetPinDetail(pinRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreatePin() {
+  @Test
+  fun testCreatePin() {
     getPinDetail.buildObservable(Params(FAKE_PIN_ID))
 
     verify(pinRepository).detail(FAKE_PIN_ID)
   }
-
 }

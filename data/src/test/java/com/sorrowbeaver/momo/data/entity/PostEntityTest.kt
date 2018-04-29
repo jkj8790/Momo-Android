@@ -15,12 +15,11 @@ class PostEntityTest {
   private val currentTime = Date().time
 
   private val samplePost = PostEntity(
-      0, 0, "photo1", "description", Date(currentTime)
+    0, 0, "photo1", "description", Date(currentTime)
   )
 
   @Mock
   private val mockCursor = mock<Cursor>()
-
 
   @Before
   fun setUp() {

@@ -7,15 +7,21 @@ import javax.inject.Inject
 
 class FakePinDataStore @Inject constructor() : PinDataStore {
 
-  val FAKE_PIN = PinEntity(0,
-      "pin_name",
-      0, Date(),
-      0, "author",
-      0, listOf()
+  val FAKE_PIN = PinEntity(
+    0,
+    "pin_name",
+    0, Date(),
+    0, "author",
+    0, listOf()
   )
 
-  override fun createPin(name: String, pinLabel: Int, authorId: Long, authorName: String,
-      momoMapId: Long): Observable<PinEntity> {
+  override fun createPin(
+    name: String,
+    pinLabel: Int,
+    authorId: Long,
+    authorName: String,
+    momoMapId: Long
+  ): Observable<PinEntity> {
     return Observable.just(FAKE_PIN)
   }
 
@@ -26,5 +32,4 @@ class FakePinDataStore @Inject constructor() : PinDataStore {
   override fun detail(id: Long): Observable<PinEntity> {
     return Observable.just(FAKE_PIN)
   }
-
 }

@@ -9,20 +9,18 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class SearchDataRepository @Inject constructor(
-    private val searchDataStore: FakeSearchDataStore,
-    private val searchEntityDataMapper: SearchResultEntityDataMapper,
-    private val placeEntityDataMapper: PlaceEntityDataMapper
+  private val searchDataStore: FakeSearchDataStore,
+  private val searchEntityDataMapper: SearchResultEntityDataMapper,
+  private val placeEntityDataMapper: PlaceEntityDataMapper
 ) : SearchRepository {
-
 
   override fun searchMapAndUser(keyword: String): Observable<SearchResult> {
     return searchDataStore.searchMapAndUser(keyword)
-        .map { searchEntityDataMapper.transform(it) }
+      .map { searchEntityDataMapper.transform(it) }
   }
 
   override fun searchPlace(): Observable<List<Place>> {
     return searchDataStore.searchPlace()
-        .map { placeEntityDataMapper.transform(it) }
+      .map { placeEntityDataMapper.transform(it) }
   }
-
 }

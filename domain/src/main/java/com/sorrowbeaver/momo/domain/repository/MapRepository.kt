@@ -7,11 +7,15 @@ import io.reactivex.Observable
 
 interface MapRepository {
 
-  fun createMap(name: String, description: String, isPrivate: Boolean,
-      authorId: Long, authorName: String): Observable<MomoMap>
+  fun createMap(
+    name: String,
+    description: String,
+    isPrivate: Boolean,
+    authorId: Long,
+    authorName: String
+  ): Observable<MomoMap>
 
   fun maps(mapSortOption: MapSortOption = RECENT): Observable<List<MomoMap>>
 
   fun detail(id: Long): Observable<MomoMap>
-
 }

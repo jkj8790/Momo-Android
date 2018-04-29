@@ -9,9 +9,9 @@ import javax.inject.Inject
 import javax.inject.Named
 
 open class Login @Inject constructor(
-    private val userRepository: UserRepository,
-    @Named("executor") executorScheduler: Scheduler,
-    @Named("postExecution") postExecutionScheduler: Scheduler
+  private val userRepository: UserRepository,
+  @Named("executor") executorScheduler: Scheduler,
+  @Named("postExecution") postExecutionScheduler: Scheduler
 ) : UseCase<User, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val id: String, val password: String)

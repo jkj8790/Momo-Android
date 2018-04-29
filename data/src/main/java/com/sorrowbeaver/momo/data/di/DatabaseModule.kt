@@ -21,16 +21,15 @@ class DatabaseModule(private val application: Application) {
 
   @Provides
   fun provideSqlBrite() = SqlBrite.Builder()
-      .logger { Log.d("Database", it) }
-      .build()!!
+    .logger { Log.d("Database", it) }
+    .build()!!
 
   @Provides
-  fun briteDataBase(sqlBrite: SqlBrite)
-  : BriteDatabase{
+  fun briteDataBase(sqlBrite: SqlBrite): BriteDatabase {
     val configuration = Configuration.builder(application)
-        .name(DATABASE_NAME)
-        .callback(DbCallback())
-        .build()
+      .name(DATABASE_NAME)
+      .callback(DbCallback())
+      .build()
     val factory = FrameworkSQLiteOpenHelperFactory()
     val helper = factory.create(configuration)
     val db = sqlBrite.wrapDatabaseHelper(helper, Schedulers.io())
@@ -40,5 +39,4 @@ class DatabaseModule(private val application: Application) {
 
   @Provides
   fun diskPinDataStore(db: BriteDatabase) = DiskPinDataStore(db)
-
 }

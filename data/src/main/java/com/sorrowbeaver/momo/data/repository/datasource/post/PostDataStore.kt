@@ -11,4 +11,3 @@ interface PostDataStore {
 
   fun detail(id: Long): Observable<PostEntity>
 }
-

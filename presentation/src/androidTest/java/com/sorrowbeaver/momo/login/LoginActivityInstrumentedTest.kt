@@ -8,7 +8,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LoginActivityInstrumentedTest {
 
-  @Rule @JvmField
+  @Rule
+  @JvmField
   val activityRule = ActivityTestRule<LoginActivity>(LoginActivity::class.java)
-
 }

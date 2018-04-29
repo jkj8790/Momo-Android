@@ -4,24 +4,24 @@ import android.database.Cursor
 import java.util.Date
 
 data class PinEntity(
-    val id: Long,
-    val name: String,
-    val pinLabel: Int,
-    // 0 -> Place, 1 -> Food, 2 -> Cafe, 3 -> Shop, 4 -> etc
-    val createdAt: Date,
-    val authorId: Long,
-    val authorName: String,
-    val map: Long,
-    var post_list: List<PostEntity>
+  val id: Long,
+  val name: String,
+  val pinLabel: Int,
+  // 0 -> Place, 1 -> Food, 2 -> Cafe, 3 -> Shop, 4 -> etc
+  val createdAt: Date,
+  val authorId: Long,
+  val authorName: String,
+  val map: Long,
+  var post_list: List<PostEntity>
 ) {
-  constructor(cursor: Cursor): this(
-      cursor.getLong(0),
-      cursor.getString(1),
-      cursor.getInt(2),
-      Date(cursor.getLong(3)),
-      cursor.getLong(4),
-      cursor.getString(5),
-      cursor.getLong(6),
-      emptyList()
+  constructor(cursor: Cursor) : this(
+    cursor.getLong(0),
+    cursor.getString(1),
+    cursor.getInt(2),
+    Date(cursor.getLong(3)),
+    cursor.getLong(4),
+    cursor.getString(5),
+    cursor.getLong(6),
+    emptyList()
   )
 }

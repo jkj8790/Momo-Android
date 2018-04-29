@@ -14,18 +14,20 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LogoutTest {
 
-  @Mock lateinit var userRepository : UserRepository
+  @Mock
+  lateinit var userRepository: UserRepository
   lateinit var logout: Logout
 
-  @Before fun setUp() {
-    `when`(userRepository.logout()).thenReturn(Observable.empty());
+  @Before
+  fun setUp() {
+    `when`(userRepository.logout()).thenReturn(Observable.empty())
     logout = Logout(userRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testSignUp() {
+  @Test
+  fun testSignUp() {
     logout.buildObservable(Unit)
 
     verify(userRepository).logout()
   }
-
 }

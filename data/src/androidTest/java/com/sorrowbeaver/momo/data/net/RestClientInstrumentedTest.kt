@@ -18,30 +18,32 @@ class RestClientInstrumentedTest {
   val FAKE_ID = "a"
   val FAKE_PASSWORD = "b"
   val FAKE_LOGIN_RESPONSE = LoginResponse(FAKE_PK, FAKE_ID, FAKE_PASSWORD)
-  lateinit var restClient : RestClient
+  lateinit var restClient: RestClient
 
-  @Before fun setup() {
+  @Before
+  fun setup() {
     restClient = RestClient()
   }
 
-  @Test fun testLoginFailedWithInvalidAuthentication() {
+  @Test
+  fun testLoginFailedWithInvalidAuthentication() {
     val testObserver = TestObserver<LoginResponse>()
     restClient.login(FAKE_ID, FAKE_PASSWORD)
-        .subscribe(testObserver)
+      .subscribe(testObserver)
 
     testObserver.assertError(HttpException::class.java)
     val response = testObserver.errors()[0] as HttpException
     assertThat(response.code(), `is`(500))
   }
 
-  @Test fun testSignupFailedWithInvalidAuthentication() {
+  @Test
+  fun testSignupFailedWithInvalidAuthentication() {
     val testObserver = TestObserver<UserEntity>()
     restClient.signup("0", "1", "2")
-        .subscribe(testObserver)
+      .subscribe(testObserver)
 
     testObserver.assertError(HttpException::class.java)
     val response = testObserver.errors()[0] as HttpException
     assertThat(response.code(), `is`(500))
   }
 }
-

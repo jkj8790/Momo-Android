@@ -5,7 +5,7 @@ import com.sorrowbeaver.momo.BaseView
 
 interface MainContract {
 
-  interface View: BaseView<Presenter> {
+  interface View : BaseView<Presenter> {
     fun showLoading()
     fun hideLoading()
     fun showError()
@@ -13,8 +13,7 @@ interface MainContract {
     fun showUserName(userName: String)
   }
 
-  interface Presenter: BasePresenter<View> {
+  interface Presenter : BasePresenter<View> {
     fun loadMe()
   }
-
 }

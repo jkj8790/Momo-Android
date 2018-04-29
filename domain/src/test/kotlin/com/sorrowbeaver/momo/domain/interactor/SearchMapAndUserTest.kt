@@ -15,20 +15,22 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class SearchMapAndUserTest {
 
-  @Mock lateinit var searchRepository: SearchRepository
+  @Mock
+  lateinit var searchRepository: SearchRepository
   lateinit var searchMapAndUser: SearchMapAndUser
 
   val FAKE_KEYWORD = "keyword"
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     `when`(searchRepository.searchMapAndUser(FAKE_KEYWORD)).thenReturn(Observable.empty())
     searchMapAndUser = SearchMapAndUser(searchRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testCreateMap() {
+  @Test
+  fun testCreateMap() {
     searchMapAndUser.buildObservable(Params(FAKE_KEYWORD))
 
     verify(searchRepository).searchMapAndUser(FAKE_KEYWORD)
   }
-
 }

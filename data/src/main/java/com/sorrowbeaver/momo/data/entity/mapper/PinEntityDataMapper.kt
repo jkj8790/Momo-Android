@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 class PinEntityDataMapper @Inject constructor() {
 
-  fun transform(pinEntity: PinEntity) : Pin {
-    val type = when(pinEntity.pinLabel) {
+  fun transform(pinEntity: PinEntity): Pin {
+    val type = when (pinEntity.pinLabel) {
       0 -> PLACE
       1 -> FOOD
       2 -> CAFE
@@ -22,14 +22,13 @@ class PinEntityDataMapper @Inject constructor() {
     }
 
     return Pin(
-        pinEntity.id, pinEntity.name, type, pinEntity.createdAt,
-        pinEntity.authorId, pinEntity.authorName, pinEntity.map,
-        pinEntity.post_list.map { it.pk }
+      pinEntity.id, pinEntity.name, type, pinEntity.createdAt,
+      pinEntity.authorId, pinEntity.authorName, pinEntity.map,
+      pinEntity.post_list.map { it.pk }
     )
   }
 
   fun transform(pinEntities: List<PinEntity>): List<Pin> {
     return pinEntities.map { transform(it) }
   }
-
 }

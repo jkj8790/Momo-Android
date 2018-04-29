@@ -3,9 +3,9 @@ package com.sorrowbeaver.momo.domain.model
 import java.util.Date
 
 data class Post(
-    val id: Long,
-    val pinId: Long,
-    val photoUrl: String?,
-    val description: String,
-    val createdDate: Date
+  val id: Long,
+  val pinId: Long,
+  val photoUrl: String?,
+  val description: String,
+  val createdDate: Date
 )

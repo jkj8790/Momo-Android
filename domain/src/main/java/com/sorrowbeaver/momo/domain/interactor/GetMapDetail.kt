@@ -6,10 +6,10 @@ import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-class GetMapDetail (
-    val mapRepository: MapRepository,
-    executorScheduler: Scheduler,
-    postExecutionScheduler: Scheduler
+class GetMapDetail(
+  val mapRepository: MapRepository,
+  executorScheduler: Scheduler,
+  postExecutionScheduler: Scheduler
 ) : UseCase<MomoMap, Params>(executorScheduler, postExecutionScheduler) {
 
   data class Params(val id: Long)

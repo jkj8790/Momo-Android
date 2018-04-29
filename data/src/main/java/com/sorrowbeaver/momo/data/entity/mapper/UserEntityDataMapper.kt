@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class UserEntityDataMapper @Inject constructor() {
 
-  fun transform(userEntity: UserEntity) : User {
+  fun transform(userEntity: UserEntity): User {
     val type = when {
       userEntity.is_superuser -> Super
       userEntity.is_staff -> Staff
@@ -17,15 +17,14 @@ class UserEntityDataMapper @Inject constructor() {
     }
 
     return User(
-        userEntity.pk, type, userEntity.username, userEntity.email,
-        userEntity.profile_img, userEntity.date_joined, userEntity.last_login,
-        userEntity.is_facebook, userEntity.is_active,
-        listOf(), listOf(), listOf()
+      userEntity.pk, type, userEntity.username, userEntity.email,
+      userEntity.profile_img, userEntity.date_joined, userEntity.last_login,
+      userEntity.is_facebook, userEntity.is_active,
+      listOf(), listOf(), listOf()
     )
   }
 
-  fun transform(userEntities: List<UserEntity>?) : List<User>? {
+  fun transform(userEntities: List<UserEntity>?): List<User>? {
     return userEntities?.map { transform(it) }
   }
-
 }

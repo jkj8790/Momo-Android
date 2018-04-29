@@ -49,26 +49,25 @@ class FakeUserDataStore @Inject constructor() : UserDataStore {
 
   //TODO check image license..
   val ME = UserEntity(
-        0L, "me", "password", "me@email.com",
-        "http://cs301113.userapi.com/v301113396/30c7/qDFlRAPUNdw.jpg",
-        listOf(), Date(), Date(),
-        true, true, true, true, listOf()
-      )
+    0L, "me", "password", "me@email.com",
+    "http://cs301113.userapi.com/v301113396/30c7/qDFlRAPUNdw.jpg",
+    listOf(), Date(), Date(),
+    true, true, true, true, listOf()
+  )
 
   val USERS = listOf(
-      ME,
-      UserEntity(
-        1L, "dog", "password", "odg@email.com",
-        "https://i.redd.it/sq3n60qr12bz.jpg",
-        listOf(), Date(), Date(),
-        true, true, true, true, listOf()
-      ),
-      UserEntity(
-        2L, "cat", "password", "cat@email.com",
-        "http://i.imgur.com/ji3jJMu.jpg",
-        listOf(), Date(), Date(),
-        true, true, true, true, listOf()
-      )
+    ME,
+    UserEntity(
+      1L, "dog", "password", "odg@email.com",
+      "https://i.redd.it/sq3n60qr12bz.jpg",
+      listOf(), Date(), Date(),
+      true, true, true, true, listOf()
+    ),
+    UserEntity(
+      2L, "cat", "password", "cat@email.com",
+      "http://i.imgur.com/ji3jJMu.jpg",
+      listOf(), Date(), Date(),
+      true, true, true, true, listOf()
+    )
   )
 }
-

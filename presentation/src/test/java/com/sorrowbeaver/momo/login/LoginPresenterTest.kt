@@ -20,10 +20,14 @@ class LoginPresenterTest {
 
   private lateinit var loginPresenter: LoginPresenter
 
-  @Mock private val mockMapper = mock<UserModelDataMapper>()
-  @Mock private val mockView = mock<LoginContract.View>()
-  @Mock private val mockUser = mock<User>()
-  @Mock private val mockUserModel = mock<UserModel>()
+  @Mock
+  private val mockMapper = mock<UserModelDataMapper>()
+  @Mock
+  private val mockView = mock<LoginContract.View>()
+  @Mock
+  private val mockUser = mock<User>()
+  @Mock
+  private val mockUserModel = mock<UserModel>()
 
   private val FAKE_ID = "id"
   private val FAKE_PWD = "password"
@@ -59,8 +63,9 @@ class LoginPresenterTest {
     verify(mockView).hideLoading()
   }
 
-  class SuccessLogin(private val expectedUser: User) : Login(mock(),
-      Schedulers.trampoline(), Schedulers.trampoline()
+  class SuccessLogin(private val expectedUser: User) : Login(
+    mock(),
+    Schedulers.trampoline(), Schedulers.trampoline()
   ) {
 
     override fun buildObservable(params: Params): Observable<User> {
@@ -68,8 +73,10 @@ class LoginPresenterTest {
     }
   }
 
-  class FailLogin : Login(mock(),
-      Schedulers.trampoline(), Schedulers.trampoline()) {
+  class FailLogin : Login(
+    mock(),
+    Schedulers.trampoline(), Schedulers.trampoline()
+  ) {
 
     override fun buildObservable(params: Params): Observable<User> {
       return Observable.error(RuntimeException())
@@ -77,5 +84,5 @@ class LoginPresenterTest {
   }
 
   private fun createPresenter(login: Login) =
-      LoginPresenter(mockMapper, login).apply { takeView(mockView) }
+    LoginPresenter(mockMapper, login).apply { takeView(mockView) }
 }

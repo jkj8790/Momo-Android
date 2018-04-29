@@ -1,4 +1,3 @@
 package com.sorrowbeaver.momo
 
-interface BaseView<in T> {
-}
+interface BaseView<in T>

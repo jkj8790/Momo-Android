@@ -17,18 +17,20 @@ class LoginTest {
   val FAKE_ID = "id"
   val FAKE_PWD = "pwd"
 
-  @Mock lateinit var userRepository : UserRepository
-  lateinit var login : Login
+  @Mock
+  lateinit var userRepository: UserRepository
+  lateinit var login: Login
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     `when`(userRepository.login(FAKE_ID, FAKE_PWD)).thenReturn(Observable.empty())
     login = Login(userRepository, TestScheduler(), TestScheduler())
   }
 
-  @Test fun testLogin() {
+  @Test
+  fun testLogin() {
     login.buildObservable(Login.Params(FAKE_ID, FAKE_PWD))
 
-    verify(userRepository).login(FAKE_ID, FAKE_PWD);
+    verify(userRepository).login(FAKE_ID, FAKE_PWD)
   }
-
 }

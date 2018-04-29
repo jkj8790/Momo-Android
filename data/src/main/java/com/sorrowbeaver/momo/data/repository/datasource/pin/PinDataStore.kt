@@ -5,8 +5,13 @@ import io.reactivex.Observable
 
 interface PinDataStore {
 
-  fun createPin(name: String, pinLabel: Int,
-      authorId: Long, authorName: String, momoMapId: Long): Observable<PinEntity>
+  fun createPin(
+    name: String,
+    pinLabel: Int,
+    authorId: Long,
+    authorName: String,
+    momoMapId: Long
+  ): Observable<PinEntity>
 
   fun pins(): Observable<List<PinEntity>>
 

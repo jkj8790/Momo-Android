@@ -12,16 +12,15 @@ interface MomoApi {
   @FormUrlEncoded
   @POST("/api/member/login/")
   fun login(
-      @Field("id") id : String,
-      @Field("password") password : String
-  ) : Observable<LoginResponse>
+    @Field("id") id: String,
+    @Field("password") password: String
+  ): Observable<LoginResponse>
 
   @FormUrlEncoded
   @POST("/api/member/signup/")
   fun signup(
-      @Field("email") email : String,
-      @Field("username") username : String,
-      @Field("password") password : String
-  ) : Observable<UserEntity>
-
+    @Field("email") email: String,
+    @Field("username") username: String,
+    @Field("password") password: String
+  ): Observable<UserEntity>
 }

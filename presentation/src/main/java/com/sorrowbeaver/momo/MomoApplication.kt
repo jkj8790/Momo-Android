@@ -12,7 +12,7 @@ import com.squareup.leakcanary.LeakCanary
 class MomoApplication : Application() {
 
   lateinit var component: ApplicationComponent
-  private set
+    private set
 
   override fun onCreate() {
     super.onCreate()
@@ -22,14 +22,13 @@ class MomoApplication : Application() {
     LeakCanary.install(this)
 
     val dataComponent = DaggerDataComponent.builder()
-        .databaseModule(DatabaseModule(this))
-        .repositoryModule(RepositoryModule())
-        .build()
+      .databaseModule(DatabaseModule(this))
+      .repositoryModule(RepositoryModule())
+      .build()
 
     component = DaggerApplicationComponent.builder()
-        .applicationModule(ApplicationModule(this))
-        .dataComponent(dataComponent)
-        .build()
+      .applicationModule(ApplicationModule(this))
+      .dataComponent(dataComponent)
+      .build()
   }
 }
-

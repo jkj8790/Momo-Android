@@ -6,16 +6,15 @@ import javax.inject.Inject
 
 class PlaceEntityDataMapper @Inject constructor() {
 
-  fun transform(placeEntity: PlaceEntity) : Place {
+  fun transform(placeEntity: PlaceEntity): Place {
     return Place(
-        placeEntity.id, placeEntity.latitude,
-        placeEntity.longitude, placeEntity.name,
-        placeEntity.address
+      placeEntity.id, placeEntity.latitude,
+      placeEntity.longitude, placeEntity.name,
+      placeEntity.address
     )
   }
 
-  fun transform(placeEntities: List<PlaceEntity>) : List<Place> {
+  fun transform(placeEntities: List<PlaceEntity>): List<Place> {
     return placeEntities.map { transform(it) }
   }
-
 }

@@ -27,4 +27,3 @@ interface UserRepository {
 
   fun follow(userId: Long): Observable<Response>
 }
-
