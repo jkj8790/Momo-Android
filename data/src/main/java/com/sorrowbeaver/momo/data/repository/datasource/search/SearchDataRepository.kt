@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class SearchDataRepository @Inject constructor(
-  private val searchDataStore: FakeSearchDataStore,
+  private val searchDataStore: SearchDataStore,
   private val searchEntityDataMapper: SearchResultEntityDataMapper,
   private val placeEntityDataMapper: PlaceEntityDataMapper
 ) : SearchRepository {

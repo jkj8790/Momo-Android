@@ -9,7 +9,7 @@ import okhttp3.Response
 import javax.inject.Inject
 
 class UserDataRepository @Inject constructor(
-  private val userDataStore: FakeUserDataStore,
+  private val userDataStore: UserDataStore,
   private val userEntityDataMapper: UserEntityDataMapper
 ) : UserRepository {
 

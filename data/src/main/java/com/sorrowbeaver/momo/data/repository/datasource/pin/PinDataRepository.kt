@@ -8,7 +8,7 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class PinDataRepository @Inject constructor(
-  private val pinDataStore: DiskPinDataStore,
+  private val pinDataStore: PinDataStore,
   private val pinEntityDataMapper: PinEntityDataMapper
 ) : PinRepository {
 

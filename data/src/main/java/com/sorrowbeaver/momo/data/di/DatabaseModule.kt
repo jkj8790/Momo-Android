@@ -5,7 +5,16 @@ import android.arch.persistence.db.SupportSQLiteOpenHelper.Configuration
 import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory
 import android.util.Log
 import com.sorrowbeaver.momo.data.db.DbCallback
+import com.sorrowbeaver.momo.data.repository.datasource.map.DiskMapDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.map.MapDataStore
 import com.sorrowbeaver.momo.data.repository.datasource.pin.DiskPinDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.pin.PinDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.post.DiskPostDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.post.PostDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.search.FakeSearchDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.search.SearchDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.user.FakeUserDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataStore
 import com.squareup.sqlbrite3.BriteDatabase
 import com.squareup.sqlbrite3.SqlBrite
 import dagger.Module
@@ -40,5 +49,17 @@ class DatabaseModule(private val application: Application) {
   }
 
   @Provides
-  fun diskPinDataStore(db: BriteDatabase) = DiskPinDataStore(db)
+  fun pinDataStore(db: BriteDatabase): PinDataStore = DiskPinDataStore(db)
+
+  @Provides
+  fun mapDataStore(db: BriteDatabase): MapDataStore = DiskMapDataStore(db)
+
+  @Provides
+  fun postDataStore(db: BriteDatabase): PostDataStore = DiskPostDataStore(db)
+
+  @Provides
+  fun searchDataStore(): SearchDataStore = FakeSearchDataStore()
+
+  @Provides
+  fun userDataStore(): UserDataStore = FakeUserDataStore()
 }

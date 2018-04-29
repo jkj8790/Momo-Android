@@ -8,7 +8,7 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class MapDataRepository @Inject constructor(
-  private val mapDataStore: FakeMapDataStore,
+  private val mapDataStore: MapDataStore,
   private val mapEntityDataMapper: MomoMapEntityDataMapper
 ) : MapRepository {
 

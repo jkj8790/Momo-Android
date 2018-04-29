@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class PostDataRepository @Inject constructor(
-  private val postDataStore: FakePostDataStore,
+  private val postDataStore: PostDataStore,
   private val postEntityDataMapper: PostEntityDataMapper
 ) : PostRepository {
 
