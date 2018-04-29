@@ -26,10 +26,14 @@ allprojects {
     jcenter()
     mavenCentral()
   }
-}
 
-repositories {
-  mavenCentral()
+  configurations {
+    ktlint
+  }
+
+  dependencies {
+    ktlint "com.github.shyiko:ktlint:0.22.0"
+  }
 }
 
 dependencies {
