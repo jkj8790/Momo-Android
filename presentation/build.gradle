@@ -41,10 +41,6 @@ android {
       resConfigs "en", "xxxhdpi"
     }
 
-    fake {
-      dimension "data_source"
-    }
-
     disk {
       dimension "data_source"
     }

@@ -28,7 +28,9 @@ class DatabaseModule(private val application: Application) {
   fun briteDataBase(sqlBrite: SqlBrite): BriteDatabase {
     val configuration = Configuration.builder(application)
       .name(DATABASE_NAME)
-      .callback(DbCallback())
+      .callback(
+        DbCallback(application)
+      )
       .build()
     val factory = FrameworkSQLiteOpenHelperFactory()
     val helper = factory.create(configuration)
