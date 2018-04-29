@@ -11,13 +11,13 @@ import java.util.Date
 
 class UserEntityDataMapperTest {
 
-  private val FAKE_ID = 101L
-  private val FAKE_NAME = "name"
-  private val FAKE_EMAIL = "email"
-  private val FAKE_PASSWORD = "password"
-  private val FAKE_PROFILE_URL = "profile"
-  private val FAKE_JOINED_URL = Date(1000)
-  private val FAKE_LAST_LOGGED_IN = Date(1001)
+  private val fakeId = 101L
+  private val fakeName = "name"
+  private val fakeEmail = "email"
+  private val fakePassword = "password"
+  private val fakeProfileUrl = "profile"
+  private val fakeJoinedUrl = Date(1000)
+  private val fakeLastLoggedIn = Date(1001)
 
   private lateinit var userEntityDataMapper: UserEntityDataMapper
 
@@ -29,15 +29,15 @@ class UserEntityDataMapperTest {
   @Test
   fun testTransform() {
     val userEntity = UserEntity(
-      FAKE_ID, FAKE_NAME, FAKE_PASSWORD,
-      FAKE_EMAIL, FAKE_PROFILE_URL,
-      listOf(1L, 2L), FAKE_JOINED_URL, FAKE_LAST_LOGGED_IN,
+      fakeId, fakeName, fakePassword,
+      fakeEmail, fakeProfileUrl,
+      listOf(1L, 2L), fakeJoinedUrl, fakeLastLoggedIn,
       true, true, false, true, listOf()
     )
 
     val user = User(
-      FAKE_ID, UserType.Super, FAKE_NAME, FAKE_EMAIL,
-      FAKE_PROFILE_URL, FAKE_JOINED_URL, FAKE_LAST_LOGGED_IN,
+      fakeId, UserType.Super, fakeName, fakeEmail,
+      fakeProfileUrl, fakeJoinedUrl, fakeLastLoggedIn,
       true, true, listOf(), listOf(), listOf()
     )
 

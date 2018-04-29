@@ -20,18 +20,18 @@ class GetPostDetailTest {
   lateinit var postRepository: PostRepository
   private lateinit var getPostDetail: GetPostDetail
 
-  private val FAKE_POST_ID = 0L
+  private val fakePostId = 0L
 
   @Before
   fun setUp() {
-    `when`(postRepository.detail(FAKE_POST_ID)).thenReturn(Observable.empty())
+    `when`(postRepository.detail(fakePostId)).thenReturn(Observable.empty())
     getPostDetail = GetPostDetail(postRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testCreateMap() {
-    getPostDetail.buildObservable(Params(FAKE_POST_ID))
+    getPostDetail.buildObservable(Params(fakePostId))
 
-    verify(postRepository).detail(FAKE_POST_ID)
+    verify(postRepository).detail(fakePostId)
   }
 }

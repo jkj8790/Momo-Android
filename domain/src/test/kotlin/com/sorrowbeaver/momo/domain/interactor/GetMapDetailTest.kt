@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetMapDetailTest {
 
-  private val FAKE_MAP_ID = 0L
+  private val fakeMapId = 0L
 
   @Mock
   private
@@ -23,14 +23,14 @@ class GetMapDetailTest {
 
   @Before
   fun setUp() {
-    `when`(mapRepository.detail(FAKE_MAP_ID)).thenReturn(Observable.empty())
+    `when`(mapRepository.detail(fakeMapId)).thenReturn(Observable.empty())
     getMapDetail = GetMapDetail(mapRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testMapDetail() {
-    getMapDetail.buildObservable(GetMapDetail.Params(FAKE_MAP_ID))
+    getMapDetail.buildObservable(GetMapDetail.Params(fakeMapId))
 
-    verify(mapRepository).detail(FAKE_MAP_ID)
+    verify(mapRepository).detail(fakeMapId)
   }
 }

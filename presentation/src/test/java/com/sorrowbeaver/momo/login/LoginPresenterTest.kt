@@ -29,8 +29,8 @@ class LoginPresenterTest {
   @Mock
   private val mockUserModel = mock<UserModel>()
 
-  private val FAKE_ID = "id"
-  private val FAKE_PWD = "password"
+  private val fakeId = "id"
+  private val fakePassword = "password"
 
   @Before
   fun setUp() {
@@ -45,7 +45,7 @@ class LoginPresenterTest {
   fun testLogin() {
     loginPresenter = createPresenter(SuccessLogin(mockUser))
 
-    loginPresenter.login(FAKE_ID, FAKE_PWD)
+    loginPresenter.login(fakeId, fakePassword)
 
     verify(mockView).showLoading()
     verify(mockView).onSuccessLogin(anyOrNull())
@@ -56,7 +56,7 @@ class LoginPresenterTest {
   fun testError() {
     loginPresenter = createPresenter(FailLogin())
 
-    loginPresenter.login(FAKE_ID, FAKE_PWD)
+    loginPresenter.login(fakeId, fakePassword)
 
     verify(mockView).showLoading()
     verify(mockView).onLoginError()

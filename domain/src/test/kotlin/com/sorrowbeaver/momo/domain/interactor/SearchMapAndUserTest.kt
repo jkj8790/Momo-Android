@@ -20,18 +20,18 @@ class SearchMapAndUserTest {
   lateinit var searchRepository: SearchRepository
   private lateinit var searchMapAndUser: SearchMapAndUser
 
-  private val FAKE_KEYWORD = "keyword"
+  private val fakeKeyword = "keyword"
 
   @Before
   fun setUp() {
-    `when`(searchRepository.searchMapAndUser(FAKE_KEYWORD)).thenReturn(Observable.empty())
+    `when`(searchRepository.searchMapAndUser(fakeKeyword)).thenReturn(Observable.empty())
     searchMapAndUser = SearchMapAndUser(searchRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testCreateMap() {
-    searchMapAndUser.buildObservable(Params(FAKE_KEYWORD))
+    searchMapAndUser.buildObservable(Params(fakeKeyword))
 
-    verify(searchRepository).searchMapAndUser(FAKE_KEYWORD)
+    verify(searchRepository).searchMapAndUser(fakeKeyword)
   }
 }

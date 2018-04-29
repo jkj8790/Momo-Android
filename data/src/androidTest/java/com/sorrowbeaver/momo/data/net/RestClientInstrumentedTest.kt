@@ -14,10 +14,8 @@ import retrofit2.HttpException
 @RunWith(AndroidJUnit4::class)
 class RestClientInstrumentedTest {
 
-  private val FAKE_PK = 0L
-  private val FAKE_ID = "a"
-  private val FAKE_PASSWORD = "b"
-  val FAKE_LOGIN_RESPONSE = LoginResponse(FAKE_PK, FAKE_ID, FAKE_PASSWORD)
+  private val fakeId = "a"
+  private val fakePassword = "b"
   private lateinit var restClient: RestClient
 
   @Before
@@ -28,7 +26,7 @@ class RestClientInstrumentedTest {
   @Test
   fun testLoginFailedWithInvalidAuthentication() {
     val testObserver = TestObserver<LoginResponse>()
-    restClient.login(FAKE_ID, FAKE_PASSWORD)
+    restClient.login(fakeId, fakePassword)
       .subscribe(testObserver)
 
     testObserver.assertError(HttpException::class.java)

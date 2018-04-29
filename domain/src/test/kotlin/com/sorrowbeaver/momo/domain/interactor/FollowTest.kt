@@ -20,18 +20,18 @@ class FollowTest {
   lateinit var userRepository: UserRepository
   private lateinit var follow: Follow
 
-  private val FAKE_USER_ID = 0L
+  private val fakeUserId = 0L
 
   @Before
   fun setUp() {
-    `when`(userRepository.follow(FAKE_USER_ID)).thenReturn(Observable.empty())
+    `when`(userRepository.follow(fakeUserId)).thenReturn(Observable.empty())
     follow = Follow(userRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testSignUp() {
-    follow.buildObservable(Params(FAKE_USER_ID))
+    follow.buildObservable(Params(fakeUserId))
 
-    verify(userRepository).follow(FAKE_USER_ID)
+    verify(userRepository).follow(fakeUserId)
   }
 }

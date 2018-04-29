@@ -19,7 +19,7 @@ class SearchPlaceTest {
   lateinit var searchRepository: SearchRepository
   private lateinit var searchPlace: SearchPlace
 
-  val FAKE_KEYWORD = "keyword"
+  val fakeKeyword = "keyword"
 
   @Before
   fun setUp() {

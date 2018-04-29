@@ -16,9 +16,9 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class SignUpTest {
 
-  private val FAKE_EMAIL = "email"
-  private val FAKE_ID = "id"
-  private val FAKE_PWD = "pwd"
+  private val fakeEmail = "email"
+  private val fakeId = "id"
+  private val fakePwd = "pwd"
 
   @Mock
   lateinit var mockExecutor: ThreadExecutor
@@ -31,14 +31,14 @@ class SignUpTest {
 
   @Before
   fun setUp() {
-    `when`(userRepository.signUp(FAKE_EMAIL, FAKE_ID, FAKE_PWD)).thenReturn(Observable.empty())
+    `when`(userRepository.signUp(fakeEmail, fakeId, fakePwd)).thenReturn(Observable.empty())
     signUp = SignUp(userRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testSignUp() {
-    signUp.buildObservable(SignUp.Params(FAKE_EMAIL, FAKE_ID, FAKE_PWD))
+    signUp.buildObservable(SignUp.Params(fakeEmail, fakeId, fakePwd))
 
-    verify(userRepository).signUp(FAKE_EMAIL, FAKE_ID, FAKE_PWD)
+    verify(userRepository).signUp(fakeEmail, fakeId, fakePwd)
   }
 }

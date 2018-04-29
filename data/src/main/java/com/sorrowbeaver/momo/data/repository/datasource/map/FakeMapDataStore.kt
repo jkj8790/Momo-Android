@@ -10,7 +10,7 @@ class FakeMapDataStore @Inject constructor(
   userDataStore: FakeUserDataStore
 ) : MapDataStore {
 
-  private val FAKE_MAP = MomoMapEntity(
+  private val fakeMap = MomoMapEntity(
     0, "FAKE1", "I'm fake map",
     false, 0, "a", emptyList(), Date()
   )
@@ -22,14 +22,14 @@ class FakeMapDataStore @Inject constructor(
     authorId: Long,
     authorName: String
   ): Observable<MomoMapEntity> {
-    return Observable.just(FAKE_MAP)
+    return Observable.just(fakeMap)
   }
 
   override fun maps(): Observable<List<MomoMapEntity>> {
-    return Observable.just(listOf(FAKE_MAP))
+    return Observable.just(listOf(fakeMap))
   }
 
   override fun detail(id: Long): Observable<MomoMapEntity> {
-    return Observable.just(FAKE_MAP)
+    return Observable.just(fakeMap)
   }
 }

@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetProfileTest {
 
-  private val FAKE_USER_ID = 0L
+  private val fakeUserId = 0L
 
   @Mock
   private
@@ -23,14 +23,14 @@ class GetProfileTest {
 
   @Before
   fun setUp() {
-    `when`(userRepository.detail(FAKE_USER_ID)).thenReturn(Observable.empty())
+    `when`(userRepository.detail(fakeUserId)).thenReturn(Observable.empty())
     getProfile = GetProfile(userRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testSignUp() {
-    getProfile.buildObservable(GetProfile.Params(FAKE_USER_ID))
+    getProfile.buildObservable(GetProfile.Params(fakeUserId))
 
-    verify(userRepository).detail(FAKE_USER_ID)
+    verify(userRepository).detail(fakeUserId)
   }
 }

@@ -7,12 +7,12 @@ import javax.inject.Inject
 
 class FakePostDataStore @Inject constructor() : PostDataStore {
 
-  private val FAKE_POST = PostEntity(
+  private val fakePost = PostEntity(
     0, 0, "photo", "description", Date()
   )
 
   override fun posts(): Observable<List<PostEntity>> {
-    return Observable.just(listOf(FAKE_POST))
+    return Observable.just(listOf(fakePost))
   }
 
   override fun createPost(
@@ -20,10 +20,10 @@ class FakePostDataStore @Inject constructor() : PostDataStore {
     photoUrl: String?,
     description: String?
   ): Observable<PostEntity> {
-    return Observable.just(FAKE_POST)
+    return Observable.just(fakePost)
   }
 
   override fun detail(id: Long): Observable<PostEntity> {
-    return Observable.just(FAKE_POST)
+    return Observable.just(fakePost)
   }
 }

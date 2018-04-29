@@ -20,16 +20,17 @@ class CreatePostTest {
   lateinit var postRepository: PostRepository
   private lateinit var createPost: CreatePost
 
-  private val FAKE_PIN_ID = 0L
-  private val FAKE_PHOTO_URL = "photo"
-  private val FAKE_DESCRIPTION = "description"
+  private val fakePinId = 0L
+  private val fakePhotoUrl = "photo"
+  private val fakeDescription = "description"
 
   @Before
   fun setUp() {
     `when`(
       postRepository.createPost(
-        FAKE_PIN_ID,
-        FAKE_PHOTO_URL, FAKE_DESCRIPTION
+        fakePinId,
+        fakePhotoUrl,
+        fakeDescription
       )
     ).thenReturn(Observable.empty())
     createPost = CreatePost(postRepository, TestScheduler(), TestScheduler())
@@ -39,13 +40,13 @@ class CreatePostTest {
   fun testCreateMap() {
     createPost.buildObservable(
       Params(
-        FAKE_PIN_ID, FAKE_PHOTO_URL, FAKE_DESCRIPTION
+        fakePinId, fakePhotoUrl, fakeDescription
       )
     )
 
     verify(postRepository).createPost(
-      FAKE_PIN_ID,
-      FAKE_PHOTO_URL, FAKE_DESCRIPTION
+      fakePinId,
+      fakePhotoUrl, fakeDescription
     )
   }
 }

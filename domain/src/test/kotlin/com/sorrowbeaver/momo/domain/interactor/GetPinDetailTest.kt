@@ -20,18 +20,18 @@ class GetPinDetailTest {
   lateinit var pinRepository: PinRepository
   private lateinit var getPinDetail: GetPinDetail
 
-  private val FAKE_PIN_ID = 0L
+  private val fakePinId = 0L
 
   @Before
   fun setUp() {
-    `when`(pinRepository.detail(FAKE_PIN_ID)).thenReturn(Observable.empty())
+    `when`(pinRepository.detail(fakePinId)).thenReturn(Observable.empty())
     getPinDetail = GetPinDetail(pinRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testCreatePin() {
-    getPinDetail.buildObservable(Params(FAKE_PIN_ID))
+    getPinDetail.buildObservable(Params(fakePinId))
 
-    verify(pinRepository).detail(FAKE_PIN_ID)
+    verify(pinRepository).detail(fakePinId)
   }
 }

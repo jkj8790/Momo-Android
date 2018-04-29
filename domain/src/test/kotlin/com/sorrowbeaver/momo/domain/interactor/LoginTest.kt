@@ -14,8 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LoginTest {
 
-  private val FAKE_ID = "id"
-  private val FAKE_PWD = "pwd"
+  private val fakeId = "id"
+  private val fakePwd = "pwd"
 
   @Mock
   private
@@ -24,14 +24,14 @@ class LoginTest {
 
   @Before
   fun setUp() {
-    `when`(userRepository.login(FAKE_ID, FAKE_PWD)).thenReturn(Observable.empty())
+    `when`(userRepository.login(fakeId, fakePwd)).thenReturn(Observable.empty())
     login = Login(userRepository, TestScheduler(), TestScheduler())
   }
 
   @Test
   fun testLogin() {
-    login.buildObservable(Login.Params(FAKE_ID, FAKE_PWD))
+    login.buildObservable(Login.Params(fakeId, fakePwd))
 
-    verify(userRepository).login(FAKE_ID, FAKE_PWD)
+    verify(userRepository).login(fakeId, fakePwd)
   }
 }
