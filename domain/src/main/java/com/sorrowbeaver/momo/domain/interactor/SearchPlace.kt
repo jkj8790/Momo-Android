@@ -6,7 +6,7 @@ import io.reactivex.Observable
 import io.reactivex.Scheduler
 
 class SearchPlace(
-  val searchRepository: SearchRepository,
+  private val searchRepository: SearchRepository,
   executorScheduler: Scheduler,
   postExecutionScheduler: Scheduler
 ) : UseCase<List<Place>, Unit>(executorScheduler, postExecutionScheduler) {

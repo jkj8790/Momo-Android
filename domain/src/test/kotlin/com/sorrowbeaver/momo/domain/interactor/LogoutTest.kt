@@ -15,8 +15,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class LogoutTest {
 
   @Mock
+  private
   lateinit var userRepository: UserRepository
-  lateinit var logout: Logout
+  private lateinit var logout: Logout
 
   @Before
   fun setUp() {

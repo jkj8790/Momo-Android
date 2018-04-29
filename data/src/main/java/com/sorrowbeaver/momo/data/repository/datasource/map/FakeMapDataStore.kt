@@ -10,7 +10,7 @@ class FakeMapDataStore @Inject constructor(
   userDataStore: FakeUserDataStore
 ) : MapDataStore {
 
-  val FAKE_MAP = MomoMapEntity(
+  private val FAKE_MAP = MomoMapEntity(
     0, "FAKE1", "I'm fake map",
     false, 0, "a", emptyList(), Date()
   )

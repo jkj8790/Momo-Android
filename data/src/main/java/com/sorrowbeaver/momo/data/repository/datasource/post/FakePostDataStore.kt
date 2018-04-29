@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class FakePostDataStore @Inject constructor() : PostDataStore {
 
-  val FAKE_POST = PostEntity(
-    0, 0, "photho", "description", Date()
+  private val FAKE_POST = PostEntity(
+    0, 0, "photo", "description", Date()
   )
 
   override fun posts(): Observable<List<PostEntity>> {

@@ -15,8 +15,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class GetPinsTest {
 
   @Mock
+  private
   lateinit var pinRepository: PinRepository
-  lateinit var getPins: GetPins
+  private lateinit var getPins: GetPins
 
   @Before
   fun setUp() {

@@ -14,11 +14,12 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetProfileTest {
 
-  val FAKE_USER_ID = 0L
+  private val FAKE_USER_ID = 0L
 
   @Mock
+  private
   lateinit var userRepository: UserRepository
-  lateinit var getProfile: GetProfile
+  private lateinit var getProfile: GetProfile
 
   @Before
   fun setUp() {

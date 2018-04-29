@@ -16,17 +16,18 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class SignUpTest {
 
-  val FAKE_EMAIL = "email"
-  val FAKE_ID = "id"
-  val FAKE_PWD = "pwd"
+  private val FAKE_EMAIL = "email"
+  private val FAKE_ID = "id"
+  private val FAKE_PWD = "pwd"
 
   @Mock
   lateinit var mockExecutor: ThreadExecutor
   @Mock
   lateinit var mockPostExecution: PostExecutionThread
   @Mock
+  private
   lateinit var userRepository: UserRepository
-  lateinit var signUp: SignUp
+  private lateinit var signUp: SignUp
 
   @Before
   fun setUp() {

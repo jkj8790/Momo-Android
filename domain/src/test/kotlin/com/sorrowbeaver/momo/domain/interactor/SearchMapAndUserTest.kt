@@ -16,10 +16,11 @@ import org.mockito.junit.MockitoJUnitRunner
 class SearchMapAndUserTest {
 
   @Mock
+  private
   lateinit var searchRepository: SearchRepository
-  lateinit var searchMapAndUser: SearchMapAndUser
+  private lateinit var searchMapAndUser: SearchMapAndUser
 
-  val FAKE_KEYWORD = "keyword"
+  private val FAKE_KEYWORD = "keyword"
 
   @Before
   fun setUp() {

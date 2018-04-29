@@ -17,10 +17,11 @@ import org.mockito.junit.MockitoJUnitRunner
 class GetUsersTest {
 
   @Mock
+  private
   lateinit var userRepository: UserRepository
-  lateinit var getUsers: GetUsers
+  private lateinit var getUsers: GetUsers
 
-  val sortOption = FOLLOWER_DESCENDING
+  private val sortOption = FOLLOWER_DESCENDING
 
   @Before
   fun setUp() {

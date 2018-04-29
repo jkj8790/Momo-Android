@@ -16,10 +16,11 @@ import org.mockito.junit.MockitoJUnitRunner
 class GetPinDetailTest {
 
   @Mock
+  private
   lateinit var pinRepository: PinRepository
-  lateinit var getPinDetail: GetPinDetail
+  private lateinit var getPinDetail: GetPinDetail
 
-  val FAKE_PIN_ID = 0L
+  private val FAKE_PIN_ID = 0L
 
   @Before
   fun setUp() {

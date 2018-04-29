@@ -14,11 +14,12 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class GetMapDetailTest {
 
-  val FAKE_MAP_ID = 0L
+  private val FAKE_MAP_ID = 0L
 
   @Mock
+  private
   lateinit var mapRepository: MapRepository
-  lateinit var getMapDetail: GetMapDetail
+  private lateinit var getMapDetail: GetMapDetail
 
   @Before
   fun setUp() {

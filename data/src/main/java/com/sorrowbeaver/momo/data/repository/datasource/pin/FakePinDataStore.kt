@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class FakePinDataStore @Inject constructor() : PinDataStore {
 
-  val FAKE_PIN = PinEntity(
+  private val FAKE_PIN = PinEntity(
     0,
     "pin_name",
     0, Date(),

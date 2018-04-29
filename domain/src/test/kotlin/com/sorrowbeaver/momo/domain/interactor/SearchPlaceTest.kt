@@ -15,8 +15,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class SearchPlaceTest {
 
   @Mock
+  private
   lateinit var searchRepository: SearchRepository
-  lateinit var searchPlace: SearchPlace
+  private lateinit var searchPlace: SearchPlace
 
   val FAKE_KEYWORD = "keyword"
 

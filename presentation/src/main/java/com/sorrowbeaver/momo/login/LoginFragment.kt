@@ -19,7 +19,7 @@ class LoginFragment : Fragment(), LoginContract.View {
 
   @Inject
   lateinit var presenter: LoginContract.Presenter
-  var progressDialog: AlertDialog? = null
+  private var progressDialog: AlertDialog? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

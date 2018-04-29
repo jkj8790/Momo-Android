@@ -16,10 +16,11 @@ import org.mockito.junit.MockitoJUnitRunner
 class GetPostDetailTest {
 
   @Mock
+  private
   lateinit var postRepository: PostRepository
-  lateinit var getPostDetail: GetPostDetail
+  private lateinit var getPostDetail: GetPostDetail
 
-  val FAKE_POST_ID = 0L
+  private val FAKE_POST_ID = 0L
 
   @Before
   fun setUp() {

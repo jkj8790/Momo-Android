@@ -15,8 +15,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class GetPostsTest {
 
   @Mock
+  private
   lateinit var postRepository: PostRepository
-  lateinit var getPosts: GetPosts
+  private lateinit var getPosts: GetPosts
 
   @Before
   fun setUp() {

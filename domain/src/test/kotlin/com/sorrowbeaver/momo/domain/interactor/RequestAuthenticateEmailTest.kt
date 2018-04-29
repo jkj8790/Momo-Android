@@ -15,8 +15,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class RequestAuthenticateEmailTest {
 
   @Mock
+  private
   lateinit var userRepository: UserRepository
-  lateinit var requestAuthenticateEmail: RequestAuthenticateEmail
+  private lateinit var requestAuthenticateEmail: RequestAuthenticateEmail
 
   @Before
   fun setUp() {

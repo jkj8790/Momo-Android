@@ -70,14 +70,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     presenter.subscribe()
   }
 
-  override fun onPause() {
-    super.onPause()
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    return super.onOptionsItemSelected(item)
-  }
-
   /**
    * Manipulates the map once available.
    * This callback is triggered when the map is ready to be used.

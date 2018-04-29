@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import io.reactivex.Scheduler
 
 class SearchMapAndUser(
-  val searchRepository: SearchRepository,
+  private val searchRepository: SearchRepository,
   executorScheduler: Scheduler,
   postExecutionScheduler: Scheduler
 ) : UseCase<SearchResult, Params>(executorScheduler, postExecutionScheduler) {

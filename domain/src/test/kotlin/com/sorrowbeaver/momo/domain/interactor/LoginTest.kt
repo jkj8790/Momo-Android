@@ -14,12 +14,13 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LoginTest {
 
-  val FAKE_ID = "id"
-  val FAKE_PWD = "pwd"
+  private val FAKE_ID = "id"
+  private val FAKE_PWD = "pwd"
 
   @Mock
+  private
   lateinit var userRepository: UserRepository
-  lateinit var login: Login
+  private lateinit var login: Login
 
   @Before
   fun setUp() {

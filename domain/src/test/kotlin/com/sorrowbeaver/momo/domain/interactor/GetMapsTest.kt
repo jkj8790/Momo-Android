@@ -17,8 +17,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class GetMapsTest {
 
   @Mock
+  private
   lateinit var mapRepository: MapRepository
-  lateinit var getMaps: GetMaps
+  private lateinit var getMaps: GetMaps
 
   @Before
   fun setUp() {

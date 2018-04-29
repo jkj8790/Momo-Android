@@ -16,12 +16,13 @@ import org.mockito.junit.MockitoJUnitRunner
 class CreatePostTest {
 
   @Mock
+  private
   lateinit var postRepository: PostRepository
-  lateinit var createPost: CreatePost
+  private lateinit var createPost: CreatePost
 
-  val FAKE_PIN_ID = 0L
-  val FAKE_PHOTO_URL = "photo"
-  val FAKE_DESCRIPTION = "description"
+  private val FAKE_PIN_ID = 0L
+  private val FAKE_PHOTO_URL = "photo"
+  private val FAKE_DESCRIPTION = "description"
 
   @Before
   fun setUp() {

@@ -37,7 +37,7 @@ class FakeUserDataStore @Inject constructor() : UserDataStore {
     TODO("not implemented")
   }
 
-  fun Response.Builder.success(): Response = code(200).build()
+  private fun Response.Builder.success(): Response = code(200).build()
 
   override fun logout(): Observable<Response> {
     return Observable.just(Response.Builder().success())
@@ -48,14 +48,14 @@ class FakeUserDataStore @Inject constructor() : UserDataStore {
   }
 
   //TODO check image license..
-  val ME = UserEntity(
+  private val ME = UserEntity(
     0L, "me", "password", "me@email.com",
     "http://cs301113.userapi.com/v301113396/30c7/qDFlRAPUNdw.jpg",
     listOf(), Date(), Date(),
     true, true, true, true, listOf()
   )
 
-  val USERS = listOf(
+  private val USERS = listOf(
     ME,
     UserEntity(
       1L, "dog", "password", "odg@email.com",

@@ -16,10 +16,11 @@ import org.mockito.junit.MockitoJUnitRunner
 class FollowTest {
 
   @Mock
+  private
   lateinit var userRepository: UserRepository
-  lateinit var follow: Follow
+  private lateinit var follow: Follow
 
-  val FAKE_USER_ID = 0L
+  private val FAKE_USER_ID = 0L
 
   @Before
   fun setUp() {

@@ -35,7 +35,7 @@ class RepositoryModule {
     fun postRepository(impl: PostDataRepository): PostRepository
 
     @Binds
-    fun serachRepository(impl: SearchDataRepository): SearchRepository
+    fun searchRepository(impl: SearchDataRepository): SearchRepository
 
     @Binds
     fun userRepository(impl: UserDataRepository): UserRepository

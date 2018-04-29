@@ -14,11 +14,11 @@ import retrofit2.HttpException
 @RunWith(AndroidJUnit4::class)
 class RestClientInstrumentedTest {
 
-  val FAKE_PK = 0L
-  val FAKE_ID = "a"
-  val FAKE_PASSWORD = "b"
+  private val FAKE_PK = 0L
+  private val FAKE_ID = "a"
+  private val FAKE_PASSWORD = "b"
   val FAKE_LOGIN_RESPONSE = LoginResponse(FAKE_PK, FAKE_ID, FAKE_PASSWORD)
-  lateinit var restClient: RestClient
+  private lateinit var restClient: RestClient
 
   @Before
   fun setup() {
