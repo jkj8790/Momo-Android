@@ -19,7 +19,7 @@ abstract class UseCase<T, in Params> constructor(
   private val disposables: CompositeDisposable = CompositeDisposable()
   private val schedulersTransformer = ObservableTransformer<Any, Any> { upstream ->
     upstream!!
-      .subscribeOn(Schedulers.io())
+      .subscribeOn(executorScheduler)
       .observeOn(postExecutionScheduler)
   }
 
