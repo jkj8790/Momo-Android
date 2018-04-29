@@ -26,7 +26,11 @@ class LoginFragment : Fragment(), LoginContract.View {
     (activity?.application as MomoApplication).component.inject(this)
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     return inflater.inflate(R.layout.fragment_login, container, false)
   }
 
