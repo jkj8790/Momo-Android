@@ -7,16 +7,19 @@ import com.sorrowbeaver.momo.domain.interactor.Login
 import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.UserModel
+import com.sorrowbeaver.momo.rule.TrampolineSchedulerRule
 import io.reactivex.Observable
-import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 
 class LoginPresenterTest {
+
+  @get:Rule
+  val rule = TrampolineSchedulerRule()
 
   private lateinit var loginPresenter: LoginPresenter
 
@@ -34,9 +37,6 @@ class LoginPresenterTest {
 
   @Before
   fun setUp() {
-    RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
-    RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
-    RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
     // TODO 왜 setInitComputation 하면 제대로 동작하지 않는지 조사
     `when`(mockMapper.transform(mockUser)).thenReturn(mockUserModel)
   }
@@ -64,8 +64,7 @@ class LoginPresenterTest {
   }
 
   class SuccessLogin(private val expectedUser: User) : Login(
-    mock(),
-    Schedulers.trampoline(), Schedulers.trampoline()
+    mock(), Schedulers.trampoline(), Schedulers.trampoline()
   ) {
 
     override fun buildObservable(params: Params): Observable<User> {
@@ -74,8 +73,7 @@ class LoginPresenterTest {
   }
 
   class FailLogin : Login(
-    mock(),
-    Schedulers.trampoline(), Schedulers.trampoline()
+    mock(), Schedulers.trampoline(), Schedulers.trampoline()
   ) {
 
     override fun buildObservable(params: Params): Observable<User> {
