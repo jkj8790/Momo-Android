@@ -1,9 +1,9 @@
 package com.sorrowbeaver.momo.data.repository.datasource.pin
 
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.sorrowbeaver.momo.data.entity.PinEntity
-import com.sorrowbeaver.momo.data.entity.PostEntity
 import com.squareup.sqlbrite3.BriteDatabase
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.zipWith
@@ -16,7 +16,7 @@ class DiskPinDataStore @Inject constructor(
 
   override fun pins(): Observable<List<PinEntity>> {
     return db.createQuery("pin", "SELECT * FROM pin")
-      .mapToList { PinEntity(it) }
+      .mapToList { PinEntity(it, emptyList()) }
   }
 
   override fun createPin(
@@ -36,15 +36,14 @@ class DiskPinDataStore @Inject constructor(
 
   override fun detail(id: Long): Observable<PinEntity> {
     val posts = db.createQuery(
-      "pin_posts", "SELECT posts.* FROM pin_posts where pin_id = $id" +
-        "RIGHT JOIN posts ON pin_posts.pin_id = posts.id"
+      "pin_posts", "SELECT post_id FROM pin_posts where pin_id = $id"
     )
-      .mapToList { PostEntity(it) }
+      .mapToList { it.getLong(it.getColumnIndex("post_id")) }
 
     return db.createQuery("pin", "SELECT * FROM pin WHERE id = $id")
-      .mapToOne { PinEntity(it) }
-      .zipWith(posts) { t1: PinEntity, t2: List<PostEntity> ->
-        t1.apply { post_list = t2 }
+      .mapToOne { it }
+      .zipWith(posts) { cursor: Cursor, postIds: List<Long> ->
+        PinEntity(cursor, postIds)
       }
   }
 

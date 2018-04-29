@@ -12,9 +12,9 @@ data class PinEntity(
   val authorId: Long,
   val authorName: String,
   val map: Long,
-  var post_list: List<PostEntity>
+  val postIds: List<Long>
 ) {
-  constructor(cursor: Cursor) : this(
+  constructor(cursor: Cursor, postIds: List<Long>) : this(
     cursor.getLong(0),
     cursor.getString(1),
     cursor.getInt(2),
@@ -22,6 +22,6 @@ data class PinEntity(
     cursor.getLong(4),
     cursor.getString(5),
     cursor.getLong(6),
-    emptyList()
+    postIds
   )
 }

@@ -1,10 +1,12 @@
 package com.sorrowbeaver.momo.data.repository.datasource.map
 
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.sorrowbeaver.momo.data.entity.MomoMapEntity
 import com.squareup.sqlbrite3.BriteDatabase
 import io.reactivex.Observable
+import io.reactivex.rxkotlin.zipWith
 import java.util.Date
 import javax.inject.Inject
 
@@ -29,12 +31,20 @@ class DiskMapDataStore @Inject constructor(
 
   override fun maps(): Observable<List<MomoMapEntity>> {
     return db.createQuery("map", "SELECT * FROM map")
-      .mapToList { MomoMapEntity(it) }
+      .mapToList { MomoMapEntity(it, emptyList()) }
   }
 
   override fun detail(id: Long): Observable<MomoMapEntity> {
+    val pinIdQuery = db.createQuery(
+      "map_pins", "SELECT pin_id FROM map_pins where pin_id = $id"
+    )
+      .mapToList { it.getLong(it.getColumnIndex("pin_id")) }
+
     return db.createQuery("map", "SELECT * FROM map WHERE id = $id")
-      .mapToOne { MomoMapEntity(it) }
+      .mapToOne { it }
+      .zipWith(pinIdQuery) { cursor: Cursor, pinIds: List<Long> ->
+        MomoMapEntity(cursor, pinIds)
+      }
   }
 
   private fun createContentValues(

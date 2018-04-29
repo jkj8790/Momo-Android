@@ -10,17 +10,17 @@ data class MomoMapEntity(
   val is_private: Boolean,
   val authorId: Long,
   val authorName: String,
-  var pins: List<PinEntity>,
-  val createdDate: Date
+  val createdDate: Date,
+  val pinIds: List<Long>
 ) {
-  constructor(cursor: Cursor) : this(
+  constructor(cursor: Cursor, pinIds: List<Long>) : this(
     cursor.getLong(0),
     cursor.getString(1),
     cursor.getString(2),
     cursor.getInt(3) == 1,
     cursor.getLong(4),
     cursor.getString(5),
-    emptyList(),
-    Date(cursor.getLong(6))
+    Date(cursor.getLong(6)),
+    pinIds
   )
 }
