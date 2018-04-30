@@ -24,7 +24,6 @@ class PinEntityTest {
   @Mock
   private val mockCursor = mock<Cursor>()
 
-
   @Before
   fun setUp() {
     `when`(mockCursor.getLong(0)).thenReturn(samplePin.id)
