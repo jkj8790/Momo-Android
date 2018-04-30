@@ -14,12 +14,16 @@ class PinEntityTest {
 
   private val currentDate = Date()
 
+  private val fakePinIds = listOf(2L)
+
   private val samplePin = PinEntity(
-    0, "pin", 0, currentDate, 0, "author", 0, emptyList()
+    0, "pin", 0, currentDate, 0, "author",
+    0, fakePinIds
   )
 
   @Mock
   private val mockCursor = mock<Cursor>()
+
 
   @Before
   fun setUp() {
@@ -34,7 +38,7 @@ class PinEntityTest {
 
   @Test
   fun testPinEntityCursorConstructor() {
-    val result = PinEntity(mockCursor)
+    val result = PinEntity(mockCursor, fakePinIds)
 
     assertThat(result, `is`(samplePin))
   }
