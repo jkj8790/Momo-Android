@@ -36,7 +36,6 @@ class LoginPresenter @Inject constructor(
       .subscribeBy(
         onNext = { view?.onSuccessLogin(it) },
         onError = {
-          it.printStackTrace()
           view?.onLoginError()
           view?.hideLoading()
         },
