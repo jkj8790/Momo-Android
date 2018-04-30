@@ -35,6 +35,8 @@ class LoginPresenterTest {
   private val fakeId = "id"
   private val fakePassword = "password"
 
+  private val trampoline = Schedulers.trampoline()
+
   @Before
   fun setUp() {
     // TODO 왜 setInitComputation 하면 제대로 동작하지 않는지 조사
@@ -43,7 +45,7 @@ class LoginPresenterTest {
 
   @Test
   fun testLogin() {
-    loginPresenter = createPresenter(SuccessLogin(mockUser))
+    loginPresenter = createPresenter(SuccessLogin())
 
     loginPresenter.login(fakeId, fakePassword)
 
@@ -63,18 +65,14 @@ class LoginPresenterTest {
     verify(mockView).hideLoading()
   }
 
-  class SuccessLogin(private val expectedUser: User) : Login(
-    mock(), Schedulers.trampoline(), Schedulers.trampoline()
-  ) {
+  inner class SuccessLogin : Login(mock(), trampoline, trampoline) {
 
     override fun buildObservable(params: Params): Observable<User> {
-      return Observable.just(expectedUser)
+      return Observable.just(mockUser)
     }
   }
 
-  class FailLogin : Login(
-    mock(), Schedulers.trampoline(), Schedulers.trampoline()
-  ) {
+  inner class FailLogin : Login(mock(), trampoline, trampoline) {
 
     override fun buildObservable(params: Params): Observable<User> {
       return Observable.error(RuntimeException())
