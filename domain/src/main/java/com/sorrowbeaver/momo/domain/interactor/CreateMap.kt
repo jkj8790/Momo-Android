@@ -6,6 +6,7 @@ import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
+open
 class CreateMap(
   private val mapRepository: MapRepository,
   executorScheduler: Scheduler,
