@@ -9,7 +9,6 @@ import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.UserModel
 import com.sorrowbeaver.momo.rule.TrampolineSchedulerRule
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,8 +33,6 @@ class LoginPresenterTest {
 
   private val fakeId = "id"
   private val fakePassword = "password"
-
-  private val trampoline = Schedulers.trampoline()
 
   @Before
   fun setUp() {
@@ -65,16 +62,16 @@ class LoginPresenterTest {
     verify(mockView).hideLoading()
   }
 
-  inner class SuccessLogin : Login(mock(), trampoline, trampoline) {
+  inner class SuccessLogin : Login(mock()) {
 
-    override fun buildObservable(params: Params): Observable<User> {
+    override fun execute(params: Params): Observable<User> {
       return Observable.just(mockUser)
     }
   }
 
-  inner class FailLogin : Login(mock(), trampoline, trampoline) {
+  inner class FailLogin : Login(mock()) {
 
-    override fun buildObservable(params: Params): Observable<User> {
+    override fun execute(params: Params): Observable<User> {
       return Observable.error(RuntimeException())
     }
   }

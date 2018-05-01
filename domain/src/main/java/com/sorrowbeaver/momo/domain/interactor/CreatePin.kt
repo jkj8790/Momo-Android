@@ -1,17 +1,15 @@
 package com.sorrowbeaver.momo.domain.interactor
 
 import com.sorrowbeaver.momo.domain.interactor.CreatePin.Params
+import com.sorrowbeaver.momo.domain.interactor.type.UseCase
 import com.sorrowbeaver.momo.domain.model.Pin
 import com.sorrowbeaver.momo.domain.model.Pin.PinType
 import com.sorrowbeaver.momo.domain.repository.PinRepository
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 
 class CreatePin(
-  val pinRepository: PinRepository,
-  executorScheduler: Scheduler,
-  postExecutionScheduler: Scheduler
-) : UseCase<Pin, Params>(executorScheduler, postExecutionScheduler) {
+  private val pinRepository: PinRepository
+) : UseCase<Pin, Params> {
 
   data class Params(
     val name: String,
@@ -21,7 +19,7 @@ class CreatePin(
     val mapId: Long
   )
 
-  override fun buildObservable(params: Params): Observable<Pin> {
+  override fun execute(params: Params): Observable<Pin> {
     return pinRepository.createPin(
       params.name, params.pinType,
       params.authorId, params.authorName, params.mapId

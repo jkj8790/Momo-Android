@@ -5,11 +5,10 @@ import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.domain.model.UserType
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import java.util.Date
 
 //TODO It seems better to implement fake user repository
-object FakeGetMe : GetMe(mock(), Schedulers.io(), Schedulers.io()) {
+object FakeGetMe : GetMe(mock()) {
 
   val me = User(
     1L, UserType.Normal, "dog", "dog@email.com",
@@ -17,7 +16,7 @@ object FakeGetMe : GetMe(mock(), Schedulers.io(), Schedulers.io()) {
     true, true, listOf(), listOf(), listOf()
   )
 
-  override fun buildObservable(params: Unit): Observable<User> {
+  override fun execute(params: Unit): Observable<User> {
     return Observable.just(me)
   }
 }

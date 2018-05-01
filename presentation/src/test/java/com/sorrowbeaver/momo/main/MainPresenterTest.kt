@@ -70,19 +70,16 @@ class MainPresenterTest {
     verify(mockView).hideLoading()
   }
 
-  class SuccessGetMe(private val expectedUser: User) : GetMe(
-    mock(),
-    Schedulers.trampoline(), Schedulers.trampoline()
-  ) {
+  class SuccessGetMe(private val expectedUser: User) : GetMe(mock()) {
 
-    override fun buildObservable(params: Unit): Observable<User> {
+    override fun execute(params: Unit): Observable<User> {
       return Observable.just(expectedUser)
     }
   }
 
-  class FailGetMe : GetMe(mock(), Schedulers.trampoline(), Schedulers.trampoline()) {
+  class FailGetMe : GetMe(mock()) {
 
-    override fun buildObservable(params: Unit): Observable<User> {
+    override fun execute(params: Unit): Observable<User> {
       return Observable.error(RuntimeException())
     }
   }

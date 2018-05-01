@@ -1,20 +1,18 @@
 package com.sorrowbeaver.momo.domain.interactor
 
 import com.sorrowbeaver.momo.domain.interactor.SearchMapAndUser.Params
+import com.sorrowbeaver.momo.domain.interactor.type.UseCase
 import com.sorrowbeaver.momo.domain.model.SearchResult
 import com.sorrowbeaver.momo.domain.repository.SearchRepository
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 
 class SearchMapAndUser(
-  private val searchRepository: SearchRepository,
-  executorScheduler: Scheduler,
-  postExecutionScheduler: Scheduler
-) : UseCase<SearchResult, Params>(executorScheduler, postExecutionScheduler) {
+  private val searchRepository: SearchRepository
+) : UseCase<SearchResult, Params> {
 
   data class Params(val keyword: String)
 
-  override fun buildObservable(params: Params): Observable<SearchResult> {
+  override fun execute(params: Params): Observable<SearchResult> {
     return searchRepository.searchMapAndUser(params.keyword)
   }
 }

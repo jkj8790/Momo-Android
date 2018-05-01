@@ -4,7 +4,6 @@ import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.CreatePost.Params
 import com.sorrowbeaver.momo.domain.repository.PostRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,12 +32,12 @@ class CreatePostTest {
         fakeDescription
       )
     ).thenReturn(Observable.empty())
-    createPost = CreatePost(postRepository, TestScheduler(), TestScheduler())
+    createPost = CreatePost(postRepository)
   }
 
   @Test
   fun testCreateMap() {
-    createPost.buildObservable(
+    createPost.execute(
       Params(
         fakePinId, fakePhotoUrl, fakeDescription
       )

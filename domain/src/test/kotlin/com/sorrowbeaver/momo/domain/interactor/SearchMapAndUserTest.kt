@@ -4,7 +4,6 @@ import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.SearchMapAndUser.Params
 import com.sorrowbeaver.momo.domain.repository.SearchRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,12 +24,12 @@ class SearchMapAndUserTest {
   @Before
   fun setUp() {
     `when`(searchRepository.searchMapAndUser(fakeKeyword)).thenReturn(Observable.empty())
-    searchMapAndUser = SearchMapAndUser(searchRepository, TestScheduler(), TestScheduler())
+    searchMapAndUser = SearchMapAndUser(searchRepository)
   }
 
   @Test
   fun testCreateMap() {
-    searchMapAndUser.buildObservable(Params(fakeKeyword))
+    searchMapAndUser.execute(Params(fakeKeyword))
 
     verify(searchRepository).searchMapAndUser(fakeKeyword)
   }

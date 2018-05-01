@@ -8,8 +8,6 @@ import com.sorrowbeaver.momo.domain.model.MomoMap
 import com.sorrowbeaver.momo.fake.FakeGetMe
 import com.sorrowbeaver.momo.rule.TrampolineSchedulerRule
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
-
 import org.junit.Rule
 import org.junit.Test
 import java.util.Date
@@ -51,10 +49,8 @@ class CreateMapPresenterTest {
 
   //TODO test unsubscribe
 
-  inner class SuccessCreateMap : CreateMap(
-    mock(), Schedulers.trampoline(), Schedulers.trampoline()
-  ) {
-    override fun buildObservable(params: Params): Observable<MomoMap> {
+  inner class SuccessCreateMap : CreateMap(mock()) {
+    override fun execute(params: Params): Observable<MomoMap> {
       return Observable.just(fakeMap)
     }
   }

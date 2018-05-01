@@ -5,7 +5,6 @@ import com.sorrowbeaver.momo.domain.interactor.CreatePin.Params
 import com.sorrowbeaver.momo.domain.model.Pin.PinType
 import com.sorrowbeaver.momo.domain.repository.PinRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,12 +36,12 @@ class CreatePinTest {
         testMapId
       )
     ).thenReturn(Observable.empty())
-    createPin = CreatePin(pinRepository, TestScheduler(), TestScheduler())
+    createPin = CreatePin(pinRepository)
   }
 
   @Test
   fun testCreatePin() {
-    createPin.buildObservable(
+    createPin.execute(
       Params(
         testPinName,
         testPinType,

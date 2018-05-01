@@ -4,7 +4,6 @@ import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.GetPinDetail.Params
 import com.sorrowbeaver.momo.domain.repository.PinRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,12 +24,12 @@ class GetPinDetailTest {
   @Before
   fun setUp() {
     `when`(pinRepository.detail(fakePinId)).thenReturn(Observable.empty())
-    getPinDetail = GetPinDetail(pinRepository, TestScheduler(), TestScheduler())
+    getPinDetail = GetPinDetail(pinRepository)
   }
 
   @Test
   fun testCreatePin() {
-    getPinDetail.buildObservable(Params(fakePinId))
+    getPinDetail.execute(Params(fakePinId))
 
     verify(pinRepository).detail(fakePinId)
   }

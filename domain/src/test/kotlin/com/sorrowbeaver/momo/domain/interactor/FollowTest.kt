@@ -4,7 +4,6 @@ import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.Follow.Params
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,12 +24,12 @@ class FollowTest {
   @Before
   fun setUp() {
     `when`(userRepository.follow(fakeUserId)).thenReturn(Observable.empty())
-    follow = Follow(userRepository, TestScheduler(), TestScheduler())
+    follow = Follow(userRepository)
   }
 
   @Test
   fun testSignUp() {
-    follow.buildObservable(Params(fakeUserId))
+    follow.execute(Params(fakeUserId))
 
     verify(userRepository).follow(fakeUserId)
   }

@@ -24,8 +24,8 @@ class LoginPresenter @Inject constructor(
 
   override fun login(id: String, password: String) {
     view.showLoading()
-    login.get(Login.Params(id, password))
-      .observeOn(Schedulers.computation())
+    login.execute(Login.Params(id, password))
+      .subscribeOn(Schedulers.io())
       .map(userModelDataMapper::transform)
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeBy(

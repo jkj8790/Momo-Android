@@ -25,8 +25,8 @@ class MainPresenter @Inject constructor(
 
   override fun loadMe() {
     view.showLoading()
-    getMe.get(Unit)
-      .observeOn(Schedulers.computation())
+    getMe.execute(Unit)
+      .subscribeOn(Schedulers.io())
       .map(userModelMapper::transform)
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeBy(

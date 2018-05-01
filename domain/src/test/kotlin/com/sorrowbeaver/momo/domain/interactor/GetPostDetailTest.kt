@@ -4,7 +4,6 @@ import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.GetPostDetail.Params
 import com.sorrowbeaver.momo.domain.repository.PostRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,12 +24,12 @@ class GetPostDetailTest {
   @Before
   fun setUp() {
     `when`(postRepository.detail(fakePostId)).thenReturn(Observable.empty())
-    getPostDetail = GetPostDetail(postRepository, TestScheduler(), TestScheduler())
+    getPostDetail = GetPostDetail(postRepository)
   }
 
   @Test
   fun testCreateMap() {
-    getPostDetail.buildObservable(Params(fakePostId))
+    getPostDetail.execute(Params(fakePostId))
 
     verify(postRepository).detail(fakePostId)
   }

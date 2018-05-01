@@ -4,7 +4,6 @@ import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.CreateMap.Params
 import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,12 +35,12 @@ class CreateMapTest {
         testAuthorName
       )
     ).thenReturn(Observable.empty())
-    createMap = CreateMap(mapRepository, TestScheduler(), TestScheduler())
+    createMap = CreateMap(mapRepository)
   }
 
   @Test
   fun testCreateMap() {
-    createMap.buildObservable(
+    createMap.execute(
       Params(
         testName,
         testDescription,

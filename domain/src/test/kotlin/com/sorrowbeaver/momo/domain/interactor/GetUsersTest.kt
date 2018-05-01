@@ -5,7 +5,6 @@ import com.sorrowbeaver.momo.domain.interactor.GetUsers.Params
 import com.sorrowbeaver.momo.domain.model.UserSortOption.FOLLOWER_DESCENDING
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,12 +25,12 @@ class GetUsersTest {
   @Before
   fun setUp() {
     `when`(userRepository.users(sortOption)).thenReturn(Observable.empty())
-    getUsers = GetUsers(userRepository, TestScheduler(), TestScheduler())
+    getUsers = GetUsers(userRepository)
   }
 
   @Test
   fun testSignUp() {
-    getUsers.buildObservable(Params(sortOption))
+    getUsers.execute(Params(sortOption))
 
     verify(userRepository).users(sortOption)
   }

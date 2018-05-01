@@ -3,7 +3,6 @@ package com.sorrowbeaver.momo.domain.interactor
 import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.repository.UserRepository
 import io.reactivex.Observable
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,12 +23,12 @@ class GetProfileTest {
   @Before
   fun setUp() {
     `when`(userRepository.detail(fakeUserId)).thenReturn(Observable.empty())
-    getProfile = GetProfile(userRepository, TestScheduler(), TestScheduler())
+    getProfile = GetProfile(userRepository)
   }
 
   @Test
   fun testSignUp() {
-    getProfile.buildObservable(GetProfile.Params(fakeUserId))
+    getProfile.execute(GetProfile.Params(fakeUserId))
 
     verify(userRepository).detail(fakeUserId)
   }
