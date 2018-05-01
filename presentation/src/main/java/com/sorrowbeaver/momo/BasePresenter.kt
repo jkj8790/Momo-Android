@@ -1,7 +1,6 @@
 package com.sorrowbeaver.momo
 
-interface BasePresenter<in T> {
+interface BasePresenter {
   fun subscribe()
   fun unsubscribe()
-  fun takeView(view: T)
 }

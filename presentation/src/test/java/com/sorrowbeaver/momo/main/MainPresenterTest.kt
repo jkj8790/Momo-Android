@@ -1,12 +1,10 @@
-package com.sorrowbeaver.momo.login
+package com.sorrowbeaver.momo.main
 
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.domain.model.User
-import com.sorrowbeaver.momo.main.MainContract
-import com.sorrowbeaver.momo.main.MainPresenter
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.UserModel
 import io.reactivex.Observable
@@ -90,5 +88,5 @@ class MainPresenterTest {
   }
 
   private fun createPresenter(getMe: GetMe) =
-    MainPresenter(getMe, mockMapper).apply { takeView(mockView) }
+    MainPresenter(mockView, getMe, mockMapper)
 }

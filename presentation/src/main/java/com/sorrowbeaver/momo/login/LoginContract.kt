@@ -12,7 +12,7 @@ interface LoginContract {
     fun onLoginError()
   }
 
-  interface Presenter : BasePresenter<View> {
+  interface Presenter : BasePresenter {
     fun login(id: String, password: String)
   }
 }

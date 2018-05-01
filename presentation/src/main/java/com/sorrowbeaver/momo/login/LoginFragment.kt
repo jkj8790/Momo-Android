@@ -23,7 +23,12 @@ class LoginFragment : Fragment(), LoginContract.View {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    (activity?.application as MomoApplication).component.inject(this)
+    (activity?.application as MomoApplication)
+      .component
+      .loginComponent()
+      .loginModule(LoginModule(this))
+      .build()
+      .inject(this)
   }
 
   override fun onCreateView(
@@ -35,7 +40,6 @@ class LoginFragment : Fragment(), LoginContract.View {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    presenter.takeView(this)
     btnLogin.setOnClickListener {
       presenter.login(editId.text.toString(), editPwd.text.toString())
     }

@@ -28,7 +28,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    (application as MomoApplication).component.inject(this)
+    (application as MomoApplication).component
+      .mainComponent()
+      .mainModule(MainModule(this))
+      .build()
+      .inject(this)
+
     setContentView(layout.activity_maps)
 
     // Set up the toolbar.
@@ -60,8 +65,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     }
 
     toolbar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
-
-    presenter.takeView(this)
   }
 
   override fun onResume() {

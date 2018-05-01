@@ -80,5 +80,5 @@ class LoginPresenterTest {
   }
 
   private fun createPresenter(login: Login) =
-    LoginPresenter(mockMapper, login).apply { takeView(mockView) }
+    LoginPresenter(mockView, mockMapper, login)
 }
