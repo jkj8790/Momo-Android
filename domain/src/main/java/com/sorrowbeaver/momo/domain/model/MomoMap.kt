@@ -14,4 +14,8 @@ data class MomoMap(
   enum class MapSortOption {
     RECENT, PIN_COUNT
   }
+
+  companion object {
+    val nameLengthRange = 2..20
+  }
 }

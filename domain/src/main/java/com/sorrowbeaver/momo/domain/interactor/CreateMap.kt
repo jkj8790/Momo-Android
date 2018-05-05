@@ -6,8 +6,7 @@ import com.sorrowbeaver.momo.domain.model.MomoMap
 import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
 
-open
-class CreateMap(
+open class CreateMap(
   private val mapRepository: MapRepository
 ) : UseCase<MomoMap, Params> {
 
@@ -19,7 +18,10 @@ class CreateMap(
   )
 
   override fun execute(params: Params): Observable<MomoMap> {
-    //TODO need buisnessLogic
+    if (params.name.length !in MomoMap.nameLengthRange) {
+      return Observable.error(IllegalArgumentException("Name length must at be least 2"))
+    }
+
     return mapRepository.createMap(
       params.name, params.description,
       params.isPrivate, params.authorId
