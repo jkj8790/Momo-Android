@@ -25,5 +25,4 @@ interface ApplicationComponent {
   fun loginComponent(): LoginComponent.Builder
 
   fun mainComponent(): MainComponent.Builder
-
 }
