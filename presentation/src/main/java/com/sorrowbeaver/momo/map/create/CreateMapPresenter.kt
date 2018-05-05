@@ -2,13 +2,13 @@ package com.sorrowbeaver.momo.map.create
 
 import com.sorrowbeaver.momo.domain.interactor.CreateMap
 import com.sorrowbeaver.momo.domain.interactor.GetMe
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.sorrowbeaver.momo.scheduler.SchedulerProvider
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class CreateMapPresenter @Inject constructor(
   private val view: CreateMapContract.View,
+  private val schedulerProvider: SchedulerProvider,
   private val createMap: CreateMap,
   private val getMe: GetMe
 ) : CreateMapContract.Presenter {
@@ -28,8 +28,8 @@ class CreateMapPresenter @Inject constructor(
     )
 
     createMap.execute(params)
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeOn(schedulerProvider.io())
+      .observeOn(schedulerProvider.ui())
       .subscribeBy(onNext = {
         view.showSuccessToast()
         view.close()

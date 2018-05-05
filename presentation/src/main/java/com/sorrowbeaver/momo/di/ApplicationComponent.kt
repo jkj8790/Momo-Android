@@ -5,9 +5,8 @@ import com.sorrowbeaver.momo.data.di.DataComponent
 import com.sorrowbeaver.momo.login.LoginComponent
 import com.sorrowbeaver.momo.main.MainComponent
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
+import com.sorrowbeaver.momo.scheduler.SchedulerProvider
 import dagger.Component
-import io.reactivex.Scheduler
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
@@ -21,11 +20,7 @@ interface ApplicationComponent {
 
   fun userModelDataMapper(): UserModelDataMapper
 
-  @Named("executor")
-  fun executorScheduler(): Scheduler
-
-  @Named("postExecution")
-  fun postExecutionScheduler(): Scheduler
+  fun schedulerProvider(): SchedulerProvider
 
   fun loginComponent(): LoginComponent.Builder
 

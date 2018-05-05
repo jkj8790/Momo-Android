@@ -6,16 +6,13 @@ import com.nhaarman.mockito_kotlin.verifyZeroInteractions
 import com.sorrowbeaver.momo.domain.interactor.CreateMap
 import com.sorrowbeaver.momo.domain.model.MomoMap
 import com.sorrowbeaver.momo.fake.FakeGetMe
-import com.sorrowbeaver.momo.rule.TrampolineSchedulerRule
+import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
 import io.reactivex.Observable
-import org.junit.Rule
 import org.junit.Test
 import java.util.Date
 
 class CreateMapPresenterTest {
 
-  @get:Rule
-  private val rule = TrampolineSchedulerRule()
   private val mockView = mock<CreateMapContract.View>()
 
   private val fakeName = "name"
@@ -56,5 +53,8 @@ class CreateMapPresenterTest {
   }
 
   private fun createPresenter(createMap: CreateMap) =
-    CreateMapPresenter(mockView, createMap, FakeGetMe)
+    CreateMapPresenter(
+      mockView, TrampolineSchedulerProvider,
+      createMap, FakeGetMe
+    )
 }

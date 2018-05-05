@@ -7,6 +7,7 @@ import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.UserModel
+import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
@@ -85,5 +86,5 @@ class MainPresenterTest {
   }
 
   private fun createPresenter(getMe: GetMe) =
-    MainPresenter(mockView, getMe, mockMapper)
+    MainPresenter(mockView, TrampolineSchedulerProvider, getMe, mockMapper)
 }

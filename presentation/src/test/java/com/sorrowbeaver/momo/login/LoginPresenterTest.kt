@@ -7,18 +7,14 @@ import com.sorrowbeaver.momo.domain.interactor.Login
 import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.UserModel
-import com.sorrowbeaver.momo.rule.TrampolineSchedulerRule
+import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
 import io.reactivex.Observable
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 
 class LoginPresenterTest {
-
-  @get:Rule
-  val rule = TrampolineSchedulerRule()
 
   private lateinit var loginPresenter: LoginPresenter
 
@@ -77,5 +73,5 @@ class LoginPresenterTest {
   }
 
   private fun createPresenter(login: Login) =
-    LoginPresenter(mockView, mockMapper, login)
+    LoginPresenter(mockView, TrampolineSchedulerProvider, mockMapper, login)
 }
