@@ -18,12 +18,11 @@ class DiskMapDataStore @Inject constructor(
     name: String,
     description: String,
     isPrivate: Boolean,
-    authorId: Long,
-    authorName: String
+    authorId: Long
   ): Observable<MomoMapEntity> {
     val id = db.insert(
       "map", SQLiteDatabase.CONFLICT_REPLACE,
-      createContentValues(name, description, isPrivate, authorId, authorName)
+      createContentValues(name, description, isPrivate, authorId)
     )
 
     return detail(id)
@@ -51,15 +50,13 @@ class DiskMapDataStore @Inject constructor(
     name: String,
     description: String,
     isPrivate: Boolean,
-    authorId: Long,
-    authorName: String
+    authorId: Long
   ): ContentValues {
     return ContentValues().apply {
       put("name", name)
       put("description", description)
       put("is_private", if (isPrivate) 1 else 0)
       put("author_id", authorId)
-      put("author_name", authorName)
       put("created_at", Date().time)
     }
   }

@@ -11,8 +11,7 @@ interface MapRepository {
     name: String,
     description: String,
     isPrivate: Boolean,
-    authorId: Long,
-    authorName: String
+    authorId: Long
   ): Observable<MomoMap>
 
   fun maps(mapSortOption: MapSortOption = RECENT): Observable<List<MomoMap>>

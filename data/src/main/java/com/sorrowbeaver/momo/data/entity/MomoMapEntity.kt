@@ -9,7 +9,6 @@ data class MomoMapEntity(
   val description: String,
   val is_private: Boolean,
   val authorId: Long,
-  val authorName: String,
   val createdDate: Date,
   val pinIds: List<Long>
 ) {
@@ -19,7 +18,6 @@ data class MomoMapEntity(
     cursor.getString(2),
     cursor.getInt(3) == 1,
     cursor.getLong(4),
-    cursor.getString(5),
     Date(cursor.getLong(6)),
     pinIds
   )

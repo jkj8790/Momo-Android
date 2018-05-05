@@ -22,7 +22,6 @@ class CreateMapTest {
   private val testDescription = "description"
   private val testIsPrivate = true
   private val testAuthorId = 1L
-  private val testAuthorName = "authorName"
 
   @Before
   fun setUp() {
@@ -31,8 +30,7 @@ class CreateMapTest {
         testName,
         testDescription,
         testIsPrivate,
-        testAuthorId,
-        testAuthorName
+        testAuthorId
       )
     ).thenReturn(Observable.empty())
     createMap = CreateMap(mapRepository)
@@ -45,8 +43,7 @@ class CreateMapTest {
         testName,
         testDescription,
         testIsPrivate,
-        testAuthorId,
-        testAuthorName
+        testAuthorId
       )
     )
 
@@ -54,8 +51,7 @@ class CreateMapTest {
       testName,
       testDescription,
       testIsPrivate,
-      testAuthorId,
-      testAuthorName
+      testAuthorId
     )
   }
 }

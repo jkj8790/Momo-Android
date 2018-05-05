@@ -16,10 +16,9 @@ class MapDataRepository @Inject constructor(
     name: String,
     description: String,
     isPrivate: Boolean,
-    authorId: Long,
-    authorName: String
+    authorId: Long
   ): Observable<MomoMap> {
-    return mapDataStore.createMap(name, description, isPrivate, authorId, authorName)
+    return mapDataStore.createMap(name, description, isPrivate, authorId)
       .map { mapEntityDataMapper.transform(it) }
   }
 

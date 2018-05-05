@@ -24,7 +24,7 @@ class CreateMapPresenter @Inject constructor(
     val me = getMe.execute(Unit).blockingFirst()
     val params = CreateMap.Params(
       name, description,
-      private, me.id, me.userName
+      private, me.id
     )
 
     createMap.execute(params)

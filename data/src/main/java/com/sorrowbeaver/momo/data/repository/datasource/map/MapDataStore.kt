@@ -13,7 +13,6 @@ interface MapDataStore {
     name: String,
     description: String,
     isPrivate: Boolean,
-    authorId: Long,
-    authorName: String
+    authorId: Long
   ): Observable<MomoMapEntity>
 }

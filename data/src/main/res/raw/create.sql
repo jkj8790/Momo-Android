@@ -27,7 +27,6 @@ CREATE TABLE map (
     description TEXT,
     is_private INTEGER,
     author_id INTEGER,
-    author_name TEXT,
     created_at INTEGER
 )
 

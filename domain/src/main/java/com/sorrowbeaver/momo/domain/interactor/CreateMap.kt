@@ -15,14 +15,14 @@ class CreateMap(
     val name: String,
     val description: String,
     val isPrivate: Boolean,
-    val authorId: Long,
-    val authorName: String
+    val authorId: Long
   )
 
   override fun execute(params: Params): Observable<MomoMap> {
+    //TODO need buisnessLogic
     return mapRepository.createMap(
-      params.name, params.description, params.isPrivate,
-      params.authorId, params.authorName
+      params.name, params.description,
+      params.isPrivate, params.authorId
     )
   }
 }
