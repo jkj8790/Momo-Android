@@ -48,6 +48,28 @@ class CreateMapPresenterTest {
     verify(mockView).close()
   }
 
+  //TODO test error
+
+  @Test
+  fun testShowNameErrorWhenNameChangedToInvalid() {
+    val invalidName = "A" // Because
+
+    defaultPrsenter.onNameChanged(invalidName)
+
+    verify(mockView).setNameLengthError(true)
+    verify(mockView).setDoneButtonEnabled(false)
+  }
+
+  @Test
+  fun testShowNameErrorWhenNameChangedToValid() {
+    val validName = "IamGoodName" // Because
+
+    defaultPrsenter.onNameChanged(validName)
+
+    verify(mockView).setNameLengthError(false)
+    verify(mockView).setDoneButtonEnabled(true)
+  }
+
   inner class SuccessCreateMap : CreateMap(mock()) {
     override fun execute(params: Params): Observable<MomoMap> {
       return Observable.just(fakeMap)
