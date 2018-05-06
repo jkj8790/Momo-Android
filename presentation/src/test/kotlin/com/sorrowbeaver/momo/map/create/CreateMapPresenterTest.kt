@@ -44,11 +44,24 @@ class CreateMapPresenterTest {
     defaultPrsenter.createMap(fakeName, fakeDescription, fakeIsPrivate)
 
     verify(mockView).showLoading()
+    verify(mockView).hideLoading()
     verify(mockView).showSuccessToast()
     verify(mockView).close()
   }
 
-  //TODO test error
+  @Test
+  fun testCreateMapFail() {
+    val presenter = CreateMapPresenter(
+      mockView, TrampolineSchedulerProvider,
+      FailCreateMap(), FakeGetMe
+    )
+
+    presenter.createMap(fakeName, fakeDescription, fakeIsPrivate)
+
+    verify(mockView).showLoading()
+    verify(mockView).hideLoading()
+    verify(mockView).showError()
+  }
 
   @Test
   fun testShowNameErrorWhenNameChangedToInvalid() {
@@ -73,6 +86,12 @@ class CreateMapPresenterTest {
   inner class SuccessCreateMap : CreateMap(mock()) {
     override fun execute(params: Params): Observable<MomoMap> {
       return Observable.just(fakeMap)
+    }
+  }
+
+  inner class FailCreateMap : CreateMap(mock()) {
+    override fun execute(params: Params): Observable<MomoMap> {
+      return Observable.error(RuntimeException("Error!"))
     }
   }
 

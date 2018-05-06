@@ -32,10 +32,13 @@ class CreateMapPresenter @Inject constructor(
       .subscribeOn(schedulerProvider.io())
       .observeOn(schedulerProvider.ui())
       .subscribeBy(onNext = {
+        view.hideLoading()
         view.showSuccessToast()
         view.close()
       }, onError = {
         it.printStackTrace()
+        view.hideLoading()
+        view.showError()
       })
   }
 
