@@ -23,7 +23,7 @@ class PinDataRepository @Inject constructor(
       .map { pinEntityDataMapper.transform(it) }
   }
 
-  override fun pins(): Observable<List<Pin>> {
+  override fun getAllPins(): Observable<List<Pin>> {
     return pinDataStore.pins()
       .map { pinEntityDataMapper.transform(it) }
   }
@@ -31,5 +31,9 @@ class PinDataRepository @Inject constructor(
   override fun detail(id: Long): Observable<Pin> {
     return pinDataStore.detail(id)
       .map { pinEntityDataMapper.transform(it) }
+  }
+
+  override fun getPinsByMapId(mapId: Long): Observable<List<Pin>> {
+    TODO("not implemented")
   }
 }

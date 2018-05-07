@@ -11,7 +11,6 @@ class MapDataRepository @Inject constructor(
   private val mapDataStore: MapDataStore,
   private val mapEntityDataMapper: MomoMapEntityDataMapper
 ) : MapRepository {
-
   override fun createMap(
     name: String,
     description: String,
@@ -22,7 +21,7 @@ class MapDataRepository @Inject constructor(
       .map { mapEntityDataMapper.transform(it) }
   }
 
-  override fun maps(mapSortOption: MapSortOption): Observable<List<MomoMap>> {
+  override fun getAllMaps(mapSortOption: MapSortOption): Observable<List<MomoMap>> {
     return mapDataStore.maps()
       .map { mapEntityDataMapper.transform(it)!! }
     //TODO find better solution
@@ -32,4 +31,9 @@ class MapDataRepository @Inject constructor(
     return mapDataStore.detail(id)
       .map { mapEntityDataMapper.transform(it) }
   }
+
+  override fun getMapsByUserId(userId: Long): Observable<List<MomoMap>> {
+    TODO("not implemented")
+  }
+
 }

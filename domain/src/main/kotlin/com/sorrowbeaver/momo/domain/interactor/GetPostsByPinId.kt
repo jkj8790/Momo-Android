@@ -5,11 +5,13 @@ import com.sorrowbeaver.momo.domain.model.Post
 import com.sorrowbeaver.momo.domain.repository.PostRepository
 import io.reactivex.Observable
 
-class GetPosts(
+class GetPostsByPinId(
   private val postRepository: PostRepository
-) : UseCase<List<Post>, Unit> {
+) : UseCase<List<Post>, GetPostsByPinId.Params> {
 
-  override fun execute(params: Unit): Observable<List<Post>> {
-    return postRepository.posts()
+  data class Params(val pinId: Long)
+
+  override fun execute(params: Params): Observable<List<Post>> {
+    return postRepository.getPostsByPinId(params.pinId)
   }
 }

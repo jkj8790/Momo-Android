@@ -14,7 +14,9 @@ interface PinRepository {
     mapId: Long
   ): Observable<Pin>
 
-  fun pins(): Observable<List<Pin>>
+  fun getAllPins(): Observable<List<Pin>>
+
+  fun getPinsByMapId(mapId: Long): Observable<List<Pin>>
 
   fun detail(id: Long): Observable<Pin>
 }

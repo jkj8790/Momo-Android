@@ -11,7 +11,7 @@ class PostDataRepository @Inject constructor(
   private val postEntityDataMapper: PostEntityDataMapper
 ) : PostRepository {
 
-  override fun posts(): Observable<List<Post>> {
+  override fun getAllPosts(): Observable<List<Post>> {
     return postDataStore.posts()
       .map { postEntityDataMapper.transform(it) }
   }
@@ -24,5 +24,13 @@ class PostDataRepository @Inject constructor(
   override fun detail(id: Long): Observable<Post> {
     return postDataStore.detail(id)
       .map { postEntityDataMapper.transform(it) }
+  }
+
+  override fun getPostsByPinId(pinId: Long): Observable<List<Post>> {
+    TODO("not implemented")
+  }
+
+  override fun getPostsByMapId(mapId: Long): Observable<List<Post>> {
+    TODO("not implemented")
   }
 }

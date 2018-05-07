@@ -14,7 +14,9 @@ interface MapRepository {
     authorId: Long
   ): Observable<MomoMap>
 
-  fun maps(mapSortOption: MapSortOption = RECENT): Observable<List<MomoMap>>
+  fun getAllMaps(mapSortOption: MapSortOption = RECENT): Observable<List<MomoMap>>
+
+  fun getMapsByUserId(userId: Long): Observable<List<MomoMap>>
 
   fun detail(id: Long): Observable<MomoMap>
 }

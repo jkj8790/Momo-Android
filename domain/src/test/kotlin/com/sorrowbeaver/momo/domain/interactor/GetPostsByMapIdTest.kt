@@ -11,23 +11,24 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetPostsTest {
+class GetPostsByMapIdTest {
 
   @Mock
   private
   lateinit var postRepository: PostRepository
-  private lateinit var getPosts: GetPosts
+  private lateinit var getPostsByMapId: GetPostsByMapId
+  private val fakeMapId = 0L
 
   @Before
   fun setUp() {
-    `when`(postRepository.posts()).thenReturn(Observable.empty())
-    getPosts = GetPosts(postRepository)
+    `when`(postRepository.getPostsByMapId(fakeMapId)).thenReturn(Observable.empty())
+    getPostsByMapId = GetPostsByMapId(postRepository)
   }
 
   @Test
   fun testCreateMap() {
-    getPosts.execute(Unit)
+    getPostsByMapId.execute(GetPostsByMapId.Params(fakeMapId))
 
-    verify(postRepository).posts()
+    verify(postRepository).getPostsByMapId(fakeMapId)
   }
 }

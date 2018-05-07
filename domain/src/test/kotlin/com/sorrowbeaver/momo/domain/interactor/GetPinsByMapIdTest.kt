@@ -11,23 +11,24 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetPinsTest {
+class GetPinsByMapIdTest {
 
   @Mock
   private
   lateinit var pinRepository: PinRepository
-  private lateinit var getPins: GetPins
+  private lateinit var getPinsByMapId: GetPinsByMapId
+  private val fakeMapID = 0L
 
   @Before
   fun setUp() {
-    `when`(pinRepository.pins()).thenReturn(Observable.empty())
-    getPins = GetPins(pinRepository)
+    `when`(pinRepository.getPinsByMapId(fakeMapID)).thenReturn(Observable.empty())
+    getPinsByMapId = GetPinsByMapId(pinRepository)
   }
 
   @Test
   fun testCreatePin() {
-    getPins.execute(Unit)
+    getPinsByMapId.execute(GetPinsByMapId.Params(fakeMapID))
 
-    verify(pinRepository).pins()
+    verify(pinRepository).getPinsByMapId(fakeMapID)
   }
 }

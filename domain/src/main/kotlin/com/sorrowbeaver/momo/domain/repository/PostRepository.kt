@@ -5,7 +5,11 @@ import io.reactivex.Observable
 
 interface PostRepository {
 
-  fun posts(): Observable<List<Post>>
+  fun getAllPosts(): Observable<List<Post>>
+
+  fun getPostsByPinId(pinId: Long): Observable<List<Post>>
+
+  fun getPostsByMapId(mapId: Long): Observable<List<Post>>
 
   fun createPost(pinId: Long, photoUrl: String?, description: String?): Observable<Post>
 
