@@ -1,5 +1,6 @@
 package com.sorrowbeaver.momo.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -15,6 +16,7 @@ import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
 import com.sorrowbeaver.momo.map.MapFragment
+import com.sorrowbeaver.momo.map.create.CreateMapActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.nav_header.*
@@ -65,6 +67,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     }
 
     toolbar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
+
+    fab_add_task.setOnClickListener {
+      startActivity(Intent(this, CreateMapActivity::class.java))
+    }
   }
 
   override fun onResume() {

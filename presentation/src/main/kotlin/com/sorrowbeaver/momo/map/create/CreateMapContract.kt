@@ -12,9 +12,11 @@ interface CreateMapContract {
 
   interface View : BaseView<Presenter> {
     fun showLoading()
+    fun hideLoading()
     fun showSuccessToast()
     fun close()
     fun setNameLengthError(error: Boolean)
     fun setDoneButtonEnabled(enabled: Boolean)
+    fun showError()
   }
 }

@@ -5,8 +5,9 @@ import com.sorrowbeaver.momo.domain.interactor.type.UseCase
 import com.sorrowbeaver.momo.domain.model.MomoMap
 import com.sorrowbeaver.momo.domain.repository.MapRepository
 import io.reactivex.Observable
+import javax.inject.Inject
 
-open class CreateMap(
+open class CreateMap @Inject constructor(
   private val mapRepository: MapRepository
 ) : UseCase<MomoMap, Params> {
 
