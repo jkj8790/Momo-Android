@@ -18,7 +18,7 @@ data class MomoMapEntity(
     cursor.getString(2),
     cursor.getInt(3) == 1,
     cursor.getLong(4),
-    Date(cursor.getLong(6)),
+    Date(cursor.getLong(5)),
     pinIds
   )
 }
