@@ -14,9 +14,9 @@ class DbCallback(
 
   override fun onCreate(db: SupportSQLiteDatabase) {
     application.resources.openRawResource(R.raw.create).bufferedReader().use {
-      it.readText()
+      it.readText().split("\n\n")
     }.let {
-      db.execSQL(it)
+      it.forEach { db.execSQL(it) }
     }
   }
 
