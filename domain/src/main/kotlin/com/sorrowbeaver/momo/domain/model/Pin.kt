@@ -9,7 +9,7 @@ data class Pin(
   val createAt: Date,
   val authorId: Long,
   val authorName: String,
-  val momoMapId: Long,
+  val mapIds: List<Long>,
   val postIds: List<Long>
 ) {
   enum class PinType {

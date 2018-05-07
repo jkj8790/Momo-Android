@@ -1,7 +1,7 @@
 package com.sorrowbeaver.momo.data.repository.datasource.pin
 
+import android.arch.persistence.db.SimpleSQLiteQuery
 import android.content.ContentValues
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.sorrowbeaver.momo.data.entity.PinEntity
 import com.squareup.sqlbrite3.BriteDatabase
@@ -15,8 +15,7 @@ class DiskPinDataStore @Inject constructor(
 ) : PinDataStore {
 
   override fun pins(): Observable<List<PinEntity>> {
-    return db.createQuery("pin", "SELECT * FROM pin")
-      .mapToList { PinEntity(it, emptyList()) }
+    TODO("not implemented yet")
   }
 
   override fun createPin(
@@ -35,15 +34,26 @@ class DiskPinDataStore @Inject constructor(
   }
 
   override fun detail(id: Long): Observable<PinEntity> {
-    val posts = db.createQuery(
-      "pin_posts", "SELECT post_id FROM pin_posts where pin_id = $id"
-    )
-      .mapToList { it.getLong(it.getColumnIndex("post_id")) }
+    val postIdQuery = db.createQuery(
+      "pin_posts",
+      SimpleSQLiteQuery(
+        "SELECT post_id FROM pin_posts where pin_id = ?",
+        arrayOf(id)
+      )
+    ).mapToList { it.getLong(it.getColumnIndex("post_id")) }
 
-    return db.createQuery("pin", "SELECT * FROM pin WHERE id = $id")
-      .mapToOne { it }
-      .zipWith(posts) { cursor: Cursor, postIds: List<Long> ->
-        PinEntity(cursor, postIds)
+    val mapIdQuery = db.createQuery(
+      "map_pins",
+      SimpleSQLiteQuery(
+        "SELECT map_id FROM map_pins where pin_id = ?",
+        arrayOf(id)
+      )
+    ).mapToList { it.getLong(it.getColumnIndex("map_id")) }
+
+    return postIdQuery.zipWith(mapIdQuery) { postIds, mapIds -> postIds to mapIds }
+      .flatMap { pair ->
+        db.createQuery("pin", "SELECT * FROM pin WHERE id = $id")
+          .mapToOne { PinEntity(it, pair.first, pair.second) }
       }
   }
 

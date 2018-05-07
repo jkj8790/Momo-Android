@@ -23,7 +23,7 @@ class PinEntityDataMapper @Inject constructor() {
 
     return Pin(
       pinEntity.id, pinEntity.name, type, pinEntity.createdAt,
-      pinEntity.authorId, pinEntity.authorName, pinEntity.map,
+      pinEntity.authorId, pinEntity.authorName, pinEntity.mapIds,
       pinEntity.postIds
     )
   }
