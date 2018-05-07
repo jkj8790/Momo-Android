@@ -1,12 +1,11 @@
 package com.sorrowbeaver.momo.data.repository.datasource.map
 
+import android.arch.persistence.db.SimpleSQLiteQuery
 import android.content.ContentValues
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.sorrowbeaver.momo.data.entity.MomoMapEntity
 import com.squareup.sqlbrite3.BriteDatabase
 import io.reactivex.Observable
-import io.reactivex.rxkotlin.zipWith
 import java.util.Date
 import javax.inject.Inject
 
@@ -35,15 +34,21 @@ class DiskMapDataStore @Inject constructor(
 
   override fun detail(id: Long): Observable<MomoMapEntity> {
     val pinIdQuery = db.createQuery(
-      "map_pins", "SELECT pin_id FROM map_pins where pin_id = $id"
-    )
-      .mapToList { it.getLong(it.getColumnIndex("pin_id")) }
+      "map_pins",
+      SimpleSQLiteQuery(
+        "SELECT pin_id FROM map_pins where map_id = ?",
+        arrayOf(id)
+      )
+    ).mapToList { it.getLong(it.getColumnIndex("pin_id")) }
 
-    return db.createQuery("map", "SELECT * FROM map WHERE id = $id")
-      .mapToOne { it }
-      .zipWith(pinIdQuery) { cursor: Cursor, pinIds: List<Long> ->
-        MomoMapEntity(cursor, pinIds)
-      }
+    val query = SimpleSQLiteQuery(
+      "SELECT * FROM map where id = ?",
+      arrayOf(id)
+    )
+
+    return pinIdQuery.flatMap { pinIds ->
+      db.createQuery("map", query).mapToOne { MomoMapEntity(it, pinIds) }
+    }
   }
 
   private fun createContentValues(
