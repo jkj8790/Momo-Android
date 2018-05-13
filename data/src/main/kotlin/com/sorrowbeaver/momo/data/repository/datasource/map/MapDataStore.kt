@@ -5,7 +5,9 @@ import io.reactivex.Observable
 
 interface MapDataStore {
 
-  fun maps(): Observable<List<MomoMapEntity>>
+  fun getAllMaps(): Observable<List<MomoMapEntity>>
+
+  fun getMapsByUserId(userId: Long): Observable<List<MomoMapEntity>>
 
   fun detail(id: Long): Observable<MomoMapEntity>
 

@@ -22,9 +22,8 @@ class MapDataRepository @Inject constructor(
   }
 
   override fun getAllMaps(mapSortOption: MapSortOption): Observable<List<MomoMap>> {
-    return mapDataStore.maps()
+    return mapDataStore.getAllMaps()
       .map { mapEntityDataMapper.transform(it)!! }
-    //TODO find better solution
   }
 
   override fun detail(id: Long): Observable<MomoMap> {
@@ -33,7 +32,8 @@ class MapDataRepository @Inject constructor(
   }
 
   override fun getMapsByUserId(userId: Long): Observable<List<MomoMap>> {
-    TODO("not implemented")
+    return mapDataStore.getMapsByUserId(userId)
+      .map { mapEntityDataMapper.transform(it)!! }
   }
 
 }

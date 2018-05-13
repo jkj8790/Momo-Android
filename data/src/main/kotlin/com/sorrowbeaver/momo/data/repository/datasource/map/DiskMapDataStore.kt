@@ -27,9 +27,33 @@ class DiskMapDataStore @Inject constructor(
     return detail(id)
   }
 
-  override fun maps(): Observable<List<MomoMapEntity>> {
+  override fun getAllMaps(): Observable<List<MomoMapEntity>> {
     return db.createQuery("map", "SELECT * FROM map")
       .mapToList { MomoMapEntity(it, emptyList()) }
+  }
+
+  override fun getMapsByUserId(userId: Long): Observable<List<MomoMapEntity>> {
+    return Observable.fromCallable {
+      val mapCursor = db.query(
+        "SELECT * FROM map WHERE user_id = ? and is_private = 0",
+        userId
+      )
+      generateSequence { if (mapCursor.moveToNext()) mapCursor else null }
+        .map {
+
+          val mapId = mapCursor.getLong(mapCursor.getColumnIndex("id"))
+          val pinIdQuery = db.createQuery(
+            "map_pins",
+            SimpleSQLiteQuery(
+              "SELECT pin_id FROM map_pins where map_id = ?",
+              arrayOf(mapId)
+            )
+          ).mapToList { it.getLong(it.getColumnIndex("pin_id")) }
+
+          MomoMapEntity(mapCursor, pinIdQuery.blockingFirst())
+        }
+        .toList()
+    }
   }
 
   override fun detail(id: Long): Observable<MomoMapEntity> {
