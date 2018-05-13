@@ -63,4 +63,14 @@ class DiskPinDataStore @Inject constructor(
       put("map", momoMapId)
     }
   }
+
+  override fun getPinsByMapId(mapId: Long): Observable<List<PinEntity>> {
+    return db.createQuery(
+      "pin",
+      "SELECT * FROM pin WHERE map_id = ?",
+      mapId
+    )
+      .mapToList { PinEntity(it, emptyList()) }
+  }
+
 }

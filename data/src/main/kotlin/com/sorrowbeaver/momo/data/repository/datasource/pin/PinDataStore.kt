@@ -16,4 +16,6 @@ interface PinDataStore {
   fun pins(): Observable<List<PinEntity>>
 
   fun detail(id: Long): Observable<PinEntity>
+
+  fun getPinsByMapId(mapId: Long): Observable<List<PinEntity>>
 }
