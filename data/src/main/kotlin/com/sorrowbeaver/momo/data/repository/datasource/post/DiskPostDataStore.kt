@@ -1,5 +1,6 @@
 package com.sorrowbeaver.momo.data.repository.datasource.post
 
+import android.arch.persistence.db.SimpleSQLiteQuery
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import com.sorrowbeaver.momo.data.entity.PostEntity
@@ -35,6 +36,27 @@ class DiskPostDataStore(
   override fun detail(id: Long): Observable<PostEntity> {
     return db.createQuery("posts", "SELECT * FROM posts WHERE id = $id")
       .mapToOne { PostEntity(it) }
+  }
+
+  override fun getPostsByPinId(pinId: Long): Observable<List<PostEntity>> {
+    return db.createQuery("posts", "SELECT * FROM posts WHERE pin_id = $pinId")
+      .mapToList { PostEntity(it) }
+  }
+
+  override fun getPostsByMapId(mapId: Long): Observable<List<PostEntity>> {
+    val pinIds = db.createQuery(
+      "map_pins",
+      SimpleSQLiteQuery(
+        "SELECT pin_id FROM map_pins where map_id = ?",
+        arrayOf(mapId)
+      )
+    ).mapToList { it.getLong(it.getColumnIndex("pin_id")) }
+      .blockingFirst()
+    return db.createQuery(
+      "posts", "SELECT * FROM posts WHERE pin_id = ?",
+      pinIds.joinToString(prefix = "IN(", postfix = ")")
+    )
+      .mapToList { PostEntity(it) }
   }
 
   private fun createContentValues(

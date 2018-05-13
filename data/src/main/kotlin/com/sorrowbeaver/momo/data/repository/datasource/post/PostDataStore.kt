@@ -7,6 +7,10 @@ interface PostDataStore {
 
   fun posts(): Observable<List<PostEntity>>
 
+  fun getPostsByPinId(pinId: Long): Observable<List<PostEntity>>
+
+  fun getPostsByMapId(mapId: Long): Observable<List<PostEntity>>
+
   fun createPost(pinId: Long, photoUrl: String?, description: String?): Observable<PostEntity>
 
   fun detail(id: Long): Observable<PostEntity>
