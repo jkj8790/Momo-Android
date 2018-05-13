@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase
 import com.sorrowbeaver.momo.data.entity.PinEntity
 import com.squareup.sqlbrite3.BriteDatabase
 import io.reactivex.Observable
-import io.reactivex.rxkotlin.zipWith
 import java.util.Date
 import javax.inject.Inject
 
@@ -42,19 +41,10 @@ class DiskPinDataStore @Inject constructor(
       )
     ).mapToList { it.getLong(it.getColumnIndex("post_id")) }
 
-    val mapIdQuery = db.createQuery(
-      "map_pins",
-      SimpleSQLiteQuery(
-        "SELECT map_id FROM map_pins where pin_id = ?",
-        arrayOf(id)
-      )
-    ).mapToList { it.getLong(it.getColumnIndex("map_id")) }
-
-    return postIdQuery.zipWith(mapIdQuery) { postIds, mapIds -> postIds to mapIds }
-      .flatMap { pair ->
-        db.createQuery("pin", "SELECT * FROM pin WHERE id = $id")
-          .mapToOne { PinEntity(it, pair.first, pair.second) }
-      }
+    return postIdQuery.flatMap { postIds ->
+      db.createQuery("pin", "SELECT * FROM pin WHERE id = $id")
+        .mapToOne { PinEntity(it, postIds) }
+    }
   }
 
   private fun createContentValues(

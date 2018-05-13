@@ -13,7 +13,7 @@ CREATE TABLE pin (
     created_at INTEGER,
     author_id INTEGER,
     author_name TEXT,
-    map INTEGER
+    map_id INTEGER
 )
 
 CREATE TABLE pin_posts (
@@ -28,9 +28,4 @@ CREATE TABLE map (
     is_private INTEGER,
     author_id INTEGER,
     created_at INTEGER
-)
-
-CREATE TABLE map_pins (
-    map_id INTEGER,
-    pin_id INTEGER
 )
