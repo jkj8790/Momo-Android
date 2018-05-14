@@ -29,3 +29,8 @@ CREATE TABLE map (
     author_id INTEGER,
     created_at INTEGER
 )
+
+CREATE TABLE map_pins (
+    map_id INTEGER,
+    pin_id INTEGER
+)

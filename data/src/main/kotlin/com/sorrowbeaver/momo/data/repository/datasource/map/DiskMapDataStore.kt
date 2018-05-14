@@ -35,7 +35,7 @@ class DiskMapDataStore @Inject constructor(
   override fun getMapsByUserId(userId: Long): Observable<List<MomoMapEntity>> {
     return Observable.fromCallable {
       val mapCursor = db.query(
-        "SELECT * FROM map WHERE user_id = ? and is_private = 0",
+        "SELECT * FROM map WHERE author_id = ? and is_private = 0",
         userId
       )
       generateSequence { if (mapCursor.moveToNext()) mapCursor else null }
