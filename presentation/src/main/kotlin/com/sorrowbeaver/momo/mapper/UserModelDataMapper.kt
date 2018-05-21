@@ -4,6 +4,9 @@ import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.model.UserModel
 
 class UserModelDataMapper {
-
-  fun transform(user: User) = UserModel(user.userName, user.profileUrl)
+  fun transform(user: User) = UserModel(
+    user.id,
+    user.userName,
+    user.profileUrl
+  )
 }

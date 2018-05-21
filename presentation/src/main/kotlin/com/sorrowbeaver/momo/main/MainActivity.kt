@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.ContextThemeWrapper
+import android.view.Menu
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -12,11 +16,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sorrowbeaver.momo.MomoApplication
+import com.sorrowbeaver.momo.R
 import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
 import com.sorrowbeaver.momo.map.MapFragment
 import com.sorrowbeaver.momo.map.create.CreateMapActivity
+import com.sorrowbeaver.momo.model.MomoMapModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.nav_header.*
@@ -27,6 +33,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
   private var mMap: GoogleMap? = null
   @Inject
   lateinit var presenter: MainPresenter
+
+  private lateinit var arrayAdapter: ArrayAdapter<String>
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -71,6 +79,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     fab_add_task.setOnClickListener {
       startActivity(Intent(this, CreateMapActivity::class.java))
     }
+
+    arrayAdapter = ArrayAdapter<String>(
+      ContextThemeWrapper(this, R.style.Base_ThemeOverlay_AppCompat_Dark),
+      android.R.layout.simple_spinner_item,
+      mutableListOf()
+    )
+
+    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
   }
 
   override fun onResume() {
@@ -110,6 +126,26 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
       drawerLayout.closeDrawers()
       true
     }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.main, menu)
+
+    if (menu != null) {
+      val item = menu.findItem(R.id.spinner)
+      val spinner = item.actionView as Spinner
+      spinner.adapter = arrayAdapter
+    }
+
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun showMaps(maps: List<MomoMapModel>) {
+    arrayAdapter.apply {
+      clear()
+      addAll(maps.map { it.name })
+    }
+    invalidateOptionsMenu()
   }
 
   override fun showLoading() {

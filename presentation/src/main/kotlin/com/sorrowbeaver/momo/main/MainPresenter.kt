@@ -1,6 +1,8 @@
 package com.sorrowbeaver.momo.main
 
+import com.sorrowbeaver.momo.domain.interactor.GetMapsByUserId
 import com.sorrowbeaver.momo.domain.interactor.GetMe
+import com.sorrowbeaver.momo.mapper.MomoMapModelDataMapper
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.scheduler.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
@@ -11,7 +13,9 @@ class MainPresenter @Inject constructor(
   private val view: MainContract.View,
   private val schedulerProvider: SchedulerProvider,
   private val getMe: GetMe,
-  private val userModelMapper: UserModelDataMapper
+  private val getMapsByUserId: GetMapsByUserId,
+  private val userModelMapper: UserModelDataMapper,
+  private val mapModelMapper: MomoMapModelDataMapper
 ) : MainContract.Presenter {
   private val disposables = CompositeDisposable()
 
@@ -28,13 +32,21 @@ class MainPresenter @Inject constructor(
     getMe.execute(Unit)
       .subscribeOn(schedulerProvider.io())
       .map(userModelMapper::transform)
+      .flatMap { userModel ->
+        getMapsByUserId.execute(GetMapsByUserId.Params(userModel.id))
+          .map(mapModelMapper::transform)
+          .map { userModel to it }
+      }
       .observeOn(schedulerProvider.ui())
       .subscribeBy(
-        onNext = { userModel ->
+        onNext = { pair ->
+          val userModel = pair.first
+          val mapModels = pair.second
           userModel.profileUrl?.let {
             view.showProfileImage(it)
           }
           view.showUserName(userModel.userName)
+          view.showMaps(mapModels)
         },
         onError = {
           it.printStackTrace()

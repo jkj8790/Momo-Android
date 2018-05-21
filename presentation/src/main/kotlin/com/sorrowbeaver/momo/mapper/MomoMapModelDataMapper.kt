@@ -12,4 +12,8 @@ class MomoMapModelDataMapper {
       momoMap.createdDate
     )
   }
+
+  fun transform(maps: List<MomoMap>): List<MomoMapModel> {
+    return maps.map { transform(it) }
+  }
 }
