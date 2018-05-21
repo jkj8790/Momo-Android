@@ -1,5 +1,6 @@
 package com.sorrowbeaver.momo.data.di
 
+import com.sorrowbeaver.momo.domain.repository.LocationRepository
 import com.sorrowbeaver.momo.domain.repository.MapRepository
 import com.sorrowbeaver.momo.domain.repository.PinRepository
 import com.sorrowbeaver.momo.domain.repository.PostRepository
@@ -14,4 +15,5 @@ interface DataComponent {
   fun postRepository(): PostRepository
   fun searchRepository(): SearchRepository
   fun userRepository(): UserRepository
+  fun locationRepository(): LocationRepository
 }

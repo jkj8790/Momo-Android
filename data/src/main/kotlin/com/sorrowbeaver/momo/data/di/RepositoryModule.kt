@@ -1,11 +1,13 @@
 package com.sorrowbeaver.momo.data.di
 
 import com.sorrowbeaver.momo.data.entity.mapper.UserEntityDataMapper
+import com.sorrowbeaver.momo.data.repository.datasource.map.LocationDataRepository
 import com.sorrowbeaver.momo.data.repository.datasource.map.MapDataRepository
 import com.sorrowbeaver.momo.data.repository.datasource.pin.PinDataRepository
 import com.sorrowbeaver.momo.data.repository.datasource.post.PostDataRepository
 import com.sorrowbeaver.momo.data.repository.datasource.search.SearchDataRepository
 import com.sorrowbeaver.momo.data.repository.datasource.user.UserDataRepository
+import com.sorrowbeaver.momo.domain.repository.LocationRepository
 import com.sorrowbeaver.momo.domain.repository.MapRepository
 import com.sorrowbeaver.momo.domain.repository.PinRepository
 import com.sorrowbeaver.momo.domain.repository.PostRepository
@@ -39,5 +41,8 @@ class RepositoryModule {
 
     @Binds
     fun userRepository(impl: UserDataRepository): UserRepository
+
+    @Binds
+    fun locationRepository(impl: LocationDataRepository): LocationRepository
   }
 }

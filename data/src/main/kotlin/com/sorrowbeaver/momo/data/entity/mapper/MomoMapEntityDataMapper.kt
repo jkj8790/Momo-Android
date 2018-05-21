@@ -5,7 +5,8 @@ import com.sorrowbeaver.momo.domain.model.MomoMap
 import java.util.Date
 import javax.inject.Inject
 
-class MomoMapEntityDataMapper @Inject constructor() {
+class
+MomoMapEntityDataMapper @Inject constructor() {
 
   fun transform(momoMapEntity: MomoMapEntity): MomoMap {
     return MomoMap(

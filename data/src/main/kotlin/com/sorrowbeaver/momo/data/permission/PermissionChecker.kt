@@ -10,7 +10,7 @@ class PermissionChecker @Inject constructor(
   private val context: Context
 ) {
 
-  private fun hasLocationPermission(): Boolean {
+  fun hasLocationPermission(): Boolean {
     val finePermission = ContextCompat.checkSelfPermission(
       context, android.Manifest.permission.ACCESS_FINE_LOCATION
     )

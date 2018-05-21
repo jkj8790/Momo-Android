@@ -3,9 +3,14 @@ package com.sorrowbeaver.momo.data.di
 import android.app.Application
 import android.arch.persistence.db.SupportSQLiteOpenHelper.Configuration
 import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory
+import android.content.Context
+import android.location.LocationManager
 import android.util.Log
 import com.sorrowbeaver.momo.data.db.DbCallback
+import com.sorrowbeaver.momo.data.permission.PermissionChecker
+import com.sorrowbeaver.momo.data.repository.datasource.map.DeviceLocationDataStore
 import com.sorrowbeaver.momo.data.repository.datasource.map.DiskMapDataStore
+import com.sorrowbeaver.momo.data.repository.datasource.map.LocationDataStore
 import com.sorrowbeaver.momo.data.repository.datasource.map.MapDataStore
 import com.sorrowbeaver.momo.data.repository.datasource.pin.DiskPinDataStore
 import com.sorrowbeaver.momo.data.repository.datasource.pin.PinDataStore
@@ -49,6 +54,15 @@ class DatabaseModule(private val application: Application) {
   }
 
   @Provides
+  fun permissionChecker() = PermissionChecker(application)
+
+  @Provides
+  fun locationManager(): LocationManager {
+    return application.getSystemService(Context.LOCATION_SERVICE)
+      as LocationManager
+  }
+
+  @Provides
   fun pinDataStore(db: BriteDatabase): PinDataStore = DiskPinDataStore(db)
 
   @Provides
@@ -62,4 +76,12 @@ class DatabaseModule(private val application: Application) {
 
   @Provides
   fun userDataStore(): UserDataStore = FakeUserDataStore()
+
+  @Provides
+  fun locationDataStore(
+    permissionChecker: PermissionChecker,
+    locationManager: LocationManager
+  ): LocationDataStore {
+    return DeviceLocationDataStore(permissionChecker, locationManager)
+  }
 }
