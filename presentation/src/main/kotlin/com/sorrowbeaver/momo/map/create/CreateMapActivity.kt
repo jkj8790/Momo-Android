@@ -94,6 +94,4 @@ class CreateMapActivity : AppCompatActivity(), CreateMapContract.View {
   override fun showError() {
     Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
   }
-
-
 }
