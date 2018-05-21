@@ -14,7 +14,8 @@ import io.reactivex.disposables.Disposables
 class LocationStream(
   private val locationManager: LocationManager,
   private val minTime: Long,
-  private val minDistance: Float
+  private val minDistance: Float,
+  private val provider: String = LocationManager.GPS_PROVIDER
 ) : Observable<AndroidLocation>() {
   @SuppressLint("MissingPermission")
   override fun subscribeActual(observer: Observer<in AndroidLocation>) {
@@ -22,8 +23,8 @@ class LocationStream(
       observer.onSubscribe(Disposables.empty())
       observer.onError(
         IllegalStateException(
-          "Expected to be called on the main thread but was "
-            + Thread.currentThread().name
+          "Expected to be called on the main thread but was " +
+            Thread.currentThread().name
         )
       )
       return
@@ -32,7 +33,7 @@ class LocationStream(
     val listener = Listener(locationManager, observer)
     observer.onSubscribe(listener)
     locationManager.requestLocationUpdates(
-      LocationManager.GPS_PROVIDER, minTime, minDistance, listener
+      provider, minTime, minDistance, listener
     )
   }
 
