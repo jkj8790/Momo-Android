@@ -20,9 +20,9 @@ import com.sorrowbeaver.momo.R
 import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
-import com.sorrowbeaver.momo.domain.model.Location
 import com.sorrowbeaver.momo.map.MapFragment
 import com.sorrowbeaver.momo.map.create.CreateMapActivity
+import com.sorrowbeaver.momo.model.LocationModel
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.squareup.picasso.Picasso
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
       })
   }
 
-  override fun moveToCurrentLocation(location: Location) {
+  override fun moveToCurrentLocation(location: LocationModel) {
     googleMap?.moveCamera(
       CameraUpdateFactory.newLatLngZoom(
         LatLng(
