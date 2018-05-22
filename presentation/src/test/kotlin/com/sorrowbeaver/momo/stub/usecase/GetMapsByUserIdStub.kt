@@ -1,7 +1,7 @@
 package com.sorrowbeaver.momo.stub.usecase
 
-import com.sorrowbeaver.momo.domain.interactor.GetMapsByUserId
 import com.sorrowbeaver.momo.domain.model.MomoMap
+import com.sorrowbeaver.momo.domain.usecase.GetMapsByUserId
 import com.sorrowbeaver.momo.dummy.DummyMapRepository
 import io.reactivex.Observable
 import java.util.Date

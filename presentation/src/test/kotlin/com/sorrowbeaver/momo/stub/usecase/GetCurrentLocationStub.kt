@@ -1,7 +1,7 @@
 package com.sorrowbeaver.momo.stub.usecase
 
-import com.sorrowbeaver.momo.domain.interactor.GetCurrentLocation
 import com.sorrowbeaver.momo.domain.model.Location
+import com.sorrowbeaver.momo.domain.usecase.GetCurrentLocation
 import com.sorrowbeaver.momo.dummy.DummyLocationRepository
 import io.reactivex.Single
 

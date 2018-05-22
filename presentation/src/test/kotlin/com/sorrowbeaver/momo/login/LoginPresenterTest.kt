@@ -3,8 +3,8 @@ package com.sorrowbeaver.momo.login
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import com.sorrowbeaver.momo.domain.interactor.Login
 import com.sorrowbeaver.momo.domain.model.User
+import com.sorrowbeaver.momo.domain.usecase.Login
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.UserModel
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider

@@ -1,8 +1,8 @@
 package com.sorrowbeaver.momo.map.create
 
-import com.sorrowbeaver.momo.domain.interactor.CreateMap
-import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.domain.model.MomoMap
+import com.sorrowbeaver.momo.domain.usecase.CreateMap
+import com.sorrowbeaver.momo.domain.usecase.GetMe
 import com.sorrowbeaver.momo.scheduler.SchedulerProvider
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject

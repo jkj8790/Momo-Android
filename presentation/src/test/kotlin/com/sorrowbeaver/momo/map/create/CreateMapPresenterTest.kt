@@ -3,8 +3,8 @@ package com.sorrowbeaver.momo.map.create
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyZeroInteractions
-import com.sorrowbeaver.momo.domain.interactor.CreateMap
 import com.sorrowbeaver.momo.domain.model.MomoMap
+import com.sorrowbeaver.momo.domain.usecase.CreateMap
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
 import com.sorrowbeaver.momo.stub.usecase.GetMeStub
 import io.reactivex.Observable

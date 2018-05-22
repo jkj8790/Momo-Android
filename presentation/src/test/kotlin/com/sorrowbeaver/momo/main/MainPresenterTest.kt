@@ -3,7 +3,7 @@ package com.sorrowbeaver.momo.main
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import com.sorrowbeaver.momo.domain.interactor.GetMe
+import com.sorrowbeaver.momo.domain.usecase.GetMe
 import com.sorrowbeaver.momo.model.LocationModel
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.sorrowbeaver.momo.model.UserModel

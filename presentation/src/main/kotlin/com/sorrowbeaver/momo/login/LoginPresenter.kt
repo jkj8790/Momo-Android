@@ -1,6 +1,6 @@
 package com.sorrowbeaver.momo.login
 
-import com.sorrowbeaver.momo.domain.interactor.Login
+import com.sorrowbeaver.momo.domain.usecase.Login
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.scheduler.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable

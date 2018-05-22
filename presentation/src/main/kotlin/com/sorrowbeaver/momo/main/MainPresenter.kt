@@ -1,8 +1,8 @@
 package com.sorrowbeaver.momo.main
 
-import com.sorrowbeaver.momo.domain.interactor.GetCurrentLocation
-import com.sorrowbeaver.momo.domain.interactor.GetMapsByUserId
-import com.sorrowbeaver.momo.domain.interactor.GetMe
+import com.sorrowbeaver.momo.domain.usecase.GetCurrentLocation
+import com.sorrowbeaver.momo.domain.usecase.GetMapsByUserId
+import com.sorrowbeaver.momo.domain.usecase.GetMe
 import com.sorrowbeaver.momo.mapper.LocationModelDataMapper
 import com.sorrowbeaver.momo.mapper.MomoMapModelDataMapper
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
