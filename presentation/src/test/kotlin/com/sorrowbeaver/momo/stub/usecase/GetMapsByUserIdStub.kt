@@ -8,12 +8,12 @@ import java.util.Date
 
 object GetMapsByUserIdStub : GetMapsByUserId(DummyMapRepository) {
 
-  private val stub = MomoMap(
-    0L, "stub map", "I am stub map",
+  private val fake = MomoMap(
+    0L, "fake map", "I am fake map",
     false, 1L, emptyList(), Date()
   )
 
   override fun execute(params: Params): Observable<List<MomoMap>> {
-    return Observable.just(listOf(stub))
+    return Observable.just(listOf(fake))
   }
 }

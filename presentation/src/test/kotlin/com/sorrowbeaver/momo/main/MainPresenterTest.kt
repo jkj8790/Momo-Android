@@ -3,13 +3,18 @@ package com.sorrowbeaver.momo.main
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
+import com.sorrowbeaver.momo.domain.interactor.GetMe
+import com.sorrowbeaver.momo.model.LocationModel
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.sorrowbeaver.momo.model.UserModel
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
+import com.sorrowbeaver.momo.stub.mapper.LocationModelMapperStub
 import com.sorrowbeaver.momo.stub.mapper.MapModelMapperStub
 import com.sorrowbeaver.momo.stub.mapper.UserModelMapperStub
+import com.sorrowbeaver.momo.stub.usecase.GetCurrentLocationStub
 import com.sorrowbeaver.momo.stub.usecase.GetMapsByUserIdStub
 import com.sorrowbeaver.momo.stub.usecase.GetMeFailStub
+import com.sorrowbeaver.momo.stub.usecase.GetMeStub
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -29,8 +34,7 @@ class MainPresenterTest {
     1L, emptyList(), Date()
   )
 
-  private val userModelMapperStub = UserModelMapperStub(fakeUserModel)
-  private val mapModelMapperStub = MapModelMapperStub(fakeMapModel)
+  private val seoul = LocationModel(37.532600, 127.024612)
 
   @Before
   fun setUp() {
@@ -66,7 +70,7 @@ class MainPresenterTest {
 
   @Test
   fun testFailedGetMeShowError() {
-    val mainPresenter = createPresenter()
+    val mainPresenter = createPresenter(GetMeFailStub)
 
     mainPresenter.loadMe()
 
@@ -76,15 +80,19 @@ class MainPresenterTest {
   }
 
   private fun createPresenter(
+    getMe: GetMe = GetMeStub,
     expectedUserModel: UserModel = fakeUserModel,
-    expectedMapModel: MomoMapModel = fakeMapModel
+    expectedMapModel: MomoMapModel = fakeMapModel,
+    expectedLocationModel: LocationModel = seoul
   ) =
     MainPresenter(
       mockView,
       TrampolineSchedulerProvider,
-      GetMeFailStub,
+      getMe,
       GetMapsByUserIdStub,
+      GetCurrentLocationStub,
       UserModelMapperStub(expectedUserModel),
-      MapModelMapperStub(expectedMapModel)
+      MapModelMapperStub(expectedMapModel),
+      LocationModelMapperStub(expectedLocationModel)
     )
 }
