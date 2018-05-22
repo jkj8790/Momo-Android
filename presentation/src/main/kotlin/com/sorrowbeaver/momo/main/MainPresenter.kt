@@ -1,7 +1,9 @@
 package com.sorrowbeaver.momo.main
 
+import com.sorrowbeaver.momo.domain.interactor.GetCurrentLocation
 import com.sorrowbeaver.momo.domain.interactor.GetMapsByUserId
 import com.sorrowbeaver.momo.domain.interactor.GetMe
+import com.sorrowbeaver.momo.domain.interactor.TrackLocation
 import com.sorrowbeaver.momo.mapper.MomoMapModelDataMapper
 import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.scheduler.SchedulerProvider
@@ -14,6 +16,8 @@ class MainPresenter @Inject constructor(
   private val schedulerProvider: SchedulerProvider,
   private val getMe: GetMe,
   private val getMapsByUserId: GetMapsByUserId,
+  private val getCurrentLocation: GetCurrentLocation,
+  private val trackLocation: TrackLocation,
   private val userModelMapper: UserModelDataMapper,
   private val mapModelMapper: MomoMapModelDataMapper
 ) : MainContract.Presenter {
@@ -21,6 +25,18 @@ class MainPresenter @Inject constructor(
 
   override fun subscribe() {
     loadMe()
+  }
+
+  override fun loadCurrentLocation() {
+    getCurrentLocation.execute(Unit)
+      .subscribeBy(
+        onSuccess = {
+          view.moveToCurrentLocation(it)
+        },
+        onError = {
+          it.printStackTrace()
+        }
+      )
   }
 
   override fun unsubscribe() {

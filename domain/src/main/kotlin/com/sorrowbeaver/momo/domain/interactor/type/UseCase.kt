@@ -6,3 +6,4 @@ interface UseCase<T, in Params> {
 
   fun execute(params: Params): Observable<T>
 }
+

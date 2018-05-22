@@ -1,5 +1,6 @@
 package com.sorrowbeaver.momo.main
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -20,10 +21,12 @@ import com.sorrowbeaver.momo.R
 import com.sorrowbeaver.momo.R.color
 import com.sorrowbeaver.momo.R.id
 import com.sorrowbeaver.momo.R.layout
+import com.sorrowbeaver.momo.domain.model.Location
 import com.sorrowbeaver.momo.map.MapFragment
 import com.sorrowbeaver.momo.map.create.CreateMapActivity
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.squareup.picasso.Picasso
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.nav_header.*
 import javax.inject.Inject
@@ -87,6 +90,25 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     )
 
     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    val rxPermissions = RxPermissions(this)
+    rxPermissions
+      .request(Manifest.permission.ACCESS_FINE_LOCATION)
+      .subscribe({ granted ->
+        if (granted) {
+          presenter.loadCurrentLocation()
+        }
+      })
+  }
+
+  override fun moveToCurrentLocation(location: Location) {
+    mMap?.moveCamera(
+      CameraUpdateFactory.newLatLngZoom(
+        LatLng(
+          location.latitude,
+          location.longitude
+        ), 15f
+      )
+    )
   }
 
   override fun onResume() {
@@ -110,6 +132,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, MainContract.View 
     val sydney = LatLng(-34.0, 151.0)
     mMap!!.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
     mMap!!.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    presenter.loadCurrentLocation()
   }
 
   private fun setupDrawerContent(navigationView: NavigationView) {
