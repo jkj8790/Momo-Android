@@ -35,5 +35,4 @@ class MapDataRepository @Inject constructor(
     return mapDataStore.getMapsByUserId(userId)
       .map { mapEntityDataMapper.transform(it)!! }
   }
-
 }

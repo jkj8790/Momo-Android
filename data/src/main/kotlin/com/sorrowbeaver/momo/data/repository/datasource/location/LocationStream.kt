@@ -15,7 +15,7 @@ class LocationStream(
   private val locationManager: LocationManager,
   private val minTime: Long,
   private val minDistance: Float,
-  private val provider: String = LocationManager.GPS_PROVIDER
+  private val provider: String = LocationManager.NETWORK_PROVIDER
 ) : Observable<AndroidLocation>() {
   @SuppressLint("MissingPermission")
   override fun subscribeActual(observer: Observer<in AndroidLocation>) {

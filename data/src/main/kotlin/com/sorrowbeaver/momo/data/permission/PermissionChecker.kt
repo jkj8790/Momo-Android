@@ -19,8 +19,8 @@ class PermissionChecker @Inject constructor(
       context, android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    return (Build.VERSION.SDK_INT > Build.VERSION_CODES.M
-      && finePermission == PackageManager.PERMISSION_GRANTED
-      && coarsePermission == PackageManager.PERMISSION_GRANTED)
+    return (Build.VERSION.SDK_INT > Build.VERSION_CODES.M &&
+      finePermission == PackageManager.PERMISSION_GRANTED &&
+      coarsePermission == PackageManager.PERMISSION_GRANTED)
   }
 }

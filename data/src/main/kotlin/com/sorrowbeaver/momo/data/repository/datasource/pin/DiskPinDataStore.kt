@@ -72,5 +72,4 @@ class DiskPinDataStore @Inject constructor(
     )
       .mapToList { PinEntity(it, emptyList()) }
   }
-
 }
