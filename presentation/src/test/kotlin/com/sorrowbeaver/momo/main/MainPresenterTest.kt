@@ -3,8 +3,6 @@ package com.sorrowbeaver.momo.main
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import com.sorrowbeaver.momo.mapper.MomoMapModelDataMapper
-import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.sorrowbeaver.momo.model.UserModel
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
@@ -40,13 +38,10 @@ class MainPresenterTest {
 
   @Test
   fun testGetMe() {
-    val fakeUserModel = UserModel(
-      1L, "I am fake user", null
+    val noProfileUser = UserModel(
+      1L, "I have no profile :(", null
     )
-    val mainPresenter = createPresenter(
-      UserModelMapperStub(fakeUserModel),
-      mapModelMapperStub
-    )
+    val mainPresenter = createPresenter(expectedUserModel = noProfileUser)
 
     mainPresenter.loadMe()
 
@@ -58,10 +53,7 @@ class MainPresenterTest {
 
   @Test
   fun testGetMeWithProfile() {
-    val mainPresenter = createPresenter(
-      userModelMapperStub,
-      mapModelMapperStub
-    )
+    val mainPresenter = createPresenter()
 
     mainPresenter.loadMe()
 
@@ -74,9 +66,7 @@ class MainPresenterTest {
 
   @Test
   fun testFailedGetMeShowError() {
-    val mainPresenter = createPresenter(
-      userModelMapperStub, mapModelMapperStub
-    )
+    val mainPresenter = createPresenter()
 
     mainPresenter.loadMe()
 
@@ -86,15 +76,15 @@ class MainPresenterTest {
   }
 
   private fun createPresenter(
-    userModelMapper: UserModelDataMapper,
-    mapModelMapper: MomoMapModelDataMapper
+    expectedUserModel: UserModel = fakeUserModel,
+    expectedMapModel: MomoMapModel = fakeMapModel
   ) =
     MainPresenter(
       mockView,
       TrampolineSchedulerProvider,
       GetMeFailStub,
       GetMapsByUserIdStub,
-      userModelMapper,
-      mapModelMapper
+      UserModelMapperStub(expectedUserModel),
+      MapModelMapperStub(expectedMapModel)
     )
 }
