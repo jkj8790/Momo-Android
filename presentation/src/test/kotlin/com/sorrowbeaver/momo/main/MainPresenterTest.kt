@@ -3,8 +3,8 @@ package com.sorrowbeaver.momo.main
 import com.nhaarman.mockito_kotlin.anyOrNull
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import com.sorrowbeaver.momo.domain.interactor.GetMapsByUserId
-import com.sorrowbeaver.momo.domain.interactor.GetMe
+import com.sorrowbeaver.momo.mapper.MomoMapModelDataMapper
+import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.sorrowbeaver.momo.model.UserModel
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
@@ -12,23 +12,27 @@ import com.sorrowbeaver.momo.stub.mapper.MapModelMapperStub
 import com.sorrowbeaver.momo.stub.mapper.UserModelMapperStub
 import com.sorrowbeaver.momo.stub.usecase.GetMapsByUserIdStub
 import com.sorrowbeaver.momo.stub.usecase.GetMeFailStub
-import com.sorrowbeaver.momo.stub.usecase.GetMeStub
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import java.util.Date
 
 class MainPresenterTest {
 
   @Mock
   private val mockView = mock<MainContract.View>()
-  @Mock
-  private val mockUserModel = mock<UserModel>()
-  @Mock
-  private val mockMapModel = mock<MomoMapModel>()
 
-  private val userModelMapper = UserModelMapperStub(mockUserModel)
-  private val mapModelMapper = MapModelMapperStub(mockMapModel)
+  private val fakeUserModel = UserModel(
+    1L, "I am fake user", "fake://profile.url"
+  )
+
+  private val fakeMapModel = MomoMapModel(
+    0L, "Fake map", "I am fake map", false,
+    1L, emptyList(), Date()
+  )
+
+  private val userModelMapperStub = UserModelMapperStub(fakeUserModel)
+  private val mapModelMapperStub = MapModelMapperStub(fakeMapModel)
 
   @Before
   fun setUp() {
@@ -36,9 +40,12 @@ class MainPresenterTest {
 
   @Test
   fun testGetMe() {
+    val fakeUserModel = UserModel(
+      1L, "I am fake user", null
+    )
     val mainPresenter = createPresenter(
-      GetMeStub,
-      GetMapsByUserIdStub
+      UserModelMapperStub(fakeUserModel),
+      mapModelMapperStub
     )
 
     mainPresenter.loadMe()
@@ -52,11 +59,9 @@ class MainPresenterTest {
   @Test
   fun testGetMeWithProfile() {
     val mainPresenter = createPresenter(
-      GetMeStub,
-      GetMapsByUserIdStub
+      userModelMapperStub,
+      mapModelMapperStub
     )
-
-    `when`(mockUserModel.profileUrl).thenReturn("profile")
 
     mainPresenter.loadMe()
 
@@ -70,8 +75,7 @@ class MainPresenterTest {
   @Test
   fun testFailedGetMeShowError() {
     val mainPresenter = createPresenter(
-      GetMeFailStub,
-      GetMapsByUserIdStub
+      userModelMapperStub, mapModelMapperStub
     )
 
     mainPresenter.loadMe()
@@ -81,12 +85,15 @@ class MainPresenterTest {
     verify(mockView).hideLoading()
   }
 
-  private fun createPresenter(getMe: GetMe, getMapsByUserId: GetMapsByUserId) =
+  private fun createPresenter(
+    userModelMapper: UserModelDataMapper,
+    mapModelMapper: MomoMapModelDataMapper
+  ) =
     MainPresenter(
       mockView,
       TrampolineSchedulerProvider,
-      getMe,
-      getMapsByUserId,
+      GetMeFailStub,
+      GetMapsByUserIdStub,
       userModelMapper,
       mapModelMapper
     )
