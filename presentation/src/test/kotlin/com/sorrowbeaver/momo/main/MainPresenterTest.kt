@@ -7,12 +7,11 @@ import com.sorrowbeaver.momo.domain.interactor.GetMapsByUserId
 import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.domain.model.MomoMap
 import com.sorrowbeaver.momo.domain.model.User
-import com.sorrowbeaver.momo.mapper.LocationModelDataMapper
-import com.sorrowbeaver.momo.mapper.MomoMapModelDataMapper
-import com.sorrowbeaver.momo.mapper.UserModelDataMapper
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.sorrowbeaver.momo.model.UserModel
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
+import com.sorrowbeaver.momo.stub.mapper.MapModelMapperStub
+import com.sorrowbeaver.momo.stub.mapper.UserModelMapperStub
 import com.sorrowbeaver.momo.stub.usecase.GetMapsByUserIdStub
 import com.sorrowbeaver.momo.stub.usecase.GetMeFailStub
 import com.sorrowbeaver.momo.stub.usecase.GetMeStub
@@ -26,12 +25,6 @@ class MainPresenterTest {
   @Mock
   private val mockView = mock<MainContract.View>()
   @Mock
-  private val mockUserMapper = mock<UserModelDataMapper>()
-  @Mock
-  private val mockMapMapper = mock<MomoMapModelDataMapper>()
-  @Mock
-  private val mockLocationMapper = mock<LocationModelDataMapper>()
-  @Mock
   private val mockUser = mock<User>()
   @Mock
   private val mockUserModel = mock<UserModel>()
@@ -40,10 +33,11 @@ class MainPresenterTest {
   @Mock
   private val mockMapModel = mock<MomoMapModel>()
 
+  private val userModelMapper = UserModelMapperStub(mockUserModel)
+  private val mapModelMapper = MapModelMapperStub(mockMapModel)
+
   @Before
   fun setUp() {
-    `when`(mockUserMapper.transform(mockUser)).thenReturn(mockUserModel)
-    `when`(mockMapMapper.transform(mockMap)).thenReturn(mockMapModel)
   }
 
   @Test
@@ -99,7 +93,7 @@ class MainPresenterTest {
       TrampolineSchedulerProvider,
       getMe,
       getMapsByUserId,
-      mockUserMapper,
-      mockMapMapper
+      userModelMapper,
+      mapModelMapper
     )
 }
