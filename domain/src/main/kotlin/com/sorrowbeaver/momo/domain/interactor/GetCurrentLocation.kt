@@ -6,7 +6,7 @@ import com.sorrowbeaver.momo.domain.repository.LocationRepository
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetCurrentLocation @Inject constructor(
+open class GetCurrentLocation @Inject constructor(
   private val repository: LocationRepository
 ) : SingleUseCase<Location, Unit> {
 
