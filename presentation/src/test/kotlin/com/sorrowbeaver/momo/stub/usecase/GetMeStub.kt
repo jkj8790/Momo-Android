@@ -1,14 +1,14 @@
-package com.sorrowbeaver.momo.fake
+package com.sorrowbeaver.momo.stub.usecase
 
-import com.nhaarman.mockito_kotlin.mock
 import com.sorrowbeaver.momo.domain.interactor.GetMe
 import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.domain.model.UserType
+import com.sorrowbeaver.momo.dummy.DummyUserRepository
 import io.reactivex.Observable
 import java.util.Date
 
 //TODO It seems better to implement fake user repository
-object FakeGetMe : GetMe(mock()) {
+object GetMeStub : GetMe(DummyUserRepository) {
 
   val me = User(
     1L, UserType.Normal, "dog", "dog@email.com",

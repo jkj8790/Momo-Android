@@ -5,8 +5,8 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyZeroInteractions
 import com.sorrowbeaver.momo.domain.interactor.CreateMap
 import com.sorrowbeaver.momo.domain.model.MomoMap
-import com.sorrowbeaver.momo.fake.FakeGetMe
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
+import com.sorrowbeaver.momo.stub.usecase.GetMeStub
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -53,7 +53,7 @@ class CreateMapPresenterTest {
   fun testCreateMapFail() {
     val presenter = CreateMapPresenter(
       mockView, TrampolineSchedulerProvider,
-      FailCreateMap(), FakeGetMe
+      FailCreateMap(), GetMeStub
     )
 
     presenter.createMap(fakeName, fakeDescription, fakeIsPrivate)
@@ -98,6 +98,6 @@ class CreateMapPresenterTest {
   private fun createPresenter(createMap: CreateMap) =
     CreateMapPresenter(
       mockView, TrampolineSchedulerProvider,
-      createMap, FakeGetMe
+      createMap, GetMeStub
     )
 }
