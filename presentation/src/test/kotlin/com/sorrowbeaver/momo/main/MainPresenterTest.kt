@@ -79,6 +79,15 @@ class MainPresenterTest {
     verify(mockView).hideLoading()
   }
 
+  @Test
+  fun testGetCurrentLocation() {
+    val mainPresenter = createPresenter(expectedLocationModel = seoul)
+
+    mainPresenter.loadCurrentLocation()
+
+    verify(mockView).moveToCurrentLocation(seoul)
+  }
+
   private fun createPresenter(
     getMe: GetMe = GetMeStub,
     expectedUserModel: UserModel = fakeUserModel,
