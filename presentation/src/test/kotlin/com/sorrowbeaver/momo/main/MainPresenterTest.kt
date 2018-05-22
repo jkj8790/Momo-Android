@@ -5,8 +5,6 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.sorrowbeaver.momo.domain.interactor.GetMapsByUserId
 import com.sorrowbeaver.momo.domain.interactor.GetMe
-import com.sorrowbeaver.momo.domain.model.MomoMap
-import com.sorrowbeaver.momo.domain.model.User
 import com.sorrowbeaver.momo.model.MomoMapModel
 import com.sorrowbeaver.momo.model.UserModel
 import com.sorrowbeaver.momo.scheduler.TrampolineSchedulerProvider
@@ -25,11 +23,7 @@ class MainPresenterTest {
   @Mock
   private val mockView = mock<MainContract.View>()
   @Mock
-  private val mockUser = mock<User>()
-  @Mock
   private val mockUserModel = mock<UserModel>()
-  @Mock
-  private val mockMap = mock<MomoMap>()
   @Mock
   private val mockMapModel = mock<MomoMapModel>()
 
@@ -44,7 +38,7 @@ class MainPresenterTest {
   fun testGetMe() {
     val mainPresenter = createPresenter(
       GetMeStub,
-      GetMapsByUserIdStub(mockMap)
+      GetMapsByUserIdStub
     )
 
     mainPresenter.loadMe()
@@ -59,7 +53,7 @@ class MainPresenterTest {
   fun testGetMeWithProfile() {
     val mainPresenter = createPresenter(
       GetMeStub,
-      GetMapsByUserIdStub(mockMap)
+      GetMapsByUserIdStub
     )
 
     `when`(mockUserModel.profileUrl).thenReturn("profile")
@@ -77,7 +71,7 @@ class MainPresenterTest {
   fun testFailedGetMeShowError() {
     val mainPresenter = createPresenter(
       GetMeFailStub,
-      GetMapsByUserIdStub(mockMap)
+      GetMapsByUserIdStub
     )
 
     mainPresenter.loadMe()
